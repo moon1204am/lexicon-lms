@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\LexiconLMS.Domain\LexiconLMS.Domain.csproj" />
     <ProjectReference Include="..\Client\LexiconLMS.Client.csproj" />
     <ProjectReference Include="..\Shared\LexiconLMS.Shared.csproj" />
   </ItemGroup>
