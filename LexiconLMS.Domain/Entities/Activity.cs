@@ -1,4 +1,4 @@
-﻿namespace LexiconLMS.Shared.Entities
+﻿namespace LexiconLMS.Domain.Entities
 {
     public class Activity
     {
@@ -18,9 +18,9 @@
 
         //Navigation Properties
 
-        public Module Module { get; set; } = new Module();
+        public Module Module { get; set; } = default!;
 
-        public ActivityType Type { get; set; } = new ActivityType();
+        public ActivityType Type { get; set; } = default!;
 
 
     }

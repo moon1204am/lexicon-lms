@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace LexiconLMS.Shared.Entities
+namespace LexiconLMS.Domain.Entities
 {
     public class ApplicationUser: IdentityUser
     {
@@ -20,6 +15,6 @@ namespace LexiconLMS.Shared.Entities
         public Guid CourseId { get; set; }
 
         //Navigation Propery
-        public Course Course { get; set; } = new Course();
+        public Course Course { get; set; } = default!;
     }
 }

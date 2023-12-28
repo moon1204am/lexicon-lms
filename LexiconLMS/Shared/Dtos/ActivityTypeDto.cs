@@ -1,6 +1,6 @@
-﻿namespace LexiconLMS.Shared.Entities
+﻿namespace LexiconLMS.Shared.Dtos
 {
-    public class ActivityType
+    public class ActivityTypeDto
     {
         public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;

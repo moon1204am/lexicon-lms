@@ -1,6 +1,6 @@
-﻿namespace LexiconLMS.Shared.Entities
+﻿namespace LexiconLMS.Shared.Dtos
 {
-    public class Course
+    public class CourseDto
     {
         public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
@@ -13,7 +13,7 @@
         public Guid ModuleId { get; set; }
 
         //Navigation Property
-        public ICollection<User> Users { get; set; } = new List<User>();
+        public ICollection<UserDto> Users { get; set; } = new List<UserDto>();
         public ICollection<Module> Modules { get; set; } = new List<Module>();
 
     }

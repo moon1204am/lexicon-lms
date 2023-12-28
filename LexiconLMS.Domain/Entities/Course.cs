@@ -1,4 +1,4 @@
-﻿namespace LexiconLMS.Shared.Entities
+﻿namespace LexiconLMS.Domain.Entities
 {
     public class Course
     {
@@ -8,15 +8,8 @@
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
-        //Foreign Keys
-        public Guid UserId { get; set; }
-        public Guid ModuleId { get; set; }
-
         //Navigation Property
         public ICollection<ApplicationUser> Users { get; set; } = new List<ApplicationUser>();
         public ICollection<Module> Modules { get; set; } = new List<Module>();
-
     }
-
-
 }

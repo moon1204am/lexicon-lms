@@ -1,4 +1,4 @@
-﻿namespace LexiconLMS.Shared.Entities
+﻿namespace LexiconLMS.Domain.Entities
 {
     public class ActivityType
     {

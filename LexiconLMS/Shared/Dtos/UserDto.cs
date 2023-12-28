@@ -1,13 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LexiconLMS.Shared.Entities
+﻿namespace LexiconLMS.Shared.Dtos
 {
-    public class User
+    public class UserDto
     {
 
         public string FirstName { get; set; } = string.Empty;
@@ -20,6 +13,6 @@ namespace LexiconLMS.Shared.Entities
         public Guid CourseId { get; set; }
 
         //Navigation Propery
-        public Course Course { get; set; } = new Course();
+        public CourseDto Course { get; set; } = new CourseDto();
     }
 }

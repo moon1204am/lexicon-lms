@@ -1,4 +1,4 @@
-﻿namespace LexiconLMS.Shared.Entities
+﻿namespace LexiconLMS.Domain.Entities
 {
     public class Module
     {
@@ -10,10 +10,9 @@
 
         //ForeignKey
         public Guid CourseId { get; set; }
-        public Guid ActivityId { get; set; }
 
         //Navigation Property
-        public Course Course { get; set; } = new Course();
+        public Course Course { get; set; } = default!;
         public ICollection<Activity> Activities { get; set; } = new List<Activity>();
 
     }

@@ -1,4 +1,4 @@
-﻿namespace LexiconLMS.Shared.Entities
+﻿namespace LexiconLMS.Shared.Dtos
 {
     public class Activity
     {
@@ -20,7 +20,7 @@
 
         public Module Module { get; set; } = new Module();
 
-        public ActivityType Type { get; set; } = new ActivityType();
+        public ActivityTypeDto Type { get; set; } = new ActivityTypeDto();
 
 
     }
