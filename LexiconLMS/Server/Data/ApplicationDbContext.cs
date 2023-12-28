@@ -13,5 +13,7 @@ namespace LexiconLMS.Server.Data
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
         }
+
+
     }
 }

@@ -12,7 +12,7 @@
 
         //Foreign key
 
-        public Guid ModuleID { get; set; }
+        public Guid ModuleId { get; set; }
 
         public Guid ActivityTypeId { get; set; }
 
