@@ -10,7 +10,7 @@
 
         //ForeignKey
         public Guid CourseId { get; set; }
-        public Guid ActivityId { get; set; }
+        //public Guid ActivityId { get; set; }
 
         //Navigation Property
         public CourseDto Course { get; set; } = new CourseDto();

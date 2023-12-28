@@ -4,6 +4,7 @@ using LexiconLMS.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LexiconLMS.App.Server.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231228213154_RemovedForeignKey")]
+    partial class RemovedForeignKey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -169,9 +172,6 @@ namespace LexiconLMS.App.Server.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ActivityTypeId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -189,13 +189,16 @@ namespace LexiconLMS.App.Server.Data.Migrations
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Id");
+                    b.Property<Guid>("TypeId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.HasIndex("ActivityTypeId");
+                    b.HasKey("Id");
 
                     b.HasIndex("ModuleId");
 
-                    b.ToTable("Activities");
+                    b.HasIndex("TypeId");
+
+                    b.ToTable("Activity");
                 });
 
             modelBuilder.Entity("LexiconLMS.Domain.Entities.ActivityType", b =>
@@ -210,7 +213,7 @@ namespace LexiconLMS.App.Server.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ActivityTypes");
+                    b.ToTable("ActivityType");
                 });
 
             modelBuilder.Entity("LexiconLMS.Domain.Entities.ApplicationUser", b =>
@@ -313,7 +316,7 @@ namespace LexiconLMS.App.Server.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Courses");
+                    b.ToTable("Course");
                 });
 
             modelBuilder.Entity("LexiconLMS.Domain.Entities.Module", b =>
@@ -343,7 +346,7 @@ namespace LexiconLMS.App.Server.Data.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.ToTable("Modules");
+                    b.ToTable("Module");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -485,15 +488,15 @@ namespace LexiconLMS.App.Server.Data.Migrations
 
             modelBuilder.Entity("LexiconLMS.Domain.Entities.Activity", b =>
                 {
-                    b.HasOne("LexiconLMS.Domain.Entities.ActivityType", "Type")
-                        .WithMany("Activities")
-                        .HasForeignKey("ActivityTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("LexiconLMS.Domain.Entities.Module", "Module")
                         .WithMany("Activities")
                         .HasForeignKey("ModuleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LexiconLMS.Domain.Entities.ActivityType", "Type")
+                        .WithMany("Activities")
+                        .HasForeignKey("TypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -1,6 +1,5 @@
 ﻿using LexiconLMS.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace LexiconLMS.Server.Data
 {
@@ -13,16 +12,15 @@ namespace LexiconLMS.Server.Data
         public static async Task InitAsync(ApplicationDbContext context, IServiceProvider serviceProvider)
         {
             var activityTypes = AddActivityType();
-            await context.AddRangeAsync(activityTypes);
             var courses = AddCourses();
-            await context.AddRangeAsync(courses);
             var modules = AddModules(courses);
-            await context.AddRangeAsync(modules);
             var activities = AddActivities(activityTypes, modules);
+
+            await context.AddRangeAsync(activityTypes);
+            await context.AddRangeAsync(courses);
+            await context.AddRangeAsync(modules);
             await context.AddRangeAsync(activities);
-
-            await context.SaveChangesAsync();
-
+            await context.SaveChangesAsync(); // Save changes for courses, modules, and activities
 
             if (context.Roles.Any()) return;
 
@@ -32,13 +30,13 @@ namespace LexiconLMS.Server.Data
             var roles = new[] { "Admin", "Student" };
             await AddRolesAsync(roles);
 
-            var users = AddUsers(courses).ToList();
+            var users = AddUsers(context.Courses.ToList()).ToList();
 
             var adminPassword = "P@ssw0rd";
-            var adminCourseId = new Guid();
+            var adminCourseId = courses.First(c => c.Name == ".Net").Id; // Retrieve course ID from the database
 
             var studentPassword = "P@ssw0rd";
-            var studentCourseId = new Guid();
+            var studentCourseId = courses.First(c => c.Name == "Java").Id; // Retrieve course ID from the database
 
             var admin = await AddAccountAsync(users[0], adminPassword, adminCourseId);
             var user = await AddAccountAsync(users[1], studentPassword, studentCourseId);
@@ -120,71 +118,71 @@ namespace LexiconLMS.Server.Data
 
                 if (!result.Succeeded) throw new Exception(string.Join("\n", result.Errors));
             }
-
         }
-
         private static IEnumerable<ActivityType> AddActivityType()
         {
             var activityTypes = new List<ActivityType>
             {
                 new ActivityType
                 {
+                    Id = Guid.NewGuid(),
                     Name = "Assignment"
                 },
                 new ActivityType
                 {
+                    Id = Guid.NewGuid(),
                     Name = "E-learning"
                 },
                 new ActivityType
                 {
+                    Id = Guid.NewGuid(),
                     Name = "Lecture"
 
                 },
                 new ActivityType
                 {
+                    Id = Guid.NewGuid(),
                     Name = "Practice"
                 },
             };
             return activityTypes;
         }
 
-
         private static IEnumerable<Activity> AddActivities(IEnumerable<ActivityType> activityTypes, IEnumerable<Module> modules)
         {
-
             var activities = new List<Activity>
             {
                 new Activity
                 {
+                    Id = Guid.NewGuid(),
                     Name = "Assignment OOD",
-                    Description = "Learn about inheritence and polymorphism",
+                    Description = "Learn about inheritance and polymorphism",
                     StartTime = new DateTime(2023, 11, 11, 13, 0, 0),
-                    EndTime =new DateTime(2023, 11, 18, 13, 0, 0)
+                    EndTime = new DateTime(2023, 11, 18, 13, 0, 0)
                 },
                 new Activity
                 {
+                    Id = Guid.NewGuid(),
                     Name = "Project Blazor",
                     Description = "Group project using Blazor",
                     StartTime = new DateTime(2023, 12, 20, 13, 0, 0),
-                    EndTime =new DateTime(2024, 01, 12, 1, 0, 0)
+                    EndTime = new DateTime(2024, 01, 12, 1, 0, 0)
                 }
-
             };
 
-            foreach (var module in modules)
+            foreach (var activity in activities)
             {
-                foreach (var activity in activities)
+                foreach (var type in activityTypes)
                 {
-                    foreach (var type in activityTypes)
-                    {
-                        activity.ActivityTypeId = type.Id;
-                        activity.ActivityTypeId = module.Id;
-                    }
+                    activity.ActivityTypeId = type.Id;
+                }
+                foreach (var module in modules)
+                {
+                    activity.ModuleId = module.Id;
                 }
             }
 
             return activities;
-
         }
 
         private static IEnumerable<Module> AddModules(IEnumerable<Course> courses)
@@ -193,35 +191,29 @@ namespace LexiconLMS.Server.Data
             {
                 new Module
                 {
+                    Id = Guid.NewGuid(),
                     Name = "C# Basic",
                     StartDate = new DateTime(2023, 12, 30, 14, 30, 0),
                     EndDate = new DateTime(2024, 01, 04, 14, 30, 0),
-                    //CourseId = ,
-                    //ActivityId = ,
                     Description = "C# For Beginners"
                 },
                 new Module
                 {
+                    Id = Guid.NewGuid(),
                     Name = "Java Basic",
                     StartDate = new DateTime(2024, 01, 30, 14, 30, 0),
                     EndDate = new DateTime(2024, 01, 15, 14, 30, 0),
-                    //CourseId = ,
-                    //ActivityId = ,
                     Description = "Java For Beginners"
                 },
             };
-            Random rand = new Random();
 
-            var coursesList = courses.ToList();
-
-            foreach (var module in modules)
+            // Iterate through modules and courses and assign CourseId to each module
+            foreach (var (module, course) in modules.Zip(courses, (m, c) => (m, c)))
             {
-                int index = rand.Next(0, coursesList.Count - 1);
-                module.CourseId = coursesList[index].Id;
+                module.CourseId = course.Id;
             }
 
             return modules;
-
         }
 
         private static IEnumerable<Course> AddCourses()
@@ -230,6 +222,7 @@ namespace LexiconLMS.Server.Data
             {
                 new Course
                 {
+                    Id = Guid.NewGuid(),
                     Name = ".Net",
                     StartDate = new DateTime(2023,12,30, 14,30,0),
                     EndDate = new DateTime(2024,01,15, 14,30,0),
@@ -237,6 +230,7 @@ namespace LexiconLMS.Server.Data
                 },
                 new Course
                 {
+                    Id = Guid.NewGuid(),
                     Name = "Java",
                     StartDate = new DateTime(2024,01,30, 14,30,0),
                     EndDate = new DateTime(2024,02,20, 14,30,0),
@@ -248,3 +242,4 @@ namespace LexiconLMS.Server.Data
         }
     }
 }
+
