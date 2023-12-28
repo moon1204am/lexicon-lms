@@ -1,4 +1,5 @@
 ﻿using LexiconLMS.Server.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace LexiconLMS.Server.Extensions
 {
@@ -11,8 +12,8 @@ namespace LexiconLMS.Server.Extensions
                 var serviceProvider = scope.ServiceProvider;
                 var db = serviceProvider.GetRequiredService<ApplicationDbContext>();
 
-                //await db.Database.EnsureDeletedAsync();
-                //await db.Database.MigrateAsync();
+                await db.Database.EnsureDeletedAsync();
+                await db.Database.MigrateAsync();
 
                 try
                 {
