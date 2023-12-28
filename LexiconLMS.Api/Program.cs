@@ -1,4 +1,8 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<LexiconLMSApiContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("LexiconLMSApiContext") ?? throw new InvalidOperationException("Connection string 'LexiconLMSApiContext' not found.")));
 
 // Add services to the container.
 

@@ -13,7 +13,7 @@
         public Guid ModuleId { get; set; }
 
         //Navigation Property
-        public ICollection<User> Users { get; set; } = new List<User>();
+        public ICollection<ApplicationUser> Users { get; set; } = new List<ApplicationUser>();
         public ICollection<Module> Modules { get; set; } = new List<Module>();
 
     }
