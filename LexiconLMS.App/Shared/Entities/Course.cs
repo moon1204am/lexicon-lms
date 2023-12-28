@@ -1,4 +1,4 @@
-﻿namespace LexiconLMS.App.Shared.Entities
+﻿namespace LexiconLMS.Shared.Entities
 {
     public class Course
     {
@@ -15,8 +15,8 @@
         //Navigation Property
         public ICollection<User> Users { get; set; } = new List<User>();
         public ICollection<Module> Modules { get; set; } = new List<Module>();
-        
+
     }
 
-    
+
 }

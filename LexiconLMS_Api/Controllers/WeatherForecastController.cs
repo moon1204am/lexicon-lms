@@ -1,10 +1,8 @@
-using LexiconLMS.Shared;
-using Microsoft.AspNetCore.Authorization;
+using LexiconLMS.Api;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LexiconLMS.Server.Controllers
+namespace LexiconLMS.Api.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
@@ -21,7 +19,7 @@ namespace LexiconLMS.Server.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
+        [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast

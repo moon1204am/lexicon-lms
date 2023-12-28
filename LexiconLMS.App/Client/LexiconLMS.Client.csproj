@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Shared\LexiconLMS.App.Shared.csproj" />
+    <ProjectReference Include="..\Shared\LexiconLMS.Shared.csproj" />
   </ItemGroup>
 
 </Project>

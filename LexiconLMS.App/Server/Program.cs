@@ -1,5 +1,5 @@
-using LexiconLMS.App.Server.Data;
-using LexiconLMS.App.Server.Models;
+using LexiconLMS.Server.Data;
+using LexiconLMS.Server.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;

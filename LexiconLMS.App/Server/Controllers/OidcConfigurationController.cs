@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LexiconLMS.App.Server.Controllers
+namespace LexiconLMS.Server.Controllers
 {
     public class OidcConfigurationController : Controller
     {

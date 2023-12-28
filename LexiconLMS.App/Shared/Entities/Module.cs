@@ -1,4 +1,4 @@
-﻿namespace LexiconLMS.App.Shared.Entities
+﻿namespace LexiconLMS.Shared.Entities
 {
     public class Module
     {

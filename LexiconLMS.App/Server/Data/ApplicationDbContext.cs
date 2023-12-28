@@ -1,10 +1,10 @@
 ﻿using Duende.IdentityServer.EntityFramework.Options;
-using LexiconLMS.App.Server.Models;
+using LexiconLMS.Server.Models;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
-namespace LexiconLMS.App.Server.Data
+namespace LexiconLMS.Server.Data
 {
     public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {
@@ -13,5 +13,7 @@ namespace LexiconLMS.App.Server.Data
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
         }
+
+
     }
 }
