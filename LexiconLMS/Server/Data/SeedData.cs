@@ -41,8 +41,8 @@ namespace LexiconLMS.Server.Data
             var admin = await AddAccountAsync(users[0], adminPassword, adminCourseId);
             var user = await AddAccountAsync(users[1], studentPassword, studentCourseId);
 
-            await AddUserToRoleAsync(admin, roles[0]);
-            await AddUserToRoleAsync(user, roles[1]);
+            await AddUserToRoleAsync(admin!, roles[0]);
+            await AddUserToRoleAsync(user!, roles[1]);
         }
 
         private static IEnumerable<ApplicationUser> AddUsers(IEnumerable<Course> courses)
@@ -91,7 +91,7 @@ namespace LexiconLMS.Server.Data
 
         private static async Task<ApplicationUser?> AddAccountAsync(ApplicationUser userToAdd, string password, Guid courseId)
         {
-            var user = await _userManager.FindByEmailAsync(userToAdd.Email);
+            var user = await _userManager.FindByEmailAsync(userToAdd.Email!);
             if (user != null) return null;
 
             var newUser = new ApplicationUser
@@ -147,7 +147,6 @@ namespace LexiconLMS.Server.Data
             };
             return activityTypes;
         }
-
         private static IEnumerable<Activity> AddActivities(IEnumerable<ActivityType> activityTypes, IEnumerable<Module> modules)
         {
             var activities = new List<Activity>
@@ -170,15 +169,19 @@ namespace LexiconLMS.Server.Data
                 }
             };
 
-            foreach (var activity in activities)
+            //Given that the lengths of the activityTypes and modules collections are different use if statements to assign ActivityTypeId and ModuleId to each activity
+            for (int i = 0; i < activities.Count; i++)
             {
-                foreach (var type in activityTypes)
+                // Assign ActivityTypeId if activityTypes has elements at the current index
+                if (i < activityTypes.Count())
                 {
-                    activity.ActivityTypeId = type.Id;
+                    activities[i].ActivityTypeId = activityTypes.ToList()[i].Id;
                 }
-                foreach (var module in modules)
+
+                // Assign ModuleId if modules has elements at the current index
+                if (i < modules.Count())
                 {
-                    activity.ModuleId = module.Id;
+                    activities[i].ModuleId = modules.ToList()[i].Id;
                 }
             }
 
@@ -207,10 +210,10 @@ namespace LexiconLMS.Server.Data
                 },
             };
 
-            // Iterate through modules and courses and assign CourseId to each module
-            foreach (var (module, course) in modules.Zip(courses, (m, c) => (m, c)))
+            //Iterate through modules and courses and assign CourseId to each module
+            for (int i = 0; i < modules.Count; i++)
             {
-                module.CourseId = course.Id;
+                modules[i].CourseId = courses.ToList()[i].Id;
             }
 
             return modules;
