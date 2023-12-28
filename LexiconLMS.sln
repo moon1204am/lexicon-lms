@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LexiconLMS.Client", "Lexico
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LexiconLMS.Shared", "LexiconLMS\Shared\LexiconLMS.Shared.csproj", "{145783A4-FAB8-48B7-AC27-9946FFDA0DD6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LexiconLMS.Api", "LexiconLMS.Api\LexiconLMS.Api.csproj", "{3571A089-5D0B-449F-82FD-74C4BD387697}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LexiconLMS.Domain", "LexiconLMS.Domain\LexiconLMS.Domain.csproj", "{14010D24-9F11-48F0-8AFB-636589206E63}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{145783A4-FAB8-48B7-AC27-9946FFDA0DD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{145783A4-FAB8-48B7-AC27-9946FFDA0DD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{145783A4-FAB8-48B7-AC27-9946FFDA0DD6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3571A089-5D0B-449F-82FD-74C4BD387697}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3571A089-5D0B-449F-82FD-74C4BD387697}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3571A089-5D0B-449F-82FD-74C4BD387697}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3571A089-5D0B-449F-82FD-74C4BD387697}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14010D24-9F11-48F0-8AFB-636589206E63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14010D24-9F11-48F0-8AFB-636589206E63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14010D24-9F11-48F0-8AFB-636589206E63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14010D24-9F11-48F0-8AFB-636589206E63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

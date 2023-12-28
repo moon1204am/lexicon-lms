@@ -1,9 +1,13 @@
-﻿namespace LexiconLMS.Shared.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace LexiconLMS.Domain.Entities
 {
     public class Course
     {
         public Guid Id { get; set; }
+        [StringLength(maximumLength: 50, MinimumLength = 2)]
         public string Name { get; set; } = string.Empty;
+
         public string Description { get; set; } = string.Empty;
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
