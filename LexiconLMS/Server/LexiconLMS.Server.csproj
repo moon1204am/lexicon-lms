@@ -27,4 +27,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.13" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="AutoMapperConfig\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>
