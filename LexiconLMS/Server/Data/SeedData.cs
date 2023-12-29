@@ -36,13 +36,13 @@ namespace LexiconLMS.Server.Data
             var users = AddUsers(courses).ToList();
 
             var adminPassword = "P@ssw0rd";
-            var adminCourseId = new Guid();
+            //var adminCourseId = new Guid();
 
             var studentPassword = "P@ssw0rd";
-            var studentCourseId = new Guid();
+            // var studentCourseId = new Guid();
 
-            var admin = await AddAccountAsync(users[0], adminPassword, adminCourseId);
-            var user = await AddAccountAsync(users[1], studentPassword, studentCourseId);
+            var admin = await AddAccountAsync(users[0], adminPassword);
+            var user = await AddAccountAsync(users[1], studentPassword);
 
             await AddUserToRoleAsync(admin, roles[0]);
             await AddUserToRoleAsync(user, roles[1]);
@@ -92,6 +92,7 @@ namespace LexiconLMS.Server.Data
                     Description = "Spring Boot"
                 },
             };
+
             return courses;
         }
 
@@ -116,17 +117,15 @@ namespace LexiconLMS.Server.Data
 
             };
 
-            foreach (var module in modules)
+            var activityTypesList = activityTypes.ToList();
+            var moduleList = modules.ToList();
+
+            for (int i = 0; i < activities.Count; i++)
             {
-                foreach (var activity in activities)
-                {
-                    foreach (var type in activityTypes)
-                    {
-                        activity.ActivityTypeId = type.Id;
-                        activity.ModuleId = module.Id;
-                    }
-                }
+                activities[i].ActivityTypeId = activityTypesList[i].Id;
+                activities[i].ModuleId = moduleList[i].Id;
             }
+
             return activities;
         }
 
@@ -149,14 +148,12 @@ namespace LexiconLMS.Server.Data
                     Description = "Java For Beginners"
                 },
             };
-            Random rand = new Random();
 
             var coursesList = courses.ToList();
 
-            foreach (var module in modules)
+            for (int i = 0; i < modules.Count; i++)
             {
-                int index = rand.Next(0, coursesList.Count - 1);
-                module.CourseId = coursesList[index].Id;
+                modules[i].CourseId = coursesList[i].Id;
             }
 
             return modules;
@@ -182,13 +179,13 @@ namespace LexiconLMS.Server.Data
                 }
             };
 
-            foreach (var user in users)
+            var coursesList = courses.ToList();
+
+            for (int i = 0; i < users.Count; i++)
             {
-                foreach (var course in courses)
-                {
-                    user.CourseId = course.Id;
-                }
+                users[i].CourseId = coursesList[i].Id;
             }
+
             return users;
         }
 
@@ -204,7 +201,7 @@ namespace LexiconLMS.Server.Data
             }
         }
 
-        private static async Task<ApplicationUser?> AddAccountAsync(ApplicationUser userToAdd, string password, Guid courseId)
+        private static async Task<ApplicationUser?> AddAccountAsync(ApplicationUser userToAdd, string password)
         {
             var user = await _userManager.FindByEmailAsync(userToAdd.Email);
             if (user != null) return null;
@@ -215,7 +212,7 @@ namespace LexiconLMS.Server.Data
                 FirstName = userToAdd.FirstName,
                 LastName = userToAdd.LastName,
                 Email = userToAdd.Email,
-                CourseId = courseId
+                CourseId = userToAdd.CourseId
             };
 
             var result = await _userManager.CreateAsync(newUser, password);
