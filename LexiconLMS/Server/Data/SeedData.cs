@@ -208,12 +208,23 @@ namespace LexiconLMS.Server.Data
                     EndDate = new DateTime(2024, 01, 15, 14, 30, 0),
                     Description = "Java For Beginners"
                 },
+                new Module
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Java",
+                    StartDate = new DateTime(2024, 01, 30, 14, 30, 0),
+                    EndDate = new DateTime(2024, 01, 15, 14, 30, 0),
+                    Description = "Java"
+                },
             };
 
-            //Iterate through modules and courses and assign CourseId to each module
-            for (int i = 0; i < modules.Count; i++)
+            // Iterate through modules and courses and assign CourseId to each module
+            foreach (var module in modules)
             {
-                modules[i].CourseId = courses.ToList()[i].Id;
+                foreach (var course in courses)
+                {
+                    module.CourseId = course.Id;
+                }
             }
 
             return modules;
