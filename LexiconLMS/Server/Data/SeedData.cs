@@ -9,7 +9,6 @@ namespace LexiconLMS.Server.Data
         private static UserManager<ApplicationUser> _userManager = default!;
         private static RoleManager<IdentityRole> _roleManager = default!;
 
-
         public static async Task InitAsync(ApplicationDbContext context, IServiceProvider serviceProvider)
         {
             var activityTypes = AddActivityType();
@@ -22,7 +21,6 @@ namespace LexiconLMS.Server.Data
             await context.AddRangeAsync(activities);
 
             await context.SaveChangesAsync();
-
 
             if (context.Roles.Any()) return;
 
@@ -47,9 +45,124 @@ namespace LexiconLMS.Server.Data
             await AddUserToRoleAsync(user, roles[1]);
         }
 
+        private static IEnumerable<ActivityType> AddActivityType()
+        {
+            var activityTypes = new List<ActivityType>
+            {
+                new ActivityType
+                {
+                    Name = "Assignment"
+                },
+                new ActivityType
+                {
+                    Name = "E-learning"
+                },
+                new ActivityType
+                {
+                    Name = "Lecture"
+
+                },
+                new ActivityType
+                {
+                    Name = "Practice"
+                },
+            };
+            return activityTypes;
+        }
+
+        private static IEnumerable<Course> AddCourses()
+        {
+            var courses = new List<Course>
+            {
+                new Course
+                {
+                    Name = ".Net",
+                    StartDate = new DateTime(2023,12,30, 14,30,0),
+                    EndDate = new DateTime(2024,01,15, 14,30,0),
+                    Description = "C# Object Oriented"
+                },
+                new Course
+                {
+                    Name = "Java",
+                    StartDate = new DateTime(2024,01,30, 14,30,0),
+                    EndDate = new DateTime(2024,02,20, 14,30,0),
+                    Description = "Spring Boot"
+                },
+            };
+            return courses;
+        }
+
+        private static IEnumerable<Activity> AddActivities(IEnumerable<ActivityType> activityTypes, IEnumerable<Module> modules)
+        {
+            var activities = new List<Activity>
+            {
+                new Activity
+                {
+                    Name = "Assignment OOD",
+                    Description = "Learn about inheritence and polymorphism",
+                    StartTime = new DateTime(2023, 11, 11, 13, 0, 0),
+                    EndTime =new DateTime(2023, 11, 18, 13, 0, 0)
+                },
+                new Activity
+                {
+                    Name = "Project Blazor",
+                    Description = "Group project using Blazor",
+                    StartTime = new DateTime(2023, 12, 20, 13, 0, 0),
+                    EndTime =new DateTime(2024, 01, 12, 1, 0, 0)
+                }
+
+            };
+
+            foreach (var module in modules)
+            {
+                foreach (var activity in activities)
+                {
+                    foreach (var type in activityTypes)
+                    {
+                        activity.ActivityTypeId = type.Id;
+                        activity.ModuleId = module.Id;
+                    }
+                }
+            }
+            return activities;
+        }
+
+        private static IEnumerable<Module> AddModules(IEnumerable<Course> courses)
+        {
+            var modules = new List<Module>
+            {
+                new Module
+                {
+                    Name = "C# Basic",
+                    StartDate = new DateTime(2023, 12, 30, 14, 30, 0),
+                    EndDate = new DateTime(2024, 01, 04, 14, 30, 0),
+                    //CourseId = ,
+                    //ActivityId = ,
+                    Description = "C# For Beginners"
+                },
+                new Module
+                {
+                    Name = "Java Basic",
+                    StartDate = new DateTime(2024, 01, 30, 14, 30, 0),
+                    EndDate = new DateTime(2024, 01, 15, 14, 30, 0),
+                    Description = "Java For Beginners"
+                },
+            };
+            Random rand = new Random();
+
+            var coursesList = courses.ToList();
+
+            foreach (var module in modules)
+            {
+                int index = rand.Next(0, coursesList.Count - 1);
+                module.CourseId = coursesList[index].Id;
+            }
+
+            return modules;
+        }
+
         private static IEnumerable<ApplicationUser> AddUsers(IEnumerable<Course> courses)
         {
-
             var roles = new[] { "Admin", "Student" };
 
             var users = new List<ApplicationUser>()
@@ -75,7 +188,6 @@ namespace LexiconLMS.Server.Data
                     user.CourseId = course.Id;
                 }
             }
-
             return users;
         }
 
@@ -121,130 +233,6 @@ namespace LexiconLMS.Server.Data
                 if (!result.Succeeded) throw new Exception(string.Join("\n", result.Errors));
             }
 
-        }
-
-        private static IEnumerable<ActivityType> AddActivityType()
-        {
-            var activityTypes = new List<ActivityType>
-            {
-                new ActivityType
-                {
-                    Name = "Assignment"
-                },
-                new ActivityType
-                {
-                    Name = "E-learning"
-                },
-                new ActivityType
-                {
-                    Name = "Lecture"
-
-                },
-                new ActivityType
-                {
-                    Name = "Practice"
-                },
-            };
-            return activityTypes;
-        }
-
-
-        private static IEnumerable<Activity> AddActivities(IEnumerable<ActivityType> activityTypes, IEnumerable<Module> modules)
-        {
-
-            var activities = new List<Activity>
-            {
-                new Activity
-                {
-                    Name = "Assignment OOD",
-                    Description = "Learn about inheritence and polymorphism",
-                    StartTime = new DateTime(2023, 11, 11, 13, 0, 0),
-                    EndTime =new DateTime(2023, 11, 18, 13, 0, 0)
-                },
-                new Activity
-                {
-                    Name = "Project Blazor",
-                    Description = "Group project using Blazor",
-                    StartTime = new DateTime(2023, 12, 20, 13, 0, 0),
-                    EndTime =new DateTime(2024, 01, 12, 1, 0, 0)
-                }
-
-            };
-
-            foreach (var module in modules)
-            {
-                foreach (var activity in activities)
-                {
-                    foreach (var type in activityTypes)
-                    {
-                        activity.ActivityTypeId = type.Id;
-                        activity.ActivityTypeId = module.Id;
-                    }
-                }
-            }
-
-            return activities;
-
-        }
-
-        private static IEnumerable<Module> AddModules(IEnumerable<Course> courses)
-        {
-            var modules = new List<Module>
-            {
-                new Module
-                {
-                    Name = "C# Basic",
-                    StartDate = new DateTime(2023, 12, 30, 14, 30, 0),
-                    EndDate = new DateTime(2024, 01, 04, 14, 30, 0),
-                    //CourseId = ,
-                    //ActivityId = ,
-                    Description = "C# For Beginners"
-                },
-                new Module
-                {
-                    Name = "Java Basic",
-                    StartDate = new DateTime(2024, 01, 30, 14, 30, 0),
-                    EndDate = new DateTime(2024, 01, 15, 14, 30, 0),
-                    //CourseId = ,
-                    //ActivityId = ,
-                    Description = "Java For Beginners"
-                },
-            };
-            Random rand = new Random();
-
-            var coursesList = courses.ToList();
-
-            foreach (var module in modules)
-            {
-                int index = rand.Next(0, coursesList.Count - 1);
-                module.CourseId = coursesList[index].Id;
-            }
-
-            return modules;
-
-        }
-
-        private static IEnumerable<Course> AddCourses()
-        {
-            var courses = new List<Course>
-            {
-                new Course
-                {
-                    Name = ".Net",
-                    StartDate = new DateTime(2023,12,30, 14,30,0),
-                    EndDate = new DateTime(2024,01,15, 14,30,0),
-                    Description = "C# Object Oriented"
-                },
-                new Course
-                {
-                    Name = "Java",
-                    StartDate = new DateTime(2024,01,30, 14,30,0),
-                    EndDate = new DateTime(2024,02,20, 14,30,0),
-                    Description = "Spring Boot"
-                },
-            };
-
-            return courses;
         }
     }
 }

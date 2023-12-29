@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using LexiconLMS.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace LexiconLMS.Domain.Entities
 {
