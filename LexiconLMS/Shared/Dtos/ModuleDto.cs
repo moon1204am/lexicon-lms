@@ -1,6 +1,6 @@
 ﻿namespace LexiconLMS.Shared.Dtos
 {
-    public class Module
+    public class ModuleDto
     {
         public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
@@ -8,12 +8,12 @@
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
-        //ForeignKey
-        public Guid CourseId { get; set; }
+        ////ForeignKey
+        //public Guid CourseId { get; set; }
 
-        //Navigation Property
-        public CourseDto Course { get; set; } = new CourseDto();
-        public ICollection<Activity> Activities { get; set; } = new List<Activity>();
+        ////Navigation Property
+        //public CourseDto Course { get; set; }
+        public ICollection<ActivityDto> Activities { get; set; } = new List<ActivityDto>();
 
     }
 }

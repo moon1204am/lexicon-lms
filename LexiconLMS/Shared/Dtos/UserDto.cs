@@ -9,10 +9,10 @@
 
         public string FullName => $"{FirstName} {LastName}";
 
-        //Foreign Keys
-        public Guid CourseId { get; set; }
+        ////Foreign Keys
+        //public Guid CourseId { get; set; }
 
-        //Navigation Propery
-        public CourseDto Course { get; set; } = new CourseDto();
+        ////Navigation Propery
+        //public CourseDto Course { get; set; }
     }
 }

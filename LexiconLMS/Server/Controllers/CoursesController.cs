@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LexiconLMS.Domain.Entities;
 using LexiconLMS.Server.Data;
+using LexiconLMS.Server.Services;
+using LexiconLMS.Shared.Dtos;
 
 namespace LexiconLMS.Server.Controllers
 {
@@ -14,40 +16,43 @@ namespace LexiconLMS.Server.Controllers
     [ApiController]
     public class CoursesController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IServiceManager serviceManager;
 
-        public CoursesController(ApplicationDbContext context)
+        public CoursesController(IServiceManager serviceManager)
         {
-            _context = context;
+            this.serviceManager = serviceManager;
         }
 
         // GET: api/Courses
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Course>>> GetCourse()
+        public async Task<ActionResult<IEnumerable<CourseDto>>> GetCourse(bool includeAll = false)
         {
-            if (_context.Course == null)
-            {
-                return NotFound();
-            }
-            return await _context.Course.ToListAsync();
+            return Ok(await serviceManager.CourseService.GetCoursesAsync(includeAll));
         }
 
         // GET: api/Courses/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Course>> GetCourse(Guid id)
+        public async Task<ActionResult<CourseDto>> GetCourse(Guid id)
         {
-            if (_context.Course == null)
-            {
-                return NotFound();
-            }
-            var course = await _context.Course.FindAsync(id);
+            return Ok((CourseDto?)await serviceManager.CourseService.GetCourseAsync(id));
 
-            if (course == null)
-            {
-                return NotFound();
-            }
+            //var courseDto = await serviceManager.CourseService.GetCourseAsync(id);
+            //if (courseDto == null) return NotFound();
 
-            return course;
+            //return Ok(courseDto);
+
+            //if (_context.Course == null)
+            //{
+            //    return NotFound();
+            //}
+            //var course = await _context.Course.FindAsync(id);
+
+            //if (course == null)
+            //{
+            //    return NotFound();
+            //}
+
+            //return course;
         }
 
         // PUT: api/Courses/5
@@ -55,30 +60,31 @@ namespace LexiconLMS.Server.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCourse(Guid id, Course course)
         {
-            if (id != course.Id)
-            {
-                return BadRequest();
-            }
+            //if (id != course.Id)
+            //{
+            //    return BadRequest();
+            //}
 
-            _context.Entry(course).State = EntityState.Modified;
+            //_context.Entry(course).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CourseExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            //try
+            //{
+            //    await _context.SaveChangesAsync();
+            //}
+            //catch (DbUpdateConcurrencyException)
+            //{
+            //    if (!CourseExists(id))
+            //    {
+            //        return NotFound();
+            //    }
+            //    else
+            //    {
+            //        throw;
+            //    }
+            //}
 
-            return NoContent();
+            //return NoContent();
+            return null;
         }
 
         // POST: api/Courses
@@ -86,39 +92,43 @@ namespace LexiconLMS.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Course>> PostCourse(Course course)
         {
-            if (_context.Course == null)
-            {
-                return Problem("Entity set 'ApplicationDbContext.Course'  is null.");
-            }
-            _context.Course.Add(course);
-            await _context.SaveChangesAsync();
+            //if (_context.Course == null)
+            //{
+            //    return Problem("Entity set 'ApplicationDbContext.Course'  is null.");
+            //}
+            //_context.Course.Add(course);
+            //await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCourse", new { id = course.Id }, course);
+            //return CreatedAtAction("GetCourse", new { id = course.Id }, course);
+            return null;
         }
 
         // DELETE: api/Courses/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCourse(Guid id)
         {
-            if (_context.Course == null)
-            {
-                return NotFound();
-            }
-            var course = await _context.Course.FindAsync(id);
-            if (course == null)
-            {
-                return NotFound();
-            }
+            //if (_context.Course == null)
+            //{
+            //    return NotFound();
+            //}
+            //var course = await _context.Course.FindAsync(id);
+            //if (course == null)
+            //{
+            //    return NotFound();
+            //}
 
-            _context.Course.Remove(course);
-            await _context.SaveChangesAsync();
+            //_context.Course.Remove(course);
+            //await _context.SaveChangesAsync();
 
-            return NoContent();
+            //return NoContent();
+
+            return null;
         }
 
         private bool CourseExists(Guid id)
         {
-            return (_context.Course?.Any(e => e.Id == id)).GetValueOrDefault();
+            return false;
+            //return (_context.Course?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace LexiconLMS.Shared.Dtos
 {
-    public class Activity
+    public class ActivityDto
     {
         public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
@@ -12,15 +12,15 @@
 
         //Foreign key
 
-        public Guid ModuleId { get; set; }
+        //public Guid ModuleId { get; set; }
 
-        public Guid ActivityTypeId { get; set; }
+        //public Guid ActivityTypeId { get; set; }
 
-        //Navigation Properties
+        ////Navigation Properties
 
-        public Module Module { get; set; } = new Module();
+        //public ModuleDto Module { get; set; }
 
-        public ActivityTypeDto Type { get; set; } = new ActivityTypeDto();
+        public string ActivityTypeName { get; set; } 
 
 
     }
