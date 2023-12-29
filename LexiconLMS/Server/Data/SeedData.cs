@@ -136,8 +136,6 @@ namespace LexiconLMS.Server.Data
                     Name = "C# Basic",
                     StartDate = new DateTime(2023, 12, 30, 14, 30, 0),
                     EndDate = new DateTime(2024, 01, 04, 14, 30, 0),
-                    //CourseId = ,
-                    //ActivityId = ,
                     Description = "C# For Beginners"
                 },
                 new Module
