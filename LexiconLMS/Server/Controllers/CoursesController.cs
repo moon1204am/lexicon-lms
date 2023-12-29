@@ -28,6 +28,7 @@ namespace LexiconLMS.Server.Controllers
         public async Task<ActionResult<IEnumerable<CourseDto>>> GetCourse(bool includeAll = false)
         {
             return Ok(await serviceManager.CourseService.GetCoursesAsync(includeAll));
+            
         }
 
         // GET: api/Courses/5

@@ -23,5 +23,6 @@
         public string ActivityTypeName { get; set; } 
 
 
+
     }
 }
