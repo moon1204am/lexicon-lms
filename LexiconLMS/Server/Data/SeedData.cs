@@ -1,6 +1,7 @@
 ﻿using LexiconLMS.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.EntityFrameworkCore;
 
 namespace LexiconLMS.Server.Data
 {
@@ -11,6 +12,8 @@ namespace LexiconLMS.Server.Data
 
         public static async Task InitAsync(ApplicationDbContext context, IServiceProvider serviceProvider)
         {
+            if (await context.Course.AnyAsync()) return;
+
             var activityTypes = AddActivityType();
             await context.AddRangeAsync(activityTypes);
             var courses = AddCourses();

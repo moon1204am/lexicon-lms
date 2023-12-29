@@ -14,6 +14,6 @@ namespace LexiconLMS.Server.Data
         {
         }
 
-
+        public DbSet<Course> Course { get; set; } = default!;
     }
 }
