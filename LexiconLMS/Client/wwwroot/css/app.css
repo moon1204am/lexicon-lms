@@ -109,42 +109,68 @@ a, .btn-link {
 .logo {
     width: 200px;
 }
-a {
+
+a,
+a.btn.btn-outline-primary {
     padding: 0.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-a.nav-link,
-a,
-button.nav-link.btn-link {
-    color: rgba(0, 0, 0, 0.5); /* Set the default color for the link */
-    text-decoration: none !important; /*Remove underline */
-    /* Add a bottom border to all links */
+    font-size: 1.2rem;
 }
 
-    a.nav-link:hover,
-    a:hover,
-    button.nav-link.btn-link:hover{
-        color: rgba(0, 0, 0, 0.8);
-        transition: 0.5s;
-        transform: scale(1.1);
-        text-decoration: none !important;
-        font-weight: bold;
-        border-bottom: 1px solid black;
+    a.nav-link,
+    a,
+    {
+        color: rgba(0, 0, 0, 0.5); /* Set the default color for the link */
+        text-decoration: none !important; /*Remove underline */
     }
+
+        a.nav-link:hover,
+        a:hover,
+        button.nav-link.btn-link:hover {
+            color: rgba(0, 0, 0, 0.6) !important;
+            transition: 0.5s;
+            transform: scale(1.1);
+            text-decoration: none !important;
+            font-weight: bold;
+            border-bottom: 1px solid black;
+        }
+
 .top-row {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add box shadow */
 }
+
 nav.navbar.navbar-expand-lg {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add box shadow */
-    padding: 5px;
     margin: 0;
 }
+
 .nav-padding {
-    padding-right: 30px;
+    padding-left: 42px;
 }
-/*.container{
-    padding: 0;
-    margin: 0;
-}*/
+
+.button-nav {
+    color: rgba(43, 24, 155, 0.8) !important;
+    border-radius: 50px !important;
+    border-color: rgba(43, 24, 155, 0.8) !important;
+    margin: 5px !important;
+    padding: 10px 20px !important;
+    transform: none;
+    transition: none;
+    font-size: 1.2rem;
+}
+
+    .button-nav:hover {
+        transform: none;
+        transition: none;
+        font-weight: normal;    
+        background-color: rgba(0, 0, 139, 0.2) !important;
+    }
+.menu .button-nav {
+    color: rgba(0, 0, 0, 0.5)!important;
+    border: none !important;
+    margin-bottom: 0.5rem !important;
+    margin-left: 0!important;
+    padding: 0 !important;
+}
