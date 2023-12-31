@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LexiconLMS.Client", "Lexico
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LexiconLMS.Shared", "LexiconLMS\Shared\LexiconLMS.Shared.csproj", "{145783A4-FAB8-48B7-AC27-9946FFDA0DD6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LexiconLMS.Domain", "LexiconLMS.Domain\LexiconLMS.Domain.csproj", "{BB5B6139-B8B9-4822-A9F3-C32CC856DFEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LexiconLMS.Domain", "LexiconLMS.Domain\LexiconLMS.Domain.csproj", "{BB5B6139-B8B9-4822-A9F3-C32CC856DFEB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

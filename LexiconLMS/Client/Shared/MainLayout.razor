@@ -1,17 +1,30 @@
 ﻿@inherits LayoutComponentBase
 
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
     <main>
-        <div class="top-row px-4 auth">
-            <LoginDisplay />
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
+        <nav class="navbar navbar-expand-lg navbar-light ">
+            <div class="container-fluid">
+                <img src="/Images/LoggaLMS.png" alt="Logo" class="logo" />
 
-        <article class="content px-4">
+                <!-- Include the HamburgerMenu component here -->
+                <HamburgerMenu />
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto nav-padding">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Courses</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <LoginDisplay/>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <article class="content px-4 ">
             @Body
         </article>
     </main>
