@@ -26,13 +26,13 @@ namespace LexiconLMS.Server.Repositories
 
         public async Task<IEnumerable<Course>> GetAsync(bool includeAll = false)
         {
-            return includeAll ? await _context.Course.Include(c => c.Modules).ThenInclude(m => m.Activities).ThenInclude(a => a.Type).ThenInclude(at => at.Name).ToListAsync() : 
+            return includeAll ? await _context.Course.Include(c => c.Modules).ThenInclude(m => m.Activities).ThenInclude(a => a.Type).ToListAsync() : 
                 await _context.Course.ToListAsync();
         }
 
         public async Task<Course?> GetAsync(Guid id)
         {           
-            return await _context.Course.Include(c => c.Modules).ThenInclude(m => m.Activities).ThenInclude(a => a.Type).ThenInclude(at => at.Name).FirstOrDefaultAsync(c => c.Id == id);
+            return await _context.Course.Include(c => c.Modules).ThenInclude(m => m.Activities).ThenInclude(a => a.Type).FirstOrDefaultAsync(c => c.Id == id);
         }
 
         public void UpdateAsync(Course course)
