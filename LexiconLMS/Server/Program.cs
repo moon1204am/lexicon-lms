@@ -2,6 +2,7 @@ using LexiconLMS.Domain.Entities;
 using LexiconLMS.Server.AutoMapperConfig;
 using LexiconLMS.Server.Data;
 using LexiconLMS.Server.Extensions;
+using LexiconLMS.Server.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -39,6 +40,9 @@ builder.Services.AddAutoMapper(typeof(LmsMappings));
 
 builder.Services.AddRepositories();
 builder.Services.AddCorsPolicy();
+
+builder.Services.AddScoped<IUserService, UserService>();
+
 
 var app = builder.Build();
 

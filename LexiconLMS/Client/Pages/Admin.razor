@@ -1,6 +1,8 @@
-﻿@using Microsoft.AspNetCore.Authorization
+﻿@page "/admin"
+@using Microsoft.AspNetCore.Authorization
 @inherits LayoutComponentBase
-@page "/admin"
+@using LexiconLMS.Shared.Dtos
+@inject IUserService UserService
 @attribute [Authorize]
 
 <h3>Admin</h3>

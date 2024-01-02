@@ -3,5 +3,6 @@
     public interface IServiceManager
     {
         ICourseService CourseService { get; }
+        IUserService UserService { get; }
     }
 }

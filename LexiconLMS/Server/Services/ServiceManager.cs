@@ -4,11 +4,15 @@
     {
 
         private readonly Lazy<ICourseService> courseService;
-        public ICourseService CourseService => courseService.Value;
+        private readonly Lazy<IUserService> userService;
 
-        public ServiceManager(Lazy<ICourseService> courseService)
+        public ICourseService CourseService => courseService.Value;
+        public IUserService UserService => userService.Value;
+
+        public ServiceManager(Lazy<ICourseService> courseService, Lazy<IUserService> userService)
         {
             this.courseService = courseService;
+            this.userService = userService;
         }
     }
 }
