@@ -100,11 +100,6 @@ a, .btn-link {
         content: var(--blazor-load-percentage-text, "Loading");
     }
 
-/*.container-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}*/
 
 .logo {
     width: 200px;
@@ -120,7 +115,7 @@ a.btn.btn-outline-primary {
 }
 
     a.nav-link,
-    a,
+    a
     {
         color: rgba(0, 0, 0, 0.5); /* Set the default color for the link */
         text-decoration: none !important; /*Remove underline */
@@ -147,7 +142,7 @@ nav.navbar.navbar-expand-lg {
 }
 
 .nav-padding {
-    padding-left: 42px;
+    padding-left: 55px;
 }
 
 .button-nav {
