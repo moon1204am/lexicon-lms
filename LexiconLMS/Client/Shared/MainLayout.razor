@@ -15,8 +15,17 @@
                             <a class="nav-link" href="#">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Courses</a>
+                            <a class="nav-link" href="/Courses">Courses</a>
                         </li>
+                        <AuthorizeView>
+                            <Authorized>
+                                <li class="nav-item">
+                                    <NavLink class="nav-link" href="/admin">
+                                        <span class="oi oi-list-rich" aria-hidden="true"></span> Admin Panel
+                                    </NavLink>
+                                </li>
+                            </Authorized>
+                        </AuthorizeView>
                     </ul>
                     <ul class="navbar-nav">
                         <LoginDisplay/>

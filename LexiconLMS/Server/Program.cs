@@ -47,7 +47,8 @@ if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
     app.UseWebAssemblyDebugging();
-    await app.SeedDataAsync();
+    //Note: uncomment if you need a fresh set of SeedData and delete the database
+    //await app.SeedDataAsync();
 }
 else
 {
