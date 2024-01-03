@@ -10,6 +10,8 @@ using LexiconLMS.Server.Data;
 using LexiconLMS.Server.Services;
 using LexiconLMS.Shared.Dtos;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.SqlServer.Management.Smo;
 
 namespace LexiconLMS.Server.Controllers
 {
@@ -19,20 +21,50 @@ namespace LexiconLMS.Server.Controllers
     public class CoursesController : ControllerBase
     {
         private readonly IServiceManager serviceManager;
+        private readonly UserManager<ApplicationUser> userManager;
+        private readonly RoleManager<ApplicationRole> roleManager;
 
-        public CoursesController(IServiceManager serviceManager)
+        public CoursesController(IServiceManager serviceManager, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
         {
             this.serviceManager = serviceManager;
+            this.userManager = userManager;
+            this.roleManager = roleManager;
         }
-        [Authorize(Roles="Admin")]
+        //[Authorize(Roles="Admin")]
         // GET: api/Courses
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CourseDto>>> GetCourse(bool includeAll = false)
         {
+           //await GetAllUsersWithRoles();
+
             return Ok(await serviceManager.CourseService.GetCoursesAsync(includeAll));
             
         }
+        public async Task<List<UserDto>> GetAllUsersWithRoles()
+        {
+            var usersWithRoles = new List<UserDto>();
 
+            // Retrieve all users
+            var users = userManager.Users.ToList();
+
+            foreach (var user in users)
+            {
+                // Retrieve roles for each user
+                var roles = await userManager.GetRolesAsync(user);
+
+                // Create a DTO containing user information and roles
+                var userWithRoles = new UserDto
+                {
+                    UserId = user.CourseId,
+                    FirstName = user.UserName,
+                    Roles = roles.ToList()
+                };
+
+                usersWithRoles.Add(userWithRoles);
+            }
+
+            return usersWithRoles;
+        }
         // GET: api/Courses/5
         [HttpGet("{id}")]
         public async Task<ActionResult<CourseDto>> GetCourse(Guid id)
