@@ -21,9 +21,10 @@ namespace LexiconLMS.Server.Services
         {
             var user = _mapper.Map<ApplicationUser>(userDto);
 
-            user.UserName = userDto.Email; // Using email as the username
+            // Using email as the username
+            user.UserName = userDto.Email; 
             
-            // In case you need a hardcoded course id, you can set it here
+            // In case you need a hardcoded course id, you can set it here, double check the Guid value in SQL database
             //user.CourseId = new Guid("01276b0c-345c-4dea-0d0d-08dc0b93fb82"); // Default course id
 
             // Set other necessary properties for ApplicationUser
@@ -36,9 +37,8 @@ namespace LexiconLMS.Server.Services
 
             }
 
-            // Optionally assign roles here if needed
+            // Todo: Add user to role here, first needs to resolve issue with SQL roles
         }
 
-        // Implement other methods as needed
     }
 }

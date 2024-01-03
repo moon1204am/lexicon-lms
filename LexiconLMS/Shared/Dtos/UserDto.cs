@@ -13,11 +13,16 @@ namespace LexiconLMS.Shared.Dtos
 
         //public string FullName => $"{FirstName} {LastName}";
 
+        //Todo: Add a property for the role here, when the SQL is resolved.
+        //[Required]
+        //public string Role { get; set; } = string.Empty;
+
+
         //Foreign Keys
         [Required]
         public Guid CourseId { get; set; }
 
-        ////Navigation Propery
+        ////Navigation Property
         //public CourseDto Course { get; set; }
     }
 }
