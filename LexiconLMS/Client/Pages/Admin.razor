@@ -1,6 +1,5 @@
 ﻿@page "/admin"
 @using Microsoft.AspNetCore.Authorization
-@inherits LayoutComponentBase
 @using LexiconLMS.Shared.Dtos
 @using LexiconLMS.Client.Services
 @inject ILmsDataService LmsDataService
@@ -56,7 +55,7 @@
                                     <InputSelect @bind-Value="newUser.CourseId">
                                         @foreach (var course in courses)
                                         {
-                                            <option value="@course.Id.ToString()">@course.Name</option>
+                                            <option value="@course.Id.ToString()" @key="course.Id">@course.Name</option>
                                         }
                                     </InputSelect>
 
@@ -78,30 +77,6 @@
     </main>
 </div>
 
-
 @code {
 
-
-    private UserDto newUser = new UserDto();
-    private List<CourseDto> courses = new List<CourseDto>();
-
-    protected override async Task OnInitializedAsync()
-    {
-        courses = await LmsDataService.GetAsync<List<CourseDto>>("api/courses");
-    }
-
-    private async Task HandleValidSubmit()
-    {
-        await LmsDataService.PostAsync<UserDto, object>("api/users", newUser);
-
-        // Clear the form
-        newUser = new UserDto(); 
-        
-    }
-    // Copilot suggestion
-    // private async Task HandleValidSubmit()
-    // {
-    //     await LmsDataService.CreateUser(newUser);
-    //     newUser = new UserDto();
-    // }
 }
