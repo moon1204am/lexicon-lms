@@ -20,6 +20,10 @@ namespace LexiconLMS.Server.Services
         public async Task CreateUserAsync(UserDto userDto)
         {
             var user = _mapper.Map<ApplicationUser>(userDto);
+
+            user.UserName = userDto.Email; // Using email as the username
+            // Todo: resolve the issue with the course id, right now it is hardcoded
+            user.CourseId = new Guid("01276b0c-345c-4dea-0d0d-08dc0b93fb82"); // Default course id
             // Set other necessary properties for ApplicationUser
             var result = await _userManager.CreateAsync(user, "P@ssw0rd"); 
 
