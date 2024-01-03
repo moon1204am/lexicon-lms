@@ -1,19 +1,21 @@
 ﻿using AutoMapper;
+using LexiconLMS.Client.Pages;
 using LexiconLMS.Domain.Entities;
 using LexiconLMS.Shared.Dtos;
 
-namespace LexiconLMS.Server.AutoMapperConfig
+namespace LexiconLMS.Client.Maps
 {
-    public class LmsMappings : Profile
+    public class AutoMapperConfig : Profile
     {
-        public LmsMappings() 
-        { 
+        public AutoMapperConfig()
+        {
+            CreateMap<Activity, ActivityViewDto>().ReverseMap();
             CreateMap<Course, CourseDto>().ReverseMap();
             CreateMap<ApplicationUser, UserDto>().ReverseMap();
             CreateMap<Module, ModuleDto>().ReverseMap();
             CreateMap<Activity, ActivityDto>().ReverseMap();
             CreateMap<ActivityType, ActivityTypeDto>().ReverseMap();
-           
+
         }
     }
 }

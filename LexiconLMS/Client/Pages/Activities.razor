@@ -1,4 +1,4 @@
-﻿@page "/Activities"
+﻿    @page "/Activities"
 
 <h3>Activities</h3>
 
@@ -8,6 +8,9 @@
 }
 else
 {
+
+
+
     <table>
         <thead>
             <tr class="border-header">
@@ -20,16 +23,17 @@ else
         </thead>
         <tbody>
 
-                <tr>
+            <tr>
 
                 <td scope="row" class="text-card">@Activity.Name</td>
                 <td scope="row" class="text-card">@Activity.Description</td>
                 <td scope="row" class="text-card">@Activity.StartTime.ToString("yyyy-MM-dd")</td>
                 <td scope="row" class="text-card">@Activity.EndTime.ToString("yyyy-MM-dd")</td>
                 <td scope="row" class="text-card">@Activity.TypeName</td>
-                  
-                </tr>
+
+            </tr>
 
         </tbody>
+
     </table>
 }

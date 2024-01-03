@@ -9,18 +9,17 @@ namespace LexiconLMS.Client.Pages
 {
     public partial class Activities
     {
-        public ActivityViewDto? Activity = default!;
-
+        public ActivityDto? Activity = default!;
+        [Inject] public IMapper Mapper { get; set; } = default!;
         [Inject] public ILmsDataService LmsDataService { get; set; } = default!;
-        [Inject] public IMapper LmsMapper { get; set; }
         [Parameter] public Course Course { get; set; } = default!;
 
         protected override async Task OnInitializedAsync()
         {
-            Course.Id = new Guid("c91261b8-1c3e-4b28-3b22-08dc0ba50c16");
-            var course = await LmsDataService.GetAsync <List<CourseDto >> ($"api/courses/{Course.Id}");
-
-            Activity = LmsMapper.Map<ActivityViewDto>(course);
+            //Course.Id = new Guid("5c3283dc-86da-4fb9-f460-08dc0b9a619a");
+            var course = (await LmsDataService.GetAsync<Course>($"api/courses/{new Guid("5c3283dc-86da-4fb9-f460-08dc0b9a619a")}"))!;
+           
+            Activity = Mapper.Map<ActivityDto>(course.Modules?.FirstOrDefault()?.Activities?.FirstOrDefault());
         }
     }
 }

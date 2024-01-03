@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LexiconLMS.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,8 @@ namespace LexiconLMS.Shared.Dtos
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public string TypeName { get; set; }
+
         //ToDo: Status or not Status for Activities?
+
     }
 }

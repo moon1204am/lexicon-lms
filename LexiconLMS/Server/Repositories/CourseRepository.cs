@@ -31,8 +31,9 @@ namespace LexiconLMS.Server.Repositories
         }
 
         public async Task<Course?> GetAsync(Guid id)
-        {           
-            return await _context.Course.Include(c => c.Modules).ThenInclude(m => m.Activities).ThenInclude(a => a.Type).FirstOrDefaultAsync(c => c.Id == id);
+        {    
+            var debug = await _context.Course.Include(c => c.Modules).ThenInclude(m => m.Activities).ThenInclude(a => a.Type).FirstOrDefaultAsync(c => c.Id == id);
+            return debug;
         }
 
         public void UpdateAsync(Course course)

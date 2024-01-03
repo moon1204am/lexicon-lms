@@ -35,7 +35,8 @@ namespace LexiconLMS.Server.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<CourseDto>> GetCourse(Guid id)
         {
-            return Ok((CourseDto?)await serviceManager.CourseService.GetCourseAsync(id));
+            var courseDto = await serviceManager.CourseService.GetCourseAsync(id);
+            return Ok(await serviceManager.CourseService.GetCourseAsync(id));
 
             //var courseDto = await serviceManager.CourseService.GetCourseAsync(id);
             //if (courseDto == null) return NotFound();
