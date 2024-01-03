@@ -3,8 +3,7 @@
 <h3>CourseAdd</h3>
 
 
-<form onsubmit="@(async () => await CreateCourseAsync())">
-
+<form @onsubmit="CreateCourseAsync">
     <div>
         <label for="Name">Course name:</label>
         <input type="text" id="Name" @bind="CourseToAdd.Name" />
