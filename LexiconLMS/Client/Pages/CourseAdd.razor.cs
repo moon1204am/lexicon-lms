@@ -12,12 +12,12 @@ namespace LexiconLMS.Client.Pages
        
         
         private CourseAddDto? CourseToAdd = new CourseAddDto();
-        
 
-        //protected override async Task OnInitializedAsync()
-        //{
 
-        //}
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+        }
 
         public async Task CreateCourseAsync()
         {
