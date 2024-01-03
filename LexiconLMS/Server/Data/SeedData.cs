@@ -212,7 +212,8 @@ namespace LexiconLMS.Server.Data
                 FirstName = userToAdd.FirstName,
                 LastName = userToAdd.LastName,
                 Email = userToAdd.Email,
-                CourseId = userToAdd.CourseId
+                CourseId = userToAdd.CourseId,
+                EmailConfirmed = true
             };
 
             var result = await _userManager.CreateAsync(newUser, password);
