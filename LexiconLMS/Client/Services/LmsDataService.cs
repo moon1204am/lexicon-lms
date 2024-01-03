@@ -31,11 +31,21 @@ namespace LexiconLMS.Client.Services
         public async Task<TResponse?> PostAsync<TRequest, TResponse>(string path, TRequest content, string contentType = json)
         {
             var response = await _httpClient.PostAsJsonAsync(path, content, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
-            response.EnsureSuccessStatusCode();
+            //response.EnsureSuccessStatusCode();
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException($"Response status code does not indicate success: {response.StatusCode}.");
+            }
 
             if (response.Content == null) return default;
-            return await response.Content.ReadFromJsonAsync<TResponse>(new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
-
+            try
+            {
+                return await response.Content.ReadFromJsonAsync<TResponse>(new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+            }
+            catch (JsonException)
+            {
+                return default;
+            }
         }
 
     }

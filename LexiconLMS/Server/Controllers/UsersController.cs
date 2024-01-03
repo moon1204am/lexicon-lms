@@ -24,7 +24,8 @@ namespace LexiconLMS.Server.Controllers
             {
                 return BadRequest(ModelState);
             }
-            return Ok();
+            //return Ok();
+            return new OkObjectResult(new { message = "User created successfully", user = userDto });
         }
 
     }

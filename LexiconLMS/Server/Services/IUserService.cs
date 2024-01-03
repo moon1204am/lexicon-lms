@@ -1,9 +1,10 @@
 ﻿using LexiconLMS.Shared.Dtos;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LexiconLMS.Server.Services
 {
     public interface IUserService
     {
-        Task CreateUserAsync(UserDto userDto);
+        Task<IActionResult> CreateUserAsync(UserDto userDto);
     }
 }

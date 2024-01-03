@@ -2,7 +2,9 @@
 using LexiconLMS.Domain.Entities;
 using LexiconLMS.Server.Repositories;
 using LexiconLMS.Shared.Dtos;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LexiconLMS.Server.Services
 {
@@ -17,7 +19,7 @@ namespace LexiconLMS.Server.Services
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public async Task CreateUserAsync(UserDto userDto)
+        public async Task<IActionResult> CreateUserAsync(UserDto userDto)
         {
             var user = _mapper.Map<ApplicationUser>(userDto);
 
@@ -36,6 +38,8 @@ namespace LexiconLMS.Server.Services
                 throw new Exception($"User creation failed: {string.Join(", ", errors)}");
 
             }
+
+            return new OkObjectResult(new { message = "User created successfully.", user = userDto });
 
             // Todo: Add user to role here, first needs to resolve issue with SQL roles
         }
