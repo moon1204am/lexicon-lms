@@ -39,7 +39,5 @@ namespace LexiconLMS.Server.Repositories
         {
             _context.Update(course);
         }
-
-
     }
 }

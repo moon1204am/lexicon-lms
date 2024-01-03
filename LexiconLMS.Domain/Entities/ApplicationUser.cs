@@ -17,5 +17,7 @@ namespace LexiconLMS.Domain.Entities
 
         //Navigation Propery
         public Course Course { get; set; } = default!;
+        public ICollection<IdentityUserRole<string>> Roles { get; set; } = default!;
+        //public ICollection<IdentityRole<string>> Role { get; set; }
     }
 }
