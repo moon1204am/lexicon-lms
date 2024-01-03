@@ -42,6 +42,9 @@ builder.Services.AddRepositories();
 builder.Services.AddCorsPolicy();
 
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddTransient(x => new Lazy<IUserService>(() => x.GetRequiredService<IUserService>()));
+
+builder.Services.AddScoped<ICourseService, CourseService>();
 
 
 var app = builder.Build();

@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Text.Json;
 
 namespace LexiconLMS.Client.Services
@@ -26,5 +27,16 @@ namespace LexiconLMS.Client.Services
 
             return result;
         }
+
+        public async Task<TResponse?> PostAsync<TRequest, TResponse>(string path, TRequest content, string contentType = json)
+        {
+            var response = await _httpClient.PostAsJsonAsync(path, content, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
+            response.EnsureSuccessStatusCode();
+
+            if (response.Content == null) return default;
+            return await response.Content.ReadFromJsonAsync<TResponse>(new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+
+        }
+
     }
 }

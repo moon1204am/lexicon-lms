@@ -25,7 +25,9 @@ namespace LexiconLMS.Server.Services
 
             if (!result.Succeeded)
             {
-                throw new Exception("Could not create user");
+                var errors = result.Errors.Select(e => e.Description);
+                throw new Exception($"User creation failed: {string.Join(", ", errors)}");
+
             }
 
             // Optionally assign roles here if needed
