@@ -19,6 +19,7 @@
             <hr>
             <div class="row">
                 <div class="col-md-3">
+                    <!-- Navigation menu -->
                     <ul class="nav nav-pills flex-column">
                         <li class="nav-item"><a class="nav-link active" id="#" aria-current="page" href="#">Create User</a></li>
                         <li class="nav-item"><a class="nav-link" id="#" href="#">Edit User</a></li>
@@ -30,7 +31,7 @@
 
                     <h3>Creating new user</h3>
 
-
+                    <!-- User Creation form -->
                     <div class="row">
                         <div class="col-md-6">
                             <EditForm Model="@newUser" OnValidSubmit="HandleValidSubmit">
@@ -50,6 +51,15 @@
                                 <div class="form-group">
                                     <label for="Email">Email:</label>
                                     <InputText id="Email" class="form-control" @bind-Value="newUser.Email" />
+                                </div>
+                                <div class="form-group">
+                                    <InputSelect @bind-Value="newUser.CourseId">
+                                        @foreach (var course in courses)
+                                        {
+                                            <option value="@course.Id.ToString()">@course.Name</option>
+                                        }
+                                    </InputSelect>
+
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Create User</button>
@@ -73,13 +83,19 @@
 
 
     private UserDto newUser = new UserDto();
+    private List<CourseDto> courses = new List<CourseDto>();
 
+    protected override async Task OnInitializedAsync()
+    {
+        courses = await LmsDataService.GetAsync<List<CourseDto>>("api/courses");
+    }
 
     private async Task HandleValidSubmit()
     {
         await LmsDataService.PostAsync<UserDto, object>("api/users", newUser);
 
-        newUser = new UserDto(); // Clear the form
+        // Clear the form
+        newUser = new UserDto(); 
         
     }
 
