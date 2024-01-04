@@ -4,5 +4,6 @@
     {
         ICourseService CourseService { get; }
         IUserService UserService { get; }
+        IActivityService ActivityService { get; }
     }
 }

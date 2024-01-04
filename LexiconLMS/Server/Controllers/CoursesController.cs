@@ -28,7 +28,7 @@ namespace LexiconLMS.Server.Controllers
         public async Task<ActionResult<IEnumerable<CourseDto>>> GetCourse(bool includeAll = false)
         {
             return Ok(await serviceManager.CourseService.GetCoursesAsync(includeAll));
-            
+
         }
 
         // GET: api/Courses/5
@@ -130,6 +130,13 @@ namespace LexiconLMS.Server.Controllers
         {
             return false;
             //return (_context.Course?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        [HttpGet("activity/{id}")]
+        public async Task<ActionResult<ActivityDto>> GetActivity(Guid id)
+        {
+            var activityDto = await serviceManager.ActivityService.GetActivityAsync(id);
+            return activityDto;
         }
     }
 }

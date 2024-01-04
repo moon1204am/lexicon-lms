@@ -17,6 +17,11 @@ namespace LexiconLMS.Server.Extensions
             services.AddScoped(provider => new Lazy<IUserRepository>(() => provider.GetRequiredService<IUserRepository>()));
             services.AddScoped(provider => new Lazy<IUserService>(() => provider.GetRequiredService<IUserService>()));
 
+            services.AddScoped<IActivityRepository, ActivityRepository>();
+            services.AddScoped<IActivityService, ActivityService>();
+            services.AddScoped(provider => new Lazy<IActivityRepository>(() => provider.GetRequiredService<IActivityRepository>()));
+            services.AddScoped(provider => new Lazy<IActivityService>(() => provider.GetRequiredService<IActivityService>()));
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IServiceManager, ServiceManager>();
         }

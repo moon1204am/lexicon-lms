@@ -7,11 +7,14 @@
         public ICourseService CourseService => _courseService.Value;
         private readonly Lazy<IUserService> _userService;
         public IUserService UserService => _userService.Value;
+        private readonly Lazy<IActivityService> _activityService;
+        public IActivityService ActivityService => _activityService.Value;
 
-        public ServiceManager(Lazy<ICourseService> courseService, Lazy<IUserService> userService)
+        public ServiceManager(Lazy<ICourseService> courseService, Lazy<IUserService> userService, Lazy<IActivityService> activityService)
         {
             _courseService = courseService;
             _userService = userService;
+            _activityService = activityService;
         }
     }
 }

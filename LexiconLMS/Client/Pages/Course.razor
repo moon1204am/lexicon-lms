@@ -23,7 +23,7 @@ else
                     <div class="accordion-body">
                         @foreach (var activity in module.Activities)
                         {
-                            @activity.Name
+                            <a href="@($"{CourseDto.Id}/activity/{activity.Id}")">@activity.Name</a>
                         }
                     </div>
                 </div>
