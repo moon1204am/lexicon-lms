@@ -13,7 +13,10 @@ namespace LexiconLMS.Server.Services
         private readonly Lazy<IActivityService> _activityService;
         public IActivityService ActivityService => _activityService.Value;
 
-        public ServiceManager(Lazy<ICourseService> courseService, Lazy<IUserService> userService, Lazy<IActivityService> activityService)
+        public ServiceManager(
+            Lazy<ICourseService> courseService, 
+            Lazy<IUserService> userService, 
+            Lazy<IActivityService> activityService)
         {
             _courseService = courseService;
             _userService = userService;

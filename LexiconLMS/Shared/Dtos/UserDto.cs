@@ -12,7 +12,7 @@ namespace LexiconLMS.Shared.Dtos
         [Required, EmailAddress]
         public string Email { get; set; } = string.Empty;
 
-        //public string FullName => $"{FirstName} {LastName}";
+        public string FullName => $"{FirstName} {LastName}";
 
         //Todo: Add a property for the role here, when the SQL is resolved.
         //[Required]
@@ -22,7 +22,7 @@ namespace LexiconLMS.Shared.Dtos
         //public string FullName => $"{FirstName} {LastName}";
         //public List<RoleDto> Roles { get; set; }
         //public RoleDto Role { get; set; } = default!;
-        //public string Role { get; set; }
+        public string Role { get; set; }
         //public ICollection<IdentityUserRole<string>> Roles { get; set; }
 
         //Foreign Keys

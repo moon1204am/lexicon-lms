@@ -16,8 +16,7 @@ namespace LexiconLMS.Server.Controllers
 
         private readonly IUserService _userService;
 
-        public UsersController(IUserService userService)
-        public UsersController(IServiceManager serviceManager)
+        public UsersController(IServiceManager serviceManager, IUserService userService)
         {
             _userService = userService;
             _serviceManager = serviceManager;

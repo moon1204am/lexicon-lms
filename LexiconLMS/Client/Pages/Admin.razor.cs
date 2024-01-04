@@ -3,6 +3,7 @@ using LexiconLMS.Shared.Dtos;
 using LexiconLMS.Client.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace LexiconLMS.Client.Pages
 {
@@ -12,7 +13,7 @@ namespace LexiconLMS.Client.Pages
 
         protected UserDto newUser = new UserDto();
         protected List<CourseDto> courses = new List<CourseDto>();
-
+        //protected List<IdentityRole> roles = new List<IdentityRole>();
         protected override async Task OnInitializedAsync()
         {
             courses = await LmsDataService.GetAsync<List<CourseDto>>("api/courses");
