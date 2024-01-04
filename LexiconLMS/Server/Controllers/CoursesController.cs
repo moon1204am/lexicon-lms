@@ -93,7 +93,7 @@ namespace LexiconLMS.Server.Controllers
         // POST: api/Courses
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Course>> PostCourse(CourseAddDto course)
+        public async Task<ActionResult<CourseAddDto>> PostCourse(CourseAddDto course)
         {
             if (course != null)
             {

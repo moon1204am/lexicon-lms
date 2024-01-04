@@ -8,7 +8,8 @@ namespace LexiconLMS.Client.Pages
     {
         public List<CourseDto>? CourseList = default!;
 
-        [Inject] public ILmsDataService LmsDataService { get; set; } = default!;
+        [Inject]
+        public ILmsDataService LmsDataService { get; set; } = default!;
 
         protected override async Task OnInitializedAsync()
         {

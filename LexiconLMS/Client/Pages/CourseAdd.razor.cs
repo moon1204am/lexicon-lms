@@ -10,18 +10,18 @@ namespace LexiconLMS.Client.Pages
         [Inject] 
         public ILmsDataService LmsDataService { get; set; } = default!;
         private CourseAddDto? _courseToAdd = new CourseAddDto();
-        private string _succesMessage = string.Empty;
+        private string _successMessage = string.Empty;
         public async Task CreateCourseAsync()
         {
        
             if (_courseToAdd == null)
             {
-                _succesMessage = "Course not added";
+                _successMessage = "Course not added";
             }
             else
             {
                 await LmsDataService.PostAsync<CourseAddDto>("api/courses/",_courseToAdd);
-                _succesMessage = "Course added";
+                _successMessage = "Course added";
             }
         }
     }
