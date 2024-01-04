@@ -44,5 +44,18 @@ namespace LexiconLMS.Server.Services
             // Todo: Add user to role here, first needs to resolve issue with SQL roles
         }
 
+        public async Task<IList<string>> GetUserRolesAsync(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+         
+            if (user == null)
+            {
+                throw new KeyNotFoundException("User role not found.");
+            }
+            //return await _userManager.GetRolesAsync(user);
+            return new List<string>(await _userManager.GetRolesAsync(user));
+        }
+
+
     }
 }

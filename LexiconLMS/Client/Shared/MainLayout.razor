@@ -26,7 +26,18 @@
                                     </NavLink>
                                 </li>
                             </Authorized>
+                        </AuthorizeView>                        
+                        <!-- Todo: Temporary to see if the admin view is working or not, delete later.-->
+                        <AuthorizeView Roles="Admin">
+                            <Authorized>
+                                <li class="nav-item">
+                                    <NavLink class="nav-link" href="/admin">
+                                        <span class="oi oi-list-rich" aria-hidden="true"></span> I am an admin! If you see me.
+                                    </NavLink>
+                                </li>
+                            </Authorized>
                         </AuthorizeView>
+
                     </ul>
                     <ul class="navbar-nav">
                         <LoginDisplay/>

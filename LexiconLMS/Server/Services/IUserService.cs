@@ -6,5 +6,6 @@ namespace LexiconLMS.Server.Services
     public interface IUserService
     {
         Task<IActionResult> CreateUserAsync(UserDto userDto);
+        Task<IList<string>> GetUserRolesAsync(string userId);
     }
 }
