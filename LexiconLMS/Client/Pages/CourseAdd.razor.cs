@@ -1,36 +1,28 @@
 ﻿using LexiconLMS.Client.Services;
 using LexiconLMS.Shared.Dtos;
 using Microsoft.AspNetCore.Components;
+using System.Net;
 
 namespace LexiconLMS.Client.Pages
 {
     public partial class CourseAdd
     {
-
         [Inject] 
         public ILmsDataService LmsDataService { get; set; } = default!;
-       
-        
-        private CourseAddDto? CourseToAdd = new CourseAddDto();
-
-
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
-        }
-
+        private CourseAddDto? _courseToAdd = new CourseAddDto();
+        private string _succesMessage = string.Empty;
         public async Task CreateCourseAsync()
         {
-            if (CourseToAdd == null)
+       
+            if (_courseToAdd == null)
             {
-
+                _succesMessage = "Course not added";
             }
             else
             {
-                await LmsDataService.GetAsync<List<CourseDto>>($"api/courses/{CourseToAdd}");
+                await LmsDataService.PostAsync<CourseAddDto>("api/courses/",_courseToAdd);
+                _succesMessage = "Course added";
             }
-
         }
-
     }
 }
