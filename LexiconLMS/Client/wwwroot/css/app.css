@@ -12,6 +12,12 @@ a, .btn-link {
     color: #0071c1;
 }
 
+.no-padding-lms {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
 .btn-primary {
     color: #fff;
     background-color: #1b6ec2;
@@ -114,15 +120,13 @@ a.btn.btn-outline-primary {
     font-size: 1.2rem;
 }
 
-    a.nav-link,
-    a
+    a.navbar-style
     {
         color: rgba(0, 0, 0, 0.5); /* Set the default color for the link */
         text-decoration: none !important; /*Remove underline */
     }
 
-        a.nav-link:hover,
-        a:hover,
+        a.navbar-style:hover,
         button.nav-link.btn-link:hover {
             color: rgba(0, 0, 0, 0.6) !important;
             transition: 0.5s;
@@ -168,4 +172,19 @@ nav.navbar.navbar-expand-lg {
     margin-bottom: 0.5rem !important;
     margin-left: 0!important;
     padding: 0 !important;
+}
+.custom-width {
+    width: 300px !important;
+    margin: 0 auto !important;
+    margin-top: 5rem !important;
+}
+textarea#Description.form-control{
+    height: 7rem;
+}
+
+@media (max-width: 767px) {
+    .custom-width {
+        width: 100% !important;
+        margin: 0 auto !important;
+    }
 }

@@ -93,17 +93,16 @@ namespace LexiconLMS.Server.Controllers
         // POST: api/Courses
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Course>> PostCourse(Course course)
+        public async Task<ActionResult<CourseAddDto>> PostCourse(CourseAddDto course)
         {
-            //if (_context.Course == null)
-            //{
-            //    return Problem("Entity set 'ApplicationDbContext.Course'  is null.");
-            //}
-            //_context.Course.Add(course);
-            //await _context.SaveChangesAsync();
-
-            //return CreatedAtAction("GetCourse", new { id = course.Id }, course);
-            return null;
+            if (course != null)
+            {
+                return Ok(await serviceManager.CourseService.CreateCourseAsync(course));
+            }
+            else
+            {
+                return BadRequest("Data missing.");
+            }
         }
 
         // DELETE: api/Courses/5
