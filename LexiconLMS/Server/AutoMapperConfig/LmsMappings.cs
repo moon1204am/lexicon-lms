@@ -9,6 +9,7 @@ namespace LexiconLMS.Server.AutoMapperConfig
         public LmsMappings() 
         { 
             CreateMap<Course, CourseDto>().ReverseMap();
+            CreateMap<Course, CoursesViewDto>().ReverseMap();
             CreateMap<ApplicationUser, UserDto>().ReverseMap();
             CreateMap<Module, ModuleDto>().ReverseMap();
             CreateMap<Activity, ActivityDto>().ReverseMap();
