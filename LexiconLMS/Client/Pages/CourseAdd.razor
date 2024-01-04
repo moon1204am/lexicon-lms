@@ -1,43 +1,38 @@
 ﻿@page "/CourseAdd"
 
-<h3>Add Course</h3>
+<div class="custom-width">
+    <h3 class="text-center">Add Course</h3>
+    <EditForm Model="@_courseToAdd" OnValidSubmit="@CreateCourseAsync">
+        <DataAnnotationsValidator/>
+        <p class="text-danger">@_succesMessage</p>
 
+        <div class="form-group">
+            <label for="Name">Name:</label>
+            <InputText maxlength="30" id="Name" @bind-Value="_courseToAdd.Name" class="form-control"/>
+            <ValidationMessage For="@(() => _courseToAdd.Name)"/>
+        </div>
 
-<EditForm Model="@CourseToAdd" OnValidSubmit="@CreateCourseAsync">
-    <DataAnnotationsValidator/>
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Description</th>
-            <th scope="col">Start Date</th>
-            <th scope="col">End Date</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td scope="row">
-                <InputText id="Name" @bind-Value="CourseToAdd.Name" class="form-control col-md-8">
-                </InputText>
-                <ValidationMessage For="@(()=> CourseToAdd.Name)" />
-            </td>
-            <td scope="row">
-                <InputText id="Description" @bind-Value="CourseToAdd.Description" class="form-control col-md-8">
-                </InputText>
-                <ValidationMessage For="@(()=> CourseToAdd.Description)" />
-            </td>
-            <td scope="row">
-                <InputDate id="StartDate" @bind-Value="CourseToAdd.StartDate" class="form-control col-md-8"> </InputDate>
-            </td>
-            <td scope="row">
-                <InputDate id="EndDate" @bind-Value="CourseToAdd.EndDate" class="form-control col-md-8"> </InputDate>
-            </td>
-           
-        </tr>
-        </tbody>
-    </table>
- 
-@*     <a href="@($"listofdevices")" class="btn btn-outline-primary">Back to Device list</a>&nbsp; *@
-    <button type="submit" class="btn btn-primary me-1">Add Course</button>
-</EditForm>
+        <div class="form-group description-height">
+            <label for="Description">Description:</label>
+            <textarea maxlength="100" id="Description" @bind="_courseToAdd.Description" class="form-control"></textarea>
+            <ValidationMessage For="@(() => _courseToAdd.Description)"/>
+        </div>
+
+        <div class="form-group">
+            <label for="StartDate">Start Date:</label>
+            <InputDate id="StartDate" @bind-Value="_courseToAdd.StartDate" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label for="EndDate">End Date:</label>
+            <InputDate id="EndDate" @bind-Value="_courseToAdd.EndDate" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Add Course</button>
+        </div>
+
+    </EditForm>
+</div>
+
 
