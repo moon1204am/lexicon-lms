@@ -28,7 +28,9 @@ namespace LexiconLMS.Client.Services
             return result;
         }
 
-        public async Task<TResponse?> PostAsync<TRequest, TResponse>(string path, TRequest content, string contentType = json)
+        
+        
+        public async Task<TResponse?> PostAsyncUser<TRequest, TResponse>(string path, TRequest content, string contentType = json)
         {
             var response = await _httpClient.PostAsJsonAsync(path, content, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
             //response.EnsureSuccessStatusCode();

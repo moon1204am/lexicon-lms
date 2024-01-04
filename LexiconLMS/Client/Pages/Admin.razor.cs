@@ -23,9 +23,12 @@ namespace LexiconLMS.Client.Pages
             }
         }
 
+        
+        
+        
         protected async Task HandleValidSubmit()
         {
-            await LmsDataService.PostAsync<UserDto, object>("api/users", newUser);
+            await LmsDataService.PostAsyncUser<UserDto, object>("api/users", newUser);
             newUser = new UserDto();
         }
     }
