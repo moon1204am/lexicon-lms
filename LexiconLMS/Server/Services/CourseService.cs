@@ -23,8 +23,7 @@ namespace LexiconLMS.Server.Services
 
         public async Task<CourseDto> GetCourseAsync(Guid id)
         {
-            var course = await _unitOfWork.CourseRepository.GetAsync(id) ?? throw new ArgumentNullException(nameof(id));
-            return _mapper.Map<CourseDto>(course);
+            return _mapper.Map<CourseDto>(await _unitOfWork.CourseRepository.GetAsync(id) ?? throw new ArgumentNullException(nameof(id)));
         }
         public async Task<CourseAddDto> CreateCourseAsync(CourseAddDto courseAddDto)
         {

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using LexiconLMS.Domain.Entities;
 using LexiconLMS.Shared.Dtos;
+using Microsoft.AspNetCore.Identity;
 
 namespace LexiconLMS.Server.AutoMapperConfig
 {

@@ -1,6 +1,10 @@
 ﻿using LexiconLMS.Server.Services;
 using LexiconLMS.Shared.Dtos;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System;
 
 namespace LexiconLMS.Server.Controllers
 {
@@ -8,12 +12,15 @@ namespace LexiconLMS.Server.Controllers
     [Route("api/users")]
     public class UsersController : ControllerBase
     {
+        private readonly IServiceManager _serviceManager;
 
         private readonly IUserService _userService;
 
         public UsersController(IUserService userService)
+        public UsersController(IServiceManager serviceManager)
         {
             _userService = userService;
+            _serviceManager = serviceManager;
         }
 
         [HttpPost]
@@ -21,12 +28,17 @@ namespace LexiconLMS.Server.Controllers
         {
             await _userService.CreateUserAsync(userDto);
             if (!ModelState.IsValid)
-            {
+        {
                 return BadRequest(ModelState);
             }
             //return Ok();
             return new OkObjectResult(new { message = "User created successfully", user = userDto });
         }
-
+        [HttpGet("{id}")]
+        public async Task<ActionResult<IEnumerable<UserDto>>> GetAsync(Guid id)
+        {
+            return Ok(await _serviceManager.UserService.GetUsersAsync(id));
+            //return Ok(usersDto);
+        }
     }
 }

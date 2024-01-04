@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace LexiconLMS.Shared.Dtos
 {
@@ -17,6 +18,12 @@ namespace LexiconLMS.Shared.Dtos
         //[Required]
         //public string Role { get; set; } = string.Empty;
 
+        //Maya's code snippet
+        //public string FullName => $"{FirstName} {LastName}";
+        //public List<RoleDto> Roles { get; set; }
+        //public RoleDto Role { get; set; } = default!;
+        //public string Role { get; set; }
+        //public ICollection<IdentityUserRole<string>> Roles { get; set; }
 
         //Foreign Keys
         [Required]
