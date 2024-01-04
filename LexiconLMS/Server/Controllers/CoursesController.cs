@@ -9,11 +9,13 @@ using LexiconLMS.Domain.Entities;
 using LexiconLMS.Server.Data;
 using LexiconLMS.Server.Services;
 using LexiconLMS.Shared.Dtos;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LexiconLMS.Server.Controllers
 {
     [Route("api/courses")]
     [ApiController]
+
     public class CoursesController : ControllerBase
     {
         private readonly IServiceManager serviceManager;
@@ -22,7 +24,7 @@ namespace LexiconLMS.Server.Controllers
         {
             this.serviceManager = serviceManager;
         }
-
+        [Authorize(Roles="Admin")]
         // GET: api/Courses
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CourseDto>>> GetCourse(bool includeAll = false)
