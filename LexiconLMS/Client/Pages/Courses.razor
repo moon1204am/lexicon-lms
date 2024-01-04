@@ -8,24 +8,38 @@
 }
 else
 {
-    <table>
+    <table class="table">
         <thead>
-            <tr class="border-header">
-                <td class="text-bottom" scope="col"><strong>Name</strong></td>
-                <td class="text-bottom" scope="col"><strong>Start Date</strong></td>
-                <td class="text-bottom" scope="col"><strong>End Date</strong></td>
+            <tr>
+
+                <th scope="col">Name</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+
             </tr>
         </thead>
         <tbody>
             @foreach (var coursesViewDto in CourseList)
             {
                 <tr>
-                    <td scope="row" class="text-card"><a href="https://www.w3schools.com">@coursesViewDto.Name</a> @* ToDo: Ref to (Modules) *@</td>
-                    <td scope="row" class="text-card">@coursesViewDto.StartDate.ToString("yyyy-MM-dd")</td>
-                    <td scope="row" class="text-card">@coursesViewDto.EndDate.ToString("yyyy-MM-dd")</td>
+
+                    <td scope="row" >
+                        <a class="no-padding-lms" href="https://www.w3schools.com">@coursesViewDto.Name</a> @* ToDo: Ref to (Modules) *@
+                    </td>
+                    <td scope="row">
+                        @coursesViewDto.StartDate.ToString("yyyy-MM-dd")
+                    </td>
+                    <td scope="row">
+                        @coursesViewDto.EndDate.ToString("yyyy-MM-dd")
+                    </td>
+
                 </tr>
             }
-        </tbody>
-    </table>
-}
+            </tbody>
 
+        </table>
+
+
+
+
+}
