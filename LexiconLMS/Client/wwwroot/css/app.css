@@ -173,3 +173,18 @@ nav.navbar.navbar-expand-lg {
     margin-left: 0!important;
     padding: 0 !important;
 }
+.custom-width {
+    width: 300px !important;
+    margin: 0 auto !important;
+    margin-top: 5rem !important;
+}
+textarea#Description.form-control{
+    height: 7rem;
+}
+
+@media (max-width: 767px) {
+    .custom-width {
+        width: 100% !important;
+        margin: 0 auto !important;
+    }
+}
