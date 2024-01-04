@@ -5,12 +5,15 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System.Net.Http.Json;
+using Microsoft.AspNetCore.Components.Authorization;
+using System.Security.Claims;
 
 namespace LexiconLMS.Client.Pages
 {
     public partial class Admin : ComponentBase
     {
         // ILmsDataService is injected in the Admin.razor page.
+        IEnumerable<Claim> Claims { get; set; }
 
         [Inject]
         private HttpClient Http { get; set; }
@@ -19,8 +22,23 @@ namespace LexiconLMS.Client.Pages
         protected List<CourseDto> courses = new List<CourseDto>();
         protected List<string> userRoles;
 
+        [CascadingParameter]
+        private Task<AuthenticationState> authenticationStateTask { get; set; }
+
         protected override async Task OnInitializedAsync()
         {
+            var authState = await authenticationStateTask;
+            Claims = authState.User.Claims;
+            
+            if (authState.User.IsInRole("Admin"))
+            {
+                Console.WriteLine("User is in Admin role");
+            }
+            else
+            {
+                Console.WriteLine("User is not in Admin role");
+            }
+
             try
             {
 

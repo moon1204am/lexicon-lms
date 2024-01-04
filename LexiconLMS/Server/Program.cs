@@ -28,12 +28,24 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 
-//Adjusting API end-points
+//Adjusting API end-points,  Choose 1 or 2
+// 1.
 builder.Services.AddIdentityServer()
-    .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+    .AddApiAuthorization<ApplicationUser, ApplicationDbContext>(
+    options =>
+    {
+        options.IdentityResources["openid"].UserClaims.Add("role");
+        options.ApiResources.Single().UserClaims.Add("role");
+    });
 
-builder.Services.AddAuthentication();
-    //.AddIdentityServerJwt();
+builder.Services.AddAuthentication()
+    .AddIdentityServerJwt();
+
+//// 2. Works without authenthication as a Role in Admin
+//builder.Services.AddIdentityServer()
+//    .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+//builder.Services.AddAuthentication();
+
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
