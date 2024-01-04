@@ -1,4 +1,6 @@
-﻿namespace LexiconLMS.Shared.Dtos
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace LexiconLMS.Shared.Dtos
 {
     public class UserDto
     {
@@ -8,6 +10,10 @@
         public string LastName { get; set; } = string.Empty;
 
         public string FullName => $"{FirstName} {LastName}";
+        //public List<RoleDto> Roles { get; set; }
+        //public RoleDto Role { get; set; } = default!;
+        public string Role { get; set; }
+        //public ICollection<IdentityUserRole<string>> Roles { get; set; }
 
         ////Foreign Keys
         //public Guid CourseId { get; set; }

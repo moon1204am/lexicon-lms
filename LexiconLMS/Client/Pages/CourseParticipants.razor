@@ -1,0 +1,26 @@
+﻿@page "/participants/{CourseId}"
+<h3>CourseParticipants</h3>
+@if(CourseParticipantsList == null)
+{
+    <p><em>Loading</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var participant in CourseParticipantsList)
+            {
+                <tr>
+                    <td scope="row">@participant.FullName</td>
+                    <td scope="row">@participant.Role</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
