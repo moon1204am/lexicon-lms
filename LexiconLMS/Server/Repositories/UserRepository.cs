@@ -1,5 +1,7 @@
 ﻿using LexiconLMS.Domain.Entities;
 using LexiconLMS.Server.Data;
+using LexiconLMS.Shared.Dtos;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace LexiconLMS.Server.Repositories
@@ -24,6 +26,17 @@ namespace LexiconLMS.Server.Repositories
                 LastName = userAndRoleWithIdentityRole.uur.u.LastName,
                 Role = userAndRoleWithIdentityRole.r.Name
             }).ToListAsync();
+        }
+
+        //Todo: new call to database to get roles, LMS data service
+        public async Task<IEnumerable<IdentityRole>> GetRolesAsync()
+        {
+            return await _context.Roles.ToListAsync();
+        }
+
+        public async Task<IdentityRole> GetRoleAsync(Guid id)
+        {
+            return await _context.Roles.FirstOrDefaultAsync(r => r.Id == id.ToString());
         }
     }
 }

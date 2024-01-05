@@ -24,16 +24,14 @@ namespace LexiconLMS.Server.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IActionResult> CreateUserAsync(UserDto userDto)
+        public async Task<IActionResult> CreateUserAsync(CreateUserDto userDto)
         {
+            var role = await _unitOfWork.UserRepository.GetRoleAsync(userDto.RoleId);
             var user = _mapper.Map<ApplicationUser>(userDto);
-
             // Using email as the username
-            user.UserName = userDto.Email; 
-            
-            // In case you need a hardcoded course id, you can set it here, double check the Guid value in SQL database
-            //user.CourseId = new Guid("01276b0c-345c-4dea-0d0d-08dc0b93fb82"); // Default course id
+            user.UserName = userDto.Email;
 
+            await _userManager.AddToRoleAsync(user, role.Name);
             // Set other necessary properties for ApplicationUser
             var result = await _userManager.CreateAsync(user, "P@ssw0rd"); 
 
@@ -47,6 +45,12 @@ namespace LexiconLMS.Server.Services
             return new OkObjectResult(new { message = "User created successfully.", user = userDto });
 
             // Todo: Add user to role here, first needs to resolve issue with SQL roles
+        }
+
+        public async Task<IEnumerable<RoleDto>> GetRolesAsync()
+        {        
+            var roles = await _unitOfWork.UserRepository.GetRolesAsync(); 
+            return _mapper.Map<IEnumerable<RoleDto>>(roles);
         }
 
         public async Task<IEnumerable<UserDto>> GetUsersAsync(Guid courseId)

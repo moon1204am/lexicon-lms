@@ -62,24 +62,15 @@
                                 </div>
                                 <div class="form-group">
                                     <!--Can't access the roles from database, during the creation of the user, the role is not being assigned. 
-
-                                    This is a temporary work-around-->
-                                        
-                                    <!--
-                                    <InputSelect @bind-Value="newUser.Role">
-
-                                        @foreach (var role in roles)
+-->
+                                    <InputSelect @bind-Value="newUser.RoleId">
+                                        @foreach (var role in rolesList)
                                         {
-                                            <option value="@role.Id.ToString()" @key="role.Id">@role.Name</option>
+                                            <option value="@role.Id" @key="role.Id">@role.Name</option>
                                         }
                                     </InputSelect>
-                                        -->
 
-                                    <label for="Role">Role:</label>
-                                    <InputSelect @bind-Value="newUser.Role">
-                                        <option value="Student">Student</option>
-                                        <option value="Admin">Admin</option>
-                                    </InputSelect>
+
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Create User</button>

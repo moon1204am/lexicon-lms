@@ -23,9 +23,9 @@ namespace LexiconLMS.Server.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateUserAsync([FromBody] UserDto userDto)
+        public async Task<IActionResult> CreateUserAsync([FromBody] CreateUserDto userDto)
         {
-            await _userService.CreateUserAsync(userDto);
+            await _serviceManager.UserService.CreateUserAsync(userDto);
             if (!ModelState.IsValid)
         {
                 return BadRequest(ModelState);
@@ -38,6 +38,12 @@ namespace LexiconLMS.Server.Controllers
         {
             return Ok(await _serviceManager.UserService.GetUsersAsync(id));
             //return Ok(usersDto);
+        }
+
+        [HttpGet("roles")]
+        public async Task<IEnumerable<RoleDto>> GetRolesAsync()
+        {
+            return await _serviceManager.UserService.GetRolesAsync();
         }
     }
 }
