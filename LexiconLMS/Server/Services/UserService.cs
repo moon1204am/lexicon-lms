@@ -31,16 +31,17 @@ namespace LexiconLMS.Server.Services
             // Using email as the username
             user.UserName = userDto.Email;
 
-            await _userManager.AddToRoleAsync(user, role.Name);
+            var rol = await _userManager.AddToRoleAsync(user, role.Name);
             // Set other necessary properties for ApplicationUser
-            var result = await _userManager.CreateAsync(user, "P@ssw0rd"); 
+            var result = await _userManager.CreateAsync(user, "P@ssw0rd");
 
             if (!result.Succeeded)
-        {
+            {
                 var errors = result.Errors.Select(e => e.Description);
                 throw new Exception($"User creation failed: {string.Join(", ", errors)}");
 
             }
+            await _unitOfWork.SaveChangesAsync();
 
             return new OkObjectResult(new { message = "User created successfully.", user = userDto });
 
@@ -48,8 +49,8 @@ namespace LexiconLMS.Server.Services
         }
 
         public async Task<IEnumerable<RoleDto>> GetRolesAsync()
-        {        
-            var roles = await _unitOfWork.UserRepository.GetRolesAsync(); 
+        {
+            var roles = await _unitOfWork.UserRepository.GetRolesAsync();
             return _mapper.Map<IEnumerable<RoleDto>>(roles);
         }
 
