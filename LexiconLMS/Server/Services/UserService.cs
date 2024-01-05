@@ -28,20 +28,28 @@ namespace LexiconLMS.Server.Services
         {
             var role = await _unitOfWork.UserRepository.GetRoleAsync(userDto.RoleDto.Id);
             var user = _mapper.Map<ApplicationUser>(userDto);
+            
             // Using email as the username
             user.UserName = userDto.Email;
 
-            await _userManager.AddToRoleAsync(user, role.Name);
+
             // Set other necessary properties for ApplicationUser
             var result = await _userManager.CreateAsync(user, "P@ssw0rd"); 
 
             if (!result.Succeeded)
         {
+
                 var errors = result.Errors.Select(e => e.Description);
                 throw new Exception($"User creation failed: {string.Join(", ", errors)}");
 
             }
+            else
+            {
+            await _userManager.AddToRoleAsync(user, role.Name);
 
+            }
+
+            
             return new OkObjectResult(new { message = "User created successfully.", user = userDto });
 
             // Todo: Add user to role here, first needs to resolve issue with SQL roles

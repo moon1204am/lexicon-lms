@@ -14,9 +14,7 @@ namespace LexiconLMS.Shared.Dtos
 
         //public string FullName => $"{FirstName} {LastName}";
 
-        public RoleDto RoleDto { get; set; }
-
-        
+        public RoleDto RoleDto { get; set; }        
 
         //Foreign Keys
         [Required]
