@@ -61,33 +61,15 @@ namespace LexiconLMS.Server.Controllers
         // PUT: api/Courses/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCourse(Guid id, Course course)
+        public async Task<IActionResult> PutCourse(Guid id, CourseDto course)
         {
-            //if (id != course.Id)
-            //{
-            //    return BadRequest();
-            //}
+            if (id != course.Id)
+            {
+                return BadRequest();
+            }
+            await serviceManager.CourseService.UpdateCourseAsync(id, course);
 
-            //_context.Entry(course).State = EntityState.Modified;
-
-            //try
-            //{
-            //    await _context.SaveChangesAsync();
-            //}
-            //catch (DbUpdateConcurrencyException)
-            //{
-            //    if (!CourseExists(id))
-            //    {
-            //        return NotFound();
-            //    }
-            //    else
-            //    {
-            //        throw;
-            //    }
-            //}
-
-            //return NoContent();
-            return null;
+            return NoContent();
         }
 
         // POST: api/Courses

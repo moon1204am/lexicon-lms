@@ -1,6 +1,6 @@
 ﻿@page "/courses/{CourseId}"
 <h3>Course</h3>
-
+<AuthorizeView>
 @if (CourseDto == null)
 {
     <p><em>Loading...</em></p>
@@ -10,6 +10,12 @@ else
     <a href="@($"participants/{CourseDto.Id}")" class="btn btn-outline-primary btn-sm mb-1">
         View all participants
     </a>
+
+    @if (@context.User.IsInRole("Admin"))
+    { 
+        <a class="btn btn-primary" href="@($"CourseEdit/{CourseDto.Id}")">Edit course</a> 
+    }
+
     foreach (var module in CourseDto.Modules)
     {
         <div class="accordion" id="accordionPanelsStayOpenExample">
@@ -30,5 +36,7 @@ else
             </div>
         </div>
     }
+     
 }
+</AuthorizeView>
 
