@@ -23,11 +23,11 @@ namespace LexiconLMS.Server.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateUserAsync([FromBody] CreateUserDto userDto)
+        public async Task<IActionResult> CreateUserAsync(CreateUserDto userDto)
         {
             await _serviceManager.UserService.CreateUserAsync(userDto);
             if (!ModelState.IsValid)
-        {
+            {
                 return BadRequest(ModelState);
             }
             //return Ok();

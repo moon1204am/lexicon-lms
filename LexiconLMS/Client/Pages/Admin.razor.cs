@@ -14,7 +14,7 @@ namespace LexiconLMS.Client.Pages
         protected CreateUserDto newUser = new CreateUserDto();
         protected List<CourseDto> courses = new List<CourseDto>();
 
-        private Guid _roleGuid { get; set; } = default!;
+        public Guid _roleGuid { get; set; } = default!;
 
         public string Role { get; set; } 
         protected List<RoleDto> rolesList = new List<RoleDto>();

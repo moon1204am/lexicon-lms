@@ -23,6 +23,7 @@ namespace LexiconLMS.Shared.Dtos
         //public List<RoleDto> Roles { get; set; }
         //public RoleDto Role { get; set; } = default!;
         public string Role { get; set; }
+        
         //public ICollection<IdentityUserRole<string>> Roles { get; set; }
 
         //Foreign Keys

@@ -66,7 +66,7 @@
                                     <InputSelect @bind-Value="newUser.RoleId">
                                         @foreach (var role in rolesList)
                                         {
-                                            <option value="@role.Id" @key="role.Id">@role.Name</option>
+                                            <option value="@role.Id">@role.Name</option>
                                         }
                                     </InputSelect>
 
