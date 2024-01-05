@@ -14,7 +14,7 @@ namespace LexiconLMS.Shared.Dtos
 
         //public string FullName => $"{FirstName} {LastName}";
 
-        public Guid RoleId { get; set; }
+        public RoleDto RoleDto { get; set; }
 
         
 

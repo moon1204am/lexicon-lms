@@ -26,7 +26,7 @@ namespace LexiconLMS.Server.Services
 
         public async Task<IActionResult> CreateUserAsync(CreateUserDto userDto)
         {
-            var role = await _unitOfWork.UserRepository.GetRoleAsync(userDto.RoleId);
+            var role = await _unitOfWork.UserRepository.GetRoleAsync(userDto.RoleDto.Id);
             var user = _mapper.Map<ApplicationUser>(userDto);
             // Using email as the username
             user.UserName = userDto.Email;

@@ -38,9 +38,15 @@ namespace LexiconLMS.Client.Pages
         
         protected async Task HandleValidSubmit()
         {
+            var a = _roleGuid;
+            newUser.RoleDto = rolesList.FirstOrDefault(x => x.Id == _roleGuid);
+            //newUser.RoleId = new Guid(_roleGuid.ToString());
+            
             //newUser.RoleId = _roleGuid;
             //await LmsDataService.PostAsyncUser<CreateUserDto, object>("api/users", newUser);
-            var result = newUser;
+            //var result = newUser;
+            while (newUser.RoleDto == null) {
+            }
             await LmsDataService.PostAsync<CreateUserDto>("api/users", newUser);
             
         }
