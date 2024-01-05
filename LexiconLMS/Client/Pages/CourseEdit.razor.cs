@@ -18,5 +18,10 @@ namespace LexiconLMS.Client.Pages
         {
             CourseDto = await LmsDataService.GetAsync<CourseDto>($"api/courses/{CourseId}");
         }
+
+        public async Task UpdateCourseAsync()
+        { 
+           await LmsDataService.PutAsync<CourseDto>($"api/courses/{CourseId}", CourseDto);
+        }
     }
 }

@@ -24,7 +24,7 @@ else
                 <tr>
 
                     <td scope="row" >
-                        <a class="no-padding-lms" href="https://www.w3schools.com">@coursesViewDto.Name</a> @* ToDo: Ref to (Modules) *@
+                        <a class="no-padding-lms" href="@($"courses/{coursesViewDto.Id}")">@coursesViewDto.Name</a> @* ToDo: Ref to (Modules) *@
                     </td>
                     <td scope="row">
                         @coursesViewDto.StartDate.ToString("yyyy-MM-dd")
@@ -36,10 +36,5 @@ else
                 </tr>
             }
             </tbody>
-
         </table>
-
-
-
-
 }
