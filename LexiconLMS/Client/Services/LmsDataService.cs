@@ -38,12 +38,17 @@ namespace LexiconLMS.Client.Services
             request.Content = new StringContent(jsonContent, Encoding.UTF8, contentType);
 
             var response = await _httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
-            response.EnsureSuccessStatusCode();
+            //response.EnsureSuccessStatusCode();
+            if (response.IsSuccessStatusCode)
+            {
+                var stream = await response.Content.ReadAsStreamAsync();
+                var result = JsonSerializer.Deserialize<T>(stream, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
 
-            var stream = await response.Content.ReadAsStreamAsync();
-            var result = JsonSerializer.Deserialize<T>(stream, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+                return result;
+            }
 
-            return result;
+            return default(T);
+            
         }
 
         

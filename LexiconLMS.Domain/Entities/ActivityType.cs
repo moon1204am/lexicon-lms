@@ -7,6 +7,5 @@
 
         //Navigation Property
         public ICollection<Activity> Activities { get; set; } = new List<Activity>();
-
     }
 }

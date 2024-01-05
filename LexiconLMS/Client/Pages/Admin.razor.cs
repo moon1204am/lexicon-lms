@@ -11,26 +11,22 @@ namespace LexiconLMS.Client.Pages
     {
         // ILmsDataService is injected in the Admin.razor page.
 
-        protected CreateUserDto newUser = new CreateUserDto();
-        protected List<CourseDto> courses = new List<CourseDto>();
-
-        private Guid _roleGuid { get; set; } = default!;
-
-        public string Role { get; set; } 
-        protected List<RoleDto> rolesList = new List<RoleDto>();
+        public CreateUserDto User { get; set; } = new CreateUserDto();
+        public List<CourseDto> Courses { get; set; } = new List<CourseDto>();
+        public List<RoleDto> RolesList { get; set; } = new List<RoleDto>();
 
 
 
         protected override async Task OnInitializedAsync()
         {
-            rolesList = await LmsDataService.GetAsync<List<RoleDto>>("api/users/roles");
+            RolesList = (await LmsDataService.GetAsync<List<RoleDto>>("api/users/roles")).ToList();
 
-            courses = await LmsDataService.GetAsync<List<CourseDto>>("api/courses");
+            Courses = (await LmsDataService.GetAsync<List<CourseDto>>("api/courses")).ToList();
 
-            if (courses.Count > 0)
-            {
-                newUser.CourseId = courses[0].Id;
-            }
+            //if (courses.Count > 0)
+            //{
+            //    newUser.CourseId = courses[0].Id;
+            //}
         }
 
         
@@ -40,9 +36,7 @@ namespace LexiconLMS.Client.Pages
         {
             //newUser.RoleId = _roleGuid;
             //await LmsDataService.PostAsyncUser<CreateUserDto, object>("api/users", newUser);
-            var result = newUser;
-            await LmsDataService.PostAsync<CreateUserDto>("api/users", newUser);
-            
+            await LmsDataService.PostAsync<CreateUserDto>("api/users", User);
         }
 
 

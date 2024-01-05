@@ -14,30 +14,32 @@ namespace LexiconLMS.Server.Controllers
     {
         private readonly IServiceManager _serviceManager;
 
-        private readonly IUserService _userService;
-
-        public UsersController(IServiceManager serviceManager, IUserService userService)
+        public UsersController(IServiceManager serviceManager)
         {
-            _userService = userService;
             _serviceManager = serviceManager;
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateUserAsync([FromBody] CreateUserDto userDto)
+        public async Task<IActionResult> CreateUserAsync([FromBody] CreateUserDto createUserDto)
         {
-            await _serviceManager.UserService.CreateUserAsync(userDto);
+            var userDto = await _serviceManager.UserService.CreateUserAsync(createUserDto);
             if (!ModelState.IsValid)
-        {
+            {
                 return BadRequest(ModelState);
             }
-            //return Ok();
-            return new OkObjectResult(new { message = "User created successfully", user = userDto });
+            return CreatedAtAction(nameof(GetUser), new { id = userDto.Id }, userDto);
         }
-        [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<UserDto>>> GetAsync(Guid id)
+
+        [HttpGet]
+        public async Task<ActionResult<CreateUserDto>> GetUser(Guid id)
         {
-            return Ok(await _serviceManager.UserService.GetUsersAsync(id));
-            //return Ok(usersDto);
+            return Ok(await _serviceManager.UserService.GetUserAsync(id));
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<IEnumerable<UserDto>>> PutParticipants(Guid id)
+        {
+            return Ok(await _serviceManager.UserService.GetParticipantsAsync(id));
         }
 
         [HttpGet("roles")]

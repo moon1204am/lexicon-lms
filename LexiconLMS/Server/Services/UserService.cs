@@ -8,41 +8,31 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace LexiconLMS.Server.Services
 {
     public class UserService : IUserService
     {
-        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public UserService(UserManager<ApplicationUser> userManager, IMapper mapper, IUnitOfWork unitOfWork)
+        public UserService(IMapper mapper, IUnitOfWork unitOfWork)
         {
-            _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
+            //_userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IActionResult> CreateUserAsync(CreateUserDto userDto)
+        public async Task<UserDto> CreateUserAsync(CreateUserDto userDto)
         {
             var role = await _unitOfWork.UserRepository.GetRoleAsync(userDto.RoleId);
             var user = _mapper.Map<ApplicationUser>(userDto);
             // Using email as the username
             user.UserName = userDto.Email;
-
-            await _userManager.AddToRoleAsync(user, role.Name);
-            // Set other necessary properties for ApplicationUser
-            var result = await _userManager.CreateAsync(user, "P@ssw0rd"); 
-
-            if (!result.Succeeded)
-        {
-                var errors = result.Errors.Select(e => e.Description);
-                throw new Exception($"User creation failed: {string.Join(", ", errors)}");
-
-            }
-
-            return new OkObjectResult(new { message = "User created successfully.", user = userDto });
+            var userCreated = await _unitOfWork.UserRepository.CreateUserAsync(user, role);
+            await _unitOfWork.SaveChangesAsync();
+            return _mapper.Map<UserDto>(userCreated);
 
             // Todo: Add user to role here, first needs to resolve issue with SQL roles
         }
@@ -53,14 +43,14 @@ namespace LexiconLMS.Server.Services
             return _mapper.Map<IEnumerable<RoleDto>>(roles);
         }
 
-        public async Task<IEnumerable<UserDto>> GetUsersAsync(Guid courseId)
+        public async Task<IEnumerable<UserDto>> GetParticipantsAsync(Guid courseId)
         {
-            //var users = await _unitOfWork.UserRepository.GetParticipantsAsync(courseId);
-            //var usersDto = _mapper.Map<IEnumerable<UserDto>>(users);
-            //return usersDto;
-
             return _mapper.Map<IEnumerable<UserDto>>(await _unitOfWork.UserRepository.GetParticipantsAsync(courseId));
         }
 
+        public async Task<CreateUserDto> GetUserAsync(Guid id)
+        {
+            return _mapper.Map<CreateUserDto>(await _unitOfWork.UserRepository.GetUserAsync(id));
+        }
     }
 }

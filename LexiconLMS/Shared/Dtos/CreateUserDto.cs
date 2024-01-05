@@ -12,16 +12,10 @@ namespace LexiconLMS.Shared.Dtos
         [Required, EmailAddress]
         public string Email { get; set; } = string.Empty;
 
-        //public string FullName => $"{FirstName} {LastName}";
-
+        public string FullName => $"{FirstName} {LastName}";
+        [Required]
         public Guid RoleId { get; set; }
-
-        
-
-        //Foreign Keys
         [Required]
         public Guid CourseId { get; set; }
-
-
     }
 }

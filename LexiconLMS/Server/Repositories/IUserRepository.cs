@@ -9,5 +9,7 @@ namespace LexiconLMS.Server.Repositories
         Task<IEnumerable<ApplicationUser>> GetParticipantsAsync(Guid courseId);
         Task<IEnumerable<IdentityRole>> GetRolesAsync();
         Task<IdentityRole> GetRoleAsync(Guid id);
+        Task<ApplicationUser> CreateUserAsync(ApplicationUser user, IdentityRole identityRole);
+        Task<ApplicationUser> GetUserAsync(Guid id);
     }
 }
