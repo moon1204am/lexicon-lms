@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using System.Security.Claims;
+using Microsoft.JSInterop;
 
 namespace LexiconLMS.Client.Pages
 {
@@ -17,14 +18,16 @@ namespace LexiconLMS.Client.Pages
         public ILmsDataService LmsDataService { get; set; } = default!;
         //[Inject]
         //private IUserManager UserManager { }
-        [Inject]
-        private UserManager<IdentityUser> _userManager { get; set; } = default!;
-        [Inject]
+        //[Inject]
+        //private UserManager<IdentityUser> _userManager { get; set; } = default!;
+        //[Inject]
         //AuthenticationStateProvider ASProvider { get; set; } = default!;
         [Parameter]
-        public string CourseId { get; set; }
+        public Guid CourseId { get; set; }
         public CourseDto? CourseDto { get; set; }
         public bool IsOpen { get; set; }
+        
+        private string _role;
 
         protected override async Task OnInitializedAsync()
         {

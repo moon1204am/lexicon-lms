@@ -53,11 +53,7 @@ namespace LexiconLMS.Client.Services
             request.Content = new StringContent(jsonContent, Encoding.UTF8, contentType);
 
             var response = await _httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
-
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new HttpRequestException($"Response status code does not indicate success: {response.StatusCode}.");
-            }
+            response.EnsureSuccessStatusCode();
 
             var stream = await response.Content.ReadAsStreamAsync();
             var result = JsonSerializer.Deserialize<T>(stream, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });

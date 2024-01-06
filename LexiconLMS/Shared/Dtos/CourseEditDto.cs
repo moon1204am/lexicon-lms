@@ -1,13 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace LexiconLMS.Shared.Dtos
 {
-    public class CourseDto
+    public class CourseEditDto
     {
-        public Guid Id { get; set; }
         [Required]
-        [StringLength(maximumLength:30, MinimumLength = 2, ErrorMessage = "The {0} need to be between {2} and {1} characters long.")]
+        [StringLength(maximumLength: 30, MinimumLength = 2, ErrorMessage = "The {0} need to be between {2} and {1} characters long.")]
         public string Name { get; set; } = string.Empty;
         [Required]
         [StringLength(maximumLength: 100, MinimumLength = 2, ErrorMessage = "The {0} need to be between {2} and {1} characters long.")]
@@ -16,10 +19,6 @@ namespace LexiconLMS.Shared.Dtos
         public DateTime StartDate { get; set; }
         [Required]
         public DateTime EndDate { get; set; }
-        public ICollection<UserDto> Users { get; set; } = new List<UserDto>();
-        public ICollection<ModuleDto> Modules { get; set; } = new List<ModuleDto>();
 
     }
-
-
 }

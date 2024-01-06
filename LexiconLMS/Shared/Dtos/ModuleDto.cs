@@ -1,4 +1,6 @@
-﻿namespace LexiconLMS.Shared.Dtos
+﻿using System.Text.Json.Serialization;
+
+namespace LexiconLMS.Shared.Dtos
 {
     public class ModuleDto
     {
@@ -13,6 +15,7 @@
 
         ////Navigation Property
         //public CourseDto Course { get; set; }
+      
         public ICollection<ActivityDto> Activities { get; set; } = new List<ActivityDto>();
 
     }
