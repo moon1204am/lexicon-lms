@@ -23,6 +23,7 @@ namespace LexiconLMS.Client.Pages
 
             Courses = (await LmsDataService.GetAsync<List<CourseDto>>("api/courses")).ToList();
 
+            // If you want a default value in the dropdown list, you can set it here.
             //if (courses.Count > 0)
             //{
             //    newUser.CourseId = courses[0].Id;
@@ -34,9 +35,10 @@ namespace LexiconLMS.Client.Pages
         
         protected async Task HandleValidSubmit()
         {
+            await LmsDataService.PostAsync<CreateUserDto>("api/users", User);
+            // Old approach
             //newUser.RoleId = _roleGuid;
             //await LmsDataService.PostAsyncUser<CreateUserDto, object>("api/users", newUser);
-            await LmsDataService.PostAsync<CreateUserDto>("api/users", User);
         }
 
 

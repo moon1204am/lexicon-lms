@@ -34,7 +34,6 @@ namespace LexiconLMS.Server.Services
             await _unitOfWork.SaveChangesAsync();
             return _mapper.Map<UserDto>(userCreated);
 
-            // Todo: Add user to role here, first needs to resolve issue with SQL roles
         }
 
         public async Task<IEnumerable<RoleDto>> GetRolesAsync()

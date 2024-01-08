@@ -24,15 +24,3 @@ namespace LexiconLMS.Server.Services
         }
     }
 }
-// Krystian's snippet from vctmp69708_371632.ServiceManager.341ebe39.Result.cs
-//private readonly Lazy<ICourseService> courseService;
-//private readonly Lazy<IUserService> userService;
-
-//public ICourseService CourseService => courseService.Value;
-//public IUserService UserService => userService.Value;
-
-//public ServiceManager(Lazy<ICourseService> courseService, Lazy<IUserService> userService)
-//{
-//    this.courseService = courseService;
-//    this.userService = userService;
-//}
