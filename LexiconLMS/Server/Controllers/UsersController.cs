@@ -2,11 +2,14 @@
 using LexiconLMS.Shared.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System;
 
 namespace LexiconLMS.Server.Controllers
 {
-    [Route("api/users")]
     [ApiController]
+    [Route("api/users")]
     public class UsersController : ControllerBase
     {
         private readonly IServiceManager _serviceManager;
@@ -16,11 +19,33 @@ namespace LexiconLMS.Server.Controllers
             _serviceManager = serviceManager;
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<UserDto>>> GetAsync(Guid id)
+        [HttpPost]
+        public async Task<IActionResult> CreateUserAsync([FromBody] CreateUserDto createUserDto)
         {
-            return  Ok( await _serviceManager.UserService.GetUsersAsync(id));
-            //return Ok(usersDto);
+            var userDto = await _serviceManager.UserService.CreateUserAsync(createUserDto);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            return CreatedAtAction(nameof(GetUser), new { id = userDto.Id }, userDto);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<CreateUserDto>> GetUser(Guid id)
+        {
+            return Ok(await _serviceManager.UserService.GetUserAsync(id));
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<IEnumerable<UserDto>>> PutParticipants(Guid id)
+        {
+            return Ok(await _serviceManager.UserService.GetParticipantsAsync(id));
+        }
+
+        [HttpGet("roles")]
+        public async Task<IEnumerable<RoleDto>> GetRolesAsync()
+        {
+            return await _serviceManager.UserService.GetRolesAsync();
         }
     }
 }

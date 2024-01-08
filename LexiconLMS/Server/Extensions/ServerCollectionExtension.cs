@@ -24,6 +24,8 @@ namespace LexiconLMS.Server.Extensions
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IServiceManager, ServiceManager>();
+
+            
         }
 
         public static void AddCorsPolicy(this IServiceCollection services) =>

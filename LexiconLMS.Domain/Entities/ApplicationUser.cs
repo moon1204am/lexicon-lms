@@ -6,7 +6,6 @@ namespace LexiconLMS.Domain.Entities
 {
     public class ApplicationUser: IdentityUser
     {
-
         public string FirstName { get; set; } = string.Empty;
 
         public string LastName { get; set; } = string.Empty;
@@ -20,7 +19,5 @@ namespace LexiconLMS.Domain.Entities
 
         //Navigation Propery
         public Course Course { get; set; } = default!;
-        //public ICollection<IdentityUserRole<string>> Roles { get; set; } = default!;
-        //public ICollection<IdentityRole<string>> Role { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace LexiconLMS.Server.Data
 {
@@ -223,6 +224,17 @@ namespace LexiconLMS.Server.Data
             return newUser;
         }
 
+        //private static async Task AddUserToRoleAsync(ApplicationUser user, string roleName)
+        //{
+        //    if (!await _userManager.IsInRoleAsync(user, roleName))
+        //    {
+        //        var result = await _userManager.AddToRoleAsync(user, roleName);
+
+        //        if (!result.Succeeded) throw new Exception(string.Join("\n", result.Errors));
+        //    }
+
+        //}
+
         private static async Task AddUserToRoleAsync(ApplicationUser user, string roleName)
         {
             if (!await _userManager.IsInRoleAsync(user, roleName))
@@ -231,7 +243,19 @@ namespace LexiconLMS.Server.Data
 
                 if (!result.Succeeded) throw new Exception(string.Join("\n", result.Errors));
             }
-
+            // Add a role claim for the assigned role
+            var roleClaim = new Claim(ClaimTypes.Role, roleName);
+             var addClaimResult = await _userManager.AddClaimAsync(user, roleClaim);
+             if (!addClaimResult.Succeeded) throw new Exception(string.Join("\n", addClaimResult.Errors));     
+            
+             // If the assigned role is "Admin," you may want to perform additional logic here.    
+            // For example, assigning specific claims, setting up additional permissions, etc.
+             if (roleName == "Admin")     
+            {         
+             //Perform additional operations for the "Admin" role assignment if needed.   
+                       
+            } 
+        }
         }
     }
-}
+

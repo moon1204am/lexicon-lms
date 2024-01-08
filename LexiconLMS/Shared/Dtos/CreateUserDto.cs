@@ -3,9 +3,8 @@ using Microsoft.AspNetCore.Identity;
 
 namespace LexiconLMS.Shared.Dtos
 {
-    public class UserDto
+    public class CreateUserDto
     {
-        public  Guid Id { get; set; }
         [Required, MaxLength(50), MinLength(2)]
         public string FirstName { get; set; } = string.Empty;
         [Required, MaxLength(50), MinLength(2)]
@@ -14,9 +13,6 @@ namespace LexiconLMS.Shared.Dtos
         public string Email { get; set; } = string.Empty;
 
         public string FullName => $"{FirstName} {LastName}";
-
-        //Todo: Add a property for the role here, when the SQL is resolved.
-        public string Role { get; set; }
         [Required]
         public Guid RoleId { get; set; }
         [Required]

@@ -2,6 +2,7 @@ using LexiconLMS.Domain.Entities;
 using LexiconLMS.Server.AutoMapperConfig;
 using LexiconLMS.Server.Data;
 using LexiconLMS.Server.Extensions;
+using LexiconLMS.Server.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -56,7 +57,8 @@ if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
     app.UseWebAssemblyDebugging();
-    await app.SeedDataAsync();
+    //Note: uncomment if you need a fresh set of SeedData and delete the database
+    //await app.SeedDataAsync();
 }
 else
 {
