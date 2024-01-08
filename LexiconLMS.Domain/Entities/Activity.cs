@@ -21,5 +21,6 @@
         public Module Module { get; set; } = default!;
 
         public ActivityType Type { get; set; } = default!;
+        public ICollection<Document> Documents { get; set; }
     }
 }

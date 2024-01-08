@@ -2,7 +2,7 @@
 
 <div class="custom-width">
     <h3 class="text-center">Add Course</h3>
-    <EditForm Model="@_courseToAdd" OnValidSubmit="@CreateCourseAsync">
+    <EditForm Model="@_courseToAdd" OnValidSubmit="@HandleValidSubmit">
         <DataAnnotationsValidator/>
         <p class="text-danger">@_successMessage</p>
 
@@ -30,6 +30,13 @@
 
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Add Course</button>
+        </div>
+
+        <div class="row mb-3">
+            <label for="document" class="col-12 col-sm-3">Select file: </label>
+            <div class="col-md-8">
+                <InputFile OnChange="OnInputFileChange" />
+            </div>
         </div>
 
     </EditForm>

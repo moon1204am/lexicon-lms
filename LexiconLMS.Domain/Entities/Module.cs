@@ -14,6 +14,7 @@
         //Navigation Property
         public Course Course { get; set; } = default!;
         public ICollection<Activity> Activities { get; set; } = new List<Activity>();
+        public ICollection<Document> Documents { get; set; }
 
     }
 }

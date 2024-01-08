@@ -1,0 +1,33 @@
+﻿@page "/{CourseId}/module/{ModuleId}"
+<h3>Module</h3>
+
+@if (ModuleDto == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @ModuleDto.Name
+            </dt>
+            <dd class="col-sm-10">
+                @ModuleDto.Description
+            </dd>
+            <dt class="col-sm-2">
+                Start date
+            </dt>
+            <dd class="col-sm-10">
+                @ModuleDto.StartDate
+            </dd>
+            <dt class="col-sm-2">
+                End date
+            </dt>
+            <dd class="col-sm-10">
+                @ModuleDto.EndDate
+            </dd>
+        </dl>
+    </div>
+}

@@ -15,5 +15,9 @@ namespace LexiconLMS.Shared.Dtos
         public DateTime StartDate { get; set; } = DateTime.Now;
         [Required]
         public DateTime EndDate { get; set; } = DateTime.Now.AddDays(30);
+        public string FileName { get; set; }
+        public string FileType { get; set; }
+        public byte[] FileContent { get; set; }
+        //public IFormFile Files { get; set; }
     }
 }
