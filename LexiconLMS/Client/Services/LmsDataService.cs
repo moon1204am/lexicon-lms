@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Headers;
+﻿using System.Net;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 
@@ -30,13 +31,15 @@ namespace LexiconLMS.Client.Services
 
         public async Task<T?> PostAsync<T>(string path, object data, string contentType = json)
         {
+            //build the request
             var request = new HttpRequestMessage(HttpMethod.Post, path);
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(contentType));
 
             var jsonContent = JsonSerializer.Serialize(data);
             request.Content = new StringContent(jsonContent, Encoding.UTF8, contentType);
-
+            //send the request
             var response = await _httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+
             response.EnsureSuccessStatusCode();
 
             var stream = await response.Content.ReadAsStreamAsync();
@@ -44,25 +47,19 @@ namespace LexiconLMS.Client.Services
 
             return result;
         }
-        public async Task<T?> PutAsync<T>(string path, object data, string contentType = json)
+        public async Task PutAsync<T>(string path, object data, string contentType = json)
         {
+            //build request
             var request = new HttpRequestMessage(HttpMethod.Put, path);
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(contentType));
 
             var jsonContent = JsonSerializer.Serialize(data);
             request.Content = new StringContent(jsonContent, Encoding.UTF8, contentType);
+            
+            //send request
+            var response = await _httpClient.PutAsync(path, request.Content);
 
-            var response = await _httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
-
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new HttpRequestException($"Response status code does not indicate success: {response.StatusCode}.");
-            }
-
-            var stream = await response.Content.ReadAsStreamAsync();
-            var result = JsonSerializer.Deserialize<T>(stream, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
-
-            return result;
+           // response.EnsureSuccessStatusCode();
         }
     }
 }

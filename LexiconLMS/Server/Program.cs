@@ -40,6 +40,7 @@ builder.Services.AddAutoMapper(typeof(LmsMappings));
 builder.Services.AddRepositories();
 builder.Services.AddCorsPolicy();
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

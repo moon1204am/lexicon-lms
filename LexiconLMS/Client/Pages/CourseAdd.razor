@@ -5,7 +5,6 @@
     <EditForm Model="@_courseToAdd" OnValidSubmit="@CreateCourseAsync">
         <DataAnnotationsValidator/>
         <p class="text-danger">@_successMessage</p>
-
         <div class="form-group">
             <label for="Name">Name:</label>
             <InputText maxlength="30" id="Name" @bind-Value="_courseToAdd.Name" class="form-control"/>
