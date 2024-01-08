@@ -21,7 +21,5 @@
         public Module Module { get; set; } = default!;
 
         public ActivityType Type { get; set; } = default!;
-
-
     }
 }

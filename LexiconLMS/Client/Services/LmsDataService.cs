@@ -1,5 +1,6 @@
 ﻿using System.Net.Http.Headers;
 using System.Text;
+using System.Net.Http.Json;
 using System.Text.Json;
 
 namespace LexiconLMS.Client.Services
@@ -37,12 +38,42 @@ namespace LexiconLMS.Client.Services
             request.Content = new StringContent(jsonContent, Encoding.UTF8, contentType);
 
             var response = await _httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
-            response.EnsureSuccessStatusCode();
+            //response.EnsureSuccessStatusCode();
+            if (response.IsSuccessStatusCode)
+            {
+                var stream = await response.Content.ReadAsStreamAsync();
+                var result = JsonSerializer.Deserialize<T>(stream, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
 
-            var stream = await response.Content.ReadAsStreamAsync();
-            var result = JsonSerializer.Deserialize<T>(stream, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+                return result;
+            }
 
-            return result;
+            return default(T);
+            
         }
+
+        
+        
+        public async Task<TResponse?> PostAsyncUser<TRequest, TResponse>(string path, TRequest content, string contentType = json)
+        {
+            var response = await _httpClient.PostAsJsonAsync(path, content, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
+            //response.EnsureSuccessStatusCode();
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException($"Response status code does not indicate success: {response.StatusCode}.");
+            }
+
+            if (response.Content == null) return default;
+            try
+            {
+                return await response.Content.ReadFromJsonAsync<TResponse>(new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+            }
+            catch (JsonException)
+            {
+                return default;
+            }
+        }
+
+
+
     }
 }

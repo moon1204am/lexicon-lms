@@ -2,6 +2,7 @@ using LexiconLMS.Domain.Entities;
 using LexiconLMS.Server.AutoMapperConfig;
 using LexiconLMS.Server.Data;
 using LexiconLMS.Server.Extensions;
+using LexiconLMS.Server.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -27,7 +28,16 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddIdentityServer()
-    .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+
+    .AddApiAuthorization<ApplicationUser, ApplicationDbContext>(
+        options => {
+            options.IdentityResources["openid"].UserClaims.Add("role");
+
+            if (options.ApiResources.Any())
+            {
+                options.ApiResources.Single().UserClaims.Add("role");
+            }
+        });
 
 builder.Services.AddAuthentication();
     //.AddIdentityServerJwt();
@@ -40,6 +50,9 @@ builder.Services.AddAutoMapper(typeof(LmsMappings));
 builder.Services.AddRepositories();
 builder.Services.AddCorsPolicy();
 
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -47,7 +60,8 @@ if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
     app.UseWebAssemblyDebugging();
-    await app.SeedDataAsync();
+    //Note: uncomment if you need a fresh set of SeedData and delete the database
+    //await app.SeedDataAsync();
 }
 else
 {
