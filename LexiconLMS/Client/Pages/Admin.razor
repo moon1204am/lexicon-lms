@@ -59,7 +59,7 @@
                                     </InputSelect>
                                 </div>
                                 <div class="form-group">
-                                    <!--Can't access the roles from database, during the creation of the user, the role is not being assigned.-->
+                                    
                                         <InputSelect @bind-Value="@User.RoleId">
                                         <option selected value="">-- select a role --</option>
                                         @foreach (var role in RolesList)
