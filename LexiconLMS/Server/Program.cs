@@ -28,11 +28,10 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddIdentityServer()
-
     .AddApiAuthorization<ApplicationUser, ApplicationDbContext>(
-        options => {
+        options =>
+        {
             options.IdentityResources["openid"].UserClaims.Add("role");
-
             if (options.ApiResources.Any())
             {
                 options.ApiResources.Single().UserClaims.Add("role");
@@ -49,8 +48,6 @@ builder.Services.AddAutoMapper(typeof(LmsMappings));
 
 builder.Services.AddRepositories();
 builder.Services.AddCorsPolicy();
-
-
 
 
 var app = builder.Build();

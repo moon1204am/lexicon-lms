@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Headers;
+﻿using System.Net;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -31,49 +32,35 @@ namespace LexiconLMS.Client.Services
 
         public async Task<T?> PostAsync<T>(string path, object data, string contentType = json)
         {
+            //build the request
             var request = new HttpRequestMessage(HttpMethod.Post, path);
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(contentType));
 
             var jsonContent = JsonSerializer.Serialize(data);
             request.Content = new StringContent(jsonContent, Encoding.UTF8, contentType);
+            //send the request
+            var response = await _httpClient.PostAsync(path, request.Content);
 
-            var response = await _httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
-            //response.EnsureSuccessStatusCode();
-            if (response.IsSuccessStatusCode)
-            {
-                var stream = await response.Content.ReadAsStreamAsync();
-                var result = JsonSerializer.Deserialize<T>(stream, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+            response.EnsureSuccessStatusCode();
 
-                return result;
-            }
+            var stream = await response.Content.ReadAsStreamAsync();
+            var result = JsonSerializer.Deserialize<T>(stream, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
 
-            return default(T);
-            
+            return result;
         }
-
-        
-        
-        public async Task<TResponse?> PostAsyncUser<TRequest, TResponse>(string path, TRequest content, string contentType = json)
+        public async Task PutAsync<T>(string path, object data, string contentType = json)
         {
-            var response = await _httpClient.PostAsJsonAsync(path, content, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
-            //response.EnsureSuccessStatusCode();
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new HttpRequestException($"Response status code does not indicate success: {response.StatusCode}.");
-            }
+            //build request
+            var request = new HttpRequestMessage(HttpMethod.Put, path);
+            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(contentType));
 
-            if (response.Content == null) return default;
-            try
-            {
-                return await response.Content.ReadFromJsonAsync<TResponse>(new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
-            }
-            catch (JsonException)
-            {
-                return default;
-            }
+            var jsonContent = JsonSerializer.Serialize(data);
+            request.Content = new StringContent(jsonContent, Encoding.UTF8, contentType);
+
+            //send request
+            var response = await _httpClient.PutAsync(path, request.Content);
+
+            response.EnsureSuccessStatusCode();
         }
-
-
-
     }
 }
