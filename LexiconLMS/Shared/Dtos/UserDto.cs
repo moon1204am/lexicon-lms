@@ -14,8 +14,6 @@ namespace LexiconLMS.Shared.Dtos
         public string Email { get; set; } = string.Empty;
 
         public string FullName => $"{FirstName} {LastName}";
-
-        //Todo: Add a property for the role here, when the SQL is resolved.
         public string Role { get; set; }
         [Required]
         public Guid RoleId { get; set; }

@@ -2,6 +2,7 @@
 using System.Text;
 using System.Net.Http.Json;
 using System.Text.Json;
+using LexiconLMS.Shared.Dtos;
 
 namespace LexiconLMS.Client.Services
 {
@@ -73,7 +74,10 @@ namespace LexiconLMS.Client.Services
             }
         }
 
-
-
+        public async Task UpdateUser(UserDto user)
+        {
+            var response = await _httpClient.PutAsJsonAsync("api/users/update", user);
+            response.EnsureSuccessStatusCode();
+        }
     }
 }

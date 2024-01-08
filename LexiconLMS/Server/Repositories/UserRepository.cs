@@ -70,5 +70,30 @@ namespace LexiconLMS.Server.Repositories
         {
             return await _userManager.Users.FirstOrDefaultAsync(u => u.Id == id.ToString());
         }
+
+        public async Task UpdateUserAsync(ApplicationUser user)
+        {
+            var existingUser = await _userManager.FindByIdAsync(user.Id);
+
+            if (existingUser == null)
+            {
+                throw new KeyNotFoundException($"User with id {user.Id} not found.");
+            }
+
+            existingUser.FirstName = user.FirstName;
+            existingUser.LastName = user.LastName;
+            existingUser.Email = user.Email;
+            existingUser.UserName = user.Email;
+            existingUser.CourseId = user.CourseId;
+            // To change roles, it involves additional logic, if we're going to have Students/Teachers then it is unnecessary complexity.
+            //existingUser.Role = user.Role;
+
+            var result = await _userManager.UpdateAsync(existingUser);
+            if (!result.Succeeded)
+            {
+                var errors = string.Join("\n", result.Errors.Select(e => e.Description));
+                throw new InvalidOperationException($"Could not update user: {errors} Check the method inside UserRepository.cs");
+            }
+        }
     }
 }

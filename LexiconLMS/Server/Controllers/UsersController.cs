@@ -47,5 +47,36 @@ namespace LexiconLMS.Server.Controllers
         {
             return await _serviceManager.UserService.GetRolesAsync();
         }
+
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateUserAsync(Guid id, [FromBody] UserDto userDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != userDto.Id)
+            {
+                return BadRequest("User ID mismatch. Check UsersController.cs");
+            }
+
+            try
+            {
+            await _serviceManager.UserService.UpdateUserAsync(userDto);
+            return NoContent();
+
+            }
+            catch(KeyNotFoundException)
+            {
+                return NotFound($"User with id {id} not found, Check UsersController.cs");
+            }
+            catch (Exception ex)
+            {
+                // Log the exception details
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while updating the user. Check UsersController.cs");
+            }
+        }
     }
 }

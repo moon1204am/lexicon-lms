@@ -51,5 +51,22 @@ namespace LexiconLMS.Server.Services
         {
             return _mapper.Map<CreateUserDto>(await _unitOfWork.UserRepository.GetUserAsync(id));
         }
+
+        public async Task UpdateUserAsync(UserDto userDto)
+        {
+            if (userDto == null) throw new ArgumentNullException(nameof(userDto));
+
+
+            var userEntity = await _unitOfWork.UserRepository.GetUserAsync(userDto.Id);
+            if (userEntity == null) throw new KeyNotFoundException($"User with id {userDto.Id} not found, Check UserService.cs");
+
+            _mapper.Map(userDto, userEntity);
+
+            await _unitOfWork.UserRepository.UpdateUserAsync(userEntity);
+            await _unitOfWork.SaveChangesAsync();
+        }
+        
+
+        
     }
 }

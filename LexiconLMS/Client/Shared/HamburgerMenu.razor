@@ -11,8 +11,17 @@
                 <a class="nav-link" href="#" @onclick="CloseMenu">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" @onclick="CloseMenu">Courses</a>
+                <a class="nav-link" href="/courses" @onclick="CloseMenu">Courses</a>
             </li>
+            <AuthorizeView Roles="Admin">
+                <Authorized>
+                    <li class="nav-item">
+                        <NavLink class="nav-link" href="/admin">
+                            <span class="oi oi-list-rich" aria-hidden="true"></span> Admin Panel
+                        </NavLink>
+                    </li>
+                </Authorized>
+            </AuthorizeView>
         </ul>
         <ul class="navbar-nav ml-auto">
             <LoginDisplay />

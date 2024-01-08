@@ -19,6 +19,9 @@ namespace LexiconLMS.Server.AutoMapperConfig
             CreateMap<Course, CourseAddDto>().ReverseMap();
             CreateMap<ApplicationUser, CreateUserDto>().ReverseMap();
             CreateMap<IdentityRole, RoleDto>().ReverseMap();
+            CreateMap<UserDto, ApplicationUser>()
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email)); // If UserName is mapped from Email
+
 
         }
     }
