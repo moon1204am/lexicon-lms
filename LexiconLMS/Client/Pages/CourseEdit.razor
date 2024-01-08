@@ -1,6 +1,7 @@
 ﻿@page "/courseedit/{CourseId}"
 
 @using LexiconLMS.Shared.Dtos
+@using System.Reflection
 
 @if (CourseDto == null)
 {
@@ -20,7 +21,7 @@ else
             <div class="form-group description-height">
                 <label for="Description">Description:</label>
                 <textarea maxlength="100" id="Description" @bind="CourseDto.Description" class="form-control box-shadow"></textarea>
-                    <ValidationMessage For="@(() => CourseDto.Description)" />
+                <ValidationMessage For="@(() => CourseDto.Description)" />
             </div>
             <div class="form-group description-height">
                 <label for="StartDate">Start Date:</label>
@@ -31,47 +32,107 @@ else
                 <InputDate id="StartDate" @bind-Value="CourseDto.EndDate" class="form-control box-shadow" />
             </div>
 
-            <h3 class="text-center">Module Edit</h3>
+            <br />
+            <div class="accordion-item">
+                <button class="accordion-button btn-activities" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                    <h3 class="text-center">Module Edit</h3>
+                </button>
+                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+                    <div class="accordion-body">
+                        @foreach (var module in CourseDto.Modules)
+                        {
+                            <div>
+                                <InputText maxlength="30" id="Name" @bind-Value="module.Name" class="form-control box-shadow" />
+                                <ValidationMessage For="@(() => module.Name)" />
+                            </div>
 
-            @foreach (var module in CourseDto.Modules)
-            {
+                            <div class="form-group description-height">
+                                <label for="Description">Description:</label>
+                                <textarea maxlength="100" id="Description" @bind="module.Description" class="form-control box-shadow"></textarea>
+                                <ValidationMessage For="@(() => module.Description)" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="StartDate">Start Date:</label>
+                                <InputDate id="StartDate" @bind-Value="module.StartDate" class="form-control" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="EndDate">End Date:</label>
+                                <InputDate id="EndDate" @bind-Value="module.EndDate" class="form-control" />
+                            </div>
 
 
-                <div class="accordion-item">
-                   
+                            <br />
 
-                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                            <InputText maxlength="30" id="Name" @bind-Value="module.Name" class="form-control box-shadow"/>
-                            <ValidationMessage For="@(() => module.Description)"/>
-                        </button>
-                    </h2>
+                            <div class="accordion-item">
+                                <button class="accordion-button btn-activities" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true" aria-controls="panelsStayOpen-collapseTwo">
+                                    <h4>Activities Edit</h4>
+                                </button>
+                                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+                                    <div class="accordion-body">
+                                        @foreach (var activity in module.Activities)
+                                        {
+                                            <br />
 
-                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show " aria-labelledby="panelsStayOpen-headingOne">
-                        <div class="accordion-body">
-                            @foreach (var activity in module.Activities)
-                            {
-                                <div class="row align-items-center">
-                                    <div class="col-10">
-                                        <a href="@($"{CourseDto.Id}/activity/{activity.Id}")">@activity.Name</a>
-                                    </div>
-                                    <div class="col-2">
-                                        <a href="" class="nomargin-nopadding">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                                                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                                            </svg>
-                                        </a>
+
+                                            <div class="accordion-item btn-activities">
+                                                <button class="accordion-button btn" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="true" aria-controls="panelsStayOpen-collapseThree">
+                                                    <p>@activity.Name</p>
+                                                </button>
+                                                <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse " aria-labelledby="panelsStayOpen-headingThree">
+                                                    <div class="accordion-body">
+                                                        <div>
+                                                            <InputText maxlength="30" id="Name" @bind-Value="activity.Name" class="form-control box-shadow" />
+                                                            <ValidationMessage For="@(() => activity.Name)" />
+                                                        </div>
+
+                                                        <div class="form-group description-height">
+                                                            <label for="Description">Description:</label>
+                                                            <textarea maxlength="100" id="Description" @bind="activity.Description" class="form-control box-shadow"></textarea>
+                                                            <ValidationMessage For="@(() => activity.Description)" />
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="StartTime">Start Time:</label>
+                                                            <InputDate id="StartTime" @bind-Value="activity.StartTime" class="form-control" />
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="EndTime">End Time:</label>
+                                                            <InputDate id="EndTime" @bind-Value="activity.EndTime" class="form-control" />
+                                                        </div>
+
+                                                        <div class="col-10">
+                                                            <p><strong>Type of activity:</strong> </p>
+                                                        </div>
+                                                        <div class="col-2 ">
+                                                            <p>@activity.TypeName</p>
+                                                            <a href="" class="nomargin-nopadding">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                                                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                                                                </svg>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
                                     </div>
                                 </div>
-                            }
-                        </div>
+                            </div>
+                        }
                     </div>
                 </div>
-            }
+            </div>
             <button class="btn btn-primary">Add Module</button>
             <button type="submit" class="btn btn-danger"> Update</button>
+
         </EditForm>
     </div>
 
+
+
 }
+

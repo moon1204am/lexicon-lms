@@ -189,6 +189,12 @@ textarea#Description.form-control{
     margin: 0 !important;
     padding: 0 !important;
 }
+.btn-activities {
+    background-color: rgba(0, 0, 255, 0.1) !important;
+}
+
+
+
 @media (max-width: 767px) {
     .custom-width {
         width: 100% !important;

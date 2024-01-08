@@ -38,7 +38,7 @@ namespace LexiconLMS.Client.Services
             var jsonContent = JsonSerializer.Serialize(data);
             request.Content = new StringContent(jsonContent, Encoding.UTF8, contentType);
             //send the request
-            var response = await _httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+            var response = await _httpClient.PostAsync(path, request.Content);
 
             response.EnsureSuccessStatusCode();
 
@@ -55,11 +55,11 @@ namespace LexiconLMS.Client.Services
 
             var jsonContent = JsonSerializer.Serialize(data);
             request.Content = new StringContent(jsonContent, Encoding.UTF8, contentType);
-            
+
             //send request
             var response = await _httpClient.PutAsync(path, request.Content);
 
-           // response.EnsureSuccessStatusCode();
+            response.EnsureSuccessStatusCode();
         }
     }
 }
