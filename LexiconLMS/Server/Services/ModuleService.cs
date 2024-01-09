@@ -35,7 +35,8 @@ namespace LexiconLMS.Server.Services
 
         public async Task DeleteModuleAsync(Guid id)
         {
-            _unitOfWork.ModuleRepository.DeleteAsync(id);
+            var module = await _unitOfWork.ModuleRepository.GetAsync(id) ?? throw new ArgumentNullException(nameof(id));
+            _unitOfWork.ModuleRepository.DeleteAsync(module);
             await _unitOfWork.SaveChangesAsync();
         }
         public async Task UpdateModuleAsync(Guid id, ModuleDto moduleDto)

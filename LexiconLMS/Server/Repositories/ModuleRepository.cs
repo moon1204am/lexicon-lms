@@ -18,9 +18,9 @@ namespace LexiconLMS.Server.Repositories
             await _context.AddAsync(module);
         }
 
-        public void DeleteAsync(Guid id)
+        public void DeleteAsync(Module module)
         {
-            _context.Remove(id);
+            _context.Module.Remove(module);
         }
         public async Task<IEnumerable<Module>> GetAsync(bool includeAll = false)
         {

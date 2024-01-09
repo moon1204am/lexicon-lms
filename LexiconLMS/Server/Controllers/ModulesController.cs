@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using LexiconLMS.Domain.Entities;
-using LexiconLMS.Server.Data;
+using LexiconLMS.Server.Services;
+using LexiconLMS.Shared.Dtos;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Module = LexiconLMS.Domain.Entities.Module;
 
 namespace LexiconLMS.Server.Controllers
 {
@@ -14,69 +11,44 @@ namespace LexiconLMS.Server.Controllers
     [ApiController]
     public class ModulesController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IServiceManager _serviceManager;
 
-        public ModulesController(ApplicationDbContext context)
+        public ModulesController(IServiceManager serviceManager)
         {
-            _context = context;
+            _serviceManager = serviceManager;
         }
 
         // GET: api/Modules
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Module>>> GetModule()
+        public async Task<ActionResult<IEnumerable<Module>>> GetModule(bool includeAll = false)
         {
-            if (_context.Module == null)
-            {
-                return NotFound();
-            }
-            return await _context.Module.ToListAsync();
+            return Ok(await _serviceManager.ModuleService.GetModulesAsync(includeAll));
+
         }
 
         // GET: api/Modules/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Module>> GetModule(Guid id)
+        public async Task<ActionResult<ModuleDto>> GetModule(Guid id)
         {
-            if (_context.Module == null)
-            {
-                return NotFound();
-            }
-            var @module = await _context.Module.FindAsync(id);
 
-            if (@module == null)
+            if (id == Guid.Empty)
             {
-                return NotFound();
+                return BadRequest("The input for module ID is missing.");
             }
 
-            return @module;
+            return Ok((ModuleDto?)await _serviceManager.ModuleService.GetModuleAsync(id));
         }
 
         // PUT: api/Modules/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutModule(Guid id, Module @module)
+        public async Task<ActionResult> PutModule(Guid id, ModuleDto course)
         {
-            if (id != @module.Id)
+            if (id != course.Id)
             {
                 return BadRequest();
             }
-
-            _context.Entry(@module).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ModuleExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _serviceManager.ModuleService.UpdateModuleAsync(id, course);
 
             return NoContent();
         }
@@ -84,41 +56,32 @@ namespace LexiconLMS.Server.Controllers
         // POST: api/Modules
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Module>> PostModule(Module @module)
+        public async Task<ActionResult<ModuleAddDto>> PostModule(ModuleAddDto? module)
         {
-            if (_context.Module == null)
+            if (module == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Module'  is null.");
+                return BadRequest("The posted module is empty");
             }
-            _context.Module.Add(@module);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetModule", new { id = @module.Id }, @module);
+            else
+            {
+                //return Ok(await _serviceManager.ModuleService.CreateModuleAsync(module));
+                return CreatedAtAction("GetModule", new { id = await _serviceManager.ModuleService.CreateModuleAsync(module) }, module);
+            }
         }
 
-        // DELETE: api/Modules/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteModule(Guid id)
+        public async Task<ActionResult> DeleteModule(Guid id)
         {
-            if (_context.Module == null)
+            // OK TO RECCIVE A ID?????-----
+            if (id == Guid.Empty)
             {
-                return NotFound();
-            }
-            var @module = await _context.Module.FindAsync(id);
-            if (@module == null)
-            {
-                return NotFound();
+                return BadRequest("The input for module ID is missing.");
             }
 
-            _context.Module.Remove(@module);
-            await _context.SaveChangesAsync();
+            await _serviceManager.ModuleService.DeleteModuleAsync(id);
 
             return NoContent();
-        }
 
-        private bool ModuleExists(Guid id)
-        {
-            return (_context.Module?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

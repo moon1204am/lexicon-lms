@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using LexiconLMS.Domain.Entities;
-using LexiconLMS.Server.Data;
+﻿using Microsoft.AspNetCore.Mvc;
 using LexiconLMS.Server.Services;
 using LexiconLMS.Shared.Dtos;
 using Microsoft.AspNetCore.Authorization;
@@ -18,18 +10,18 @@ namespace LexiconLMS.Server.Controllers
 
     public class CoursesController : ControllerBase
     {
-        private readonly IServiceManager serviceManager;
+        private readonly IServiceManager _serviceManager;
 
         public CoursesController(IServiceManager serviceManager)
         {
-            this.serviceManager = serviceManager;
+            _serviceManager = serviceManager;
         }
         [Authorize(Roles="Admin")]
         // GET: api/Courses
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CourseDto>>> GetCourse(bool includeAll = false)
         {
-            return Ok(await serviceManager.CourseService.GetCoursesAsync(includeAll));
+            return Ok(await _serviceManager.CourseService.GetCoursesAsync(includeAll));
 
         }
 
@@ -37,7 +29,7 @@ namespace LexiconLMS.Server.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<CourseDto>> GetCourse(Guid id)
         {
-            return Ok((CourseDto?)await serviceManager.CourseService.GetCourseAsync(id));
+            return Ok((CourseDto?)await _serviceManager.CourseService.GetCourseAsync(id));
 
             //var courseDto = await serviceManager.CourseService.GetCourseAsync(id);
             //if (courseDto == null) return NotFound();
@@ -67,7 +59,7 @@ namespace LexiconLMS.Server.Controllers
             {
                 return BadRequest();
             }
-            await serviceManager.CourseService.UpdateCourseAsync(id, course);
+            await _serviceManager.CourseService.UpdateCourseAsync(id, course);
 
             return NoContent();
         }
@@ -79,7 +71,7 @@ namespace LexiconLMS.Server.Controllers
         {
             if (course != null)
             {
-                return Ok(await serviceManager.CourseService.CreateCourseAsync(course));
+                return Ok(await _serviceManager.CourseService.CreateCourseAsync(course));
             }
             else
             {
@@ -109,17 +101,5 @@ namespace LexiconLMS.Server.Controllers
             return null;
         }
 
-        private bool CourseExists(Guid id)
-        {
-            return false;
-            //return (_context.Course?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
-
-        [HttpGet("activity/{id}")]
-        public async Task<ActionResult<ActivityDto>> GetActivity(Guid id)
-        {
-            var activityDto = await serviceManager.ActivityService.GetActivityAsync(id);
-            return activityDto;
-        }
     }
 }

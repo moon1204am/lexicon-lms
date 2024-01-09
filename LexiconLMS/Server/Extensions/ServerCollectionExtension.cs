@@ -24,7 +24,9 @@ namespace LexiconLMS.Server.Extensions
             services.AddScoped(provider => new Lazy<IActivityService>(() => provider.GetRequiredService<IActivityService>()));
 
             services.AddScoped<IModuleRepository, ModuleRepository>();
+            services.AddScoped<IModuleService, ModuleService>();
             services.AddScoped(provider => new Lazy<IModuleRepository>(() => provider.GetRequiredService<IModuleRepository>()));
+            services.AddScoped(provider => new Lazy<IModuleService>(() => provider.GetRequiredService<IModuleService>()));
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IServiceManager, ServiceManager>();
