@@ -38,6 +38,10 @@ namespace LexiconLMS.Client.Services
             request.Content = new StringContent(jsonContent, Encoding.UTF8, contentType);
 
             var response = await _httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+
+            //var response = await _httpClient.PostAsJsonAsync(path, data);
+            //var status = response.StatusCode;
+
             //response.EnsureSuccessStatusCode();
             if (response.IsSuccessStatusCode)
             {
@@ -46,9 +50,7 @@ namespace LexiconLMS.Client.Services
 
                 return result;
             }
-
             return default(T);
-            
         }
 
         

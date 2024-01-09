@@ -27,7 +27,18 @@ namespace LexiconLMS.Server.Services
         }
         public async Task<CourseAddDto> CreateCourseAsync(CourseAddDto courseAddDto)
         {
+            var document = _mapper.Map<Document>(courseAddDto.DocumentDto);
+            //var document = new Document()
+            //{
+            //    FileName = courseAddDto.FileName,
+            //    FileContent = courseAddDto.FileContent,
+            //    FileType = courseAddDto.FileType,
+            //    UploadDate = courseAddDto.UploadDate,
+            //    UserId = new Guid(courseAddDto.UserId)
+            //};
+
             var course = _mapper.Map<Course>(courseAddDto);
+            course.Documents.Add(document);
             await _unitOfWork.CourseRepository.CreateAsync(course);
             await _unitOfWork.SaveChangesAsync();
             return _mapper.Map<CourseAddDto>(course);

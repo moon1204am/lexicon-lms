@@ -1,5 +1,6 @@
 using LexiconLMS.Client;
 using LexiconLMS.Client.Services;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -15,6 +16,8 @@ builder.Services.AddHttpClient("LexiconLMS.ServerAPI", client => client.BaseAddr
 
 // Supply HttpClient instances that include access tokens when making requests to the server project
 builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("LexiconLMS.ServerAPI"));
+
+builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddApiAuthorization();
 

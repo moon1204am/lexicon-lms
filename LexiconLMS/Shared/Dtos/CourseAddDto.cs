@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
+using System.Reflection.Metadata;
+using System.Security.Claims;
 
 namespace LexiconLMS.Shared.Dtos
 {
@@ -15,9 +16,12 @@ namespace LexiconLMS.Shared.Dtos
         public DateTime StartDate { get; set; } = DateTime.Now;
         [Required]
         public DateTime EndDate { get; set; } = DateTime.Now.AddDays(30);
-        public string FileName { get; set; }
-        public string FileType { get; set; }
-        public byte[] FileContent { get; set; }
+        public DocumentDto DocumentDto { get; set; } = new DocumentDto();
+        //public string FileName { get; set; }
+        //public string FileType { get; set; }
+        //public byte[] FileContent { get; set; }
+        //public DateTime UploadDate { get; set; }
+        //public string UserId { get; set; }
         //public IFormFile Files { get; set; }
     }
 }
