@@ -5,5 +5,6 @@
         ICourseService CourseService { get; }
         IUserService UserService { get; }
         IActivityService ActivityService { get; }
+        IModuleService ModuleService { get; }
     }
 }

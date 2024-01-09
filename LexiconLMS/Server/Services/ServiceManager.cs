@@ -12,15 +12,21 @@ namespace LexiconLMS.Server.Services
         public IUserService UserService => _userService.Value;
         private readonly Lazy<IActivityService> _activityService;
         public IActivityService ActivityService => _activityService.Value;
+        private readonly Lazy<IModuleService> _moduleService;
+        public IModuleService ModuleService => _moduleService.Value;
+
+        
 
         public ServiceManager(
             Lazy<ICourseService> courseService, 
             Lazy<IUserService> userService, 
-            Lazy<IActivityService> activityService)
+            Lazy<IActivityService> activityService,
+            Lazy<IModuleService> moduleService)
         {
             _courseService = courseService;
             _userService = userService;
             _activityService = activityService;
+            _moduleService = moduleService;
         }
     }
 }

@@ -35,7 +35,8 @@ namespace LexiconLMS.Server.Services
 
         public async Task DeleteCourseAsync(Guid id)
         {
-            _unitOfWork.CourseRepository.DeleteAsync(id);
+            var course = await _unitOfWork.CourseRepository.GetAsync(id) ?? throw new ArgumentNullException(nameof(id));
+            _unitOfWork.CourseRepository.DeleteAsync(course);
             await _unitOfWork.SaveChangesAsync();
         }
         public async Task UpdateCourseAsync(Guid id, CourseDto courseDto)

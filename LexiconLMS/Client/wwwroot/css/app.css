@@ -193,8 +193,6 @@ textarea#Description.form-control{
     background-color: rgba(0, 0, 255, 0.1) !important;
 }
 
-
-
 @media (max-width: 767px) {
     .custom-width {
         width: 100% !important;

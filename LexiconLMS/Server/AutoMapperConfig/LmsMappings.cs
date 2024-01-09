@@ -11,15 +11,20 @@ namespace LexiconLMS.Server.AutoMapperConfig
         { 
             //ToDo: Evaluate and remove unused DTOs and mappings.
             CreateMap<Course, CourseDto>().ReverseMap();
-            CreateMap<Course, CoursesViewDto>().ReverseMap();
-            CreateMap<ApplicationUser, UserDto>().ReverseMap();
-            CreateMap<Module, ModuleDto>().ReverseMap();
+            CreateMap<Course, CourseViewDto>().ReverseMap();
+            CreateMap<Course, CourseAddDto>().ReverseMap();
+
             CreateMap<Activity, ActivityDto>().ReverseMap();
             CreateMap<ActivityType, ActivityTypeDto>().ReverseMap();
-            CreateMap<Course, CourseAddDto>().ReverseMap();
+            
+            CreateMap<ApplicationUser, UserDto>().ReverseMap();
             CreateMap<ApplicationUser, CreateUserDto>().ReverseMap();
+
             CreateMap<IdentityRole, RoleDto>().ReverseMap();
 
+            CreateMap<Module, ModuleDto>().ReverseMap();
+            CreateMap<Module, ModuleViewDto>().ReverseMap();
+            CreateMap<Module, ModuleAddDto>().ReverseMap();
         }
     }
 }
