@@ -14,6 +14,7 @@ namespace LexiconLMS.Shared.Dtos
         public DateTime EndDate { get; set; }
 
         //Foreign Key
+        [Required(ErrorMessage = "Selecting a course for the module is required.")]
         public Guid CourseId { get; set; }
     }
 }

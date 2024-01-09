@@ -23,7 +23,7 @@ else
             {
                 <tr>
 
-                    <td scope="row" >
+                    <td scope="row">
                         <a class="no-padding-lms" href="@($"course/{courseViewDto.Id}")">@courseViewDto.Name</a> @* ToDo: Ref to (Modules) *@
                     </td>
                     <td scope="row">
@@ -35,6 +35,7 @@ else
 
                 </tr>
             }
-            </tbody>
-        </table>
+        </tbody>
+    </table>
+    <a class="btn btn-success" href="@($"courseAdd/")">Add Course</a> @* ToDo: Ref to (Modules) *@
 }

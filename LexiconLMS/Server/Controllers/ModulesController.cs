@@ -72,7 +72,10 @@ namespace LexiconLMS.Server.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteModule(Guid id)
         {
-            // OK TO RECCIVE A ID?????-----
+            // OK TO RECCIVE A ID?????-----Discuss at Review.<s
+            // OK TO RECCIVE A ID?????-----Discuss at Review.<s
+            // OK TO RECCIVE A ID?????-----Discuss at Review.<s
+            // OK TO RECCIVE A ID?????-----Discuss at Review.<s
             if (id == Guid.Empty)
             {
                 return BadRequest("The input for module ID is missing.");
