@@ -49,34 +49,32 @@ namespace LexiconLMS.Server.Controllers
         }
 
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUserAsync(Guid id, [FromBody] UserDto userDto)
+        [HttpPut("{userId}")]
+        public async Task<IActionResult> UpdateUserAsync(Guid userId, [FromBody] UpdateUserDto updateUserDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != userDto.Id)
-            {
-                return BadRequest("User ID mismatch. Check UsersController.cs");
-            }
-
             try
             {
-            await _serviceManager.UserService.UpdateUserAsync(userDto);
-            return NoContent();
+            await _serviceManager.UserService.UpdateUserAsync(userId, updateUserDto);
+            return Ok();
 
             }
-            catch(KeyNotFoundException)
-            {
-                return NotFound($"User with id {id} not found, Check UsersController.cs");
-            }
+
             catch (Exception ex)
             {
                 // Log the exception details
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while updating the user. Check UsersController.cs");
             }
+        }
+
+        public async Task<ActionResult<IEnumerable<UserDto>>> GetAllUsers()
+        {
+            var users = await _serviceManager.UserService.GetAllUsersAsync();
+            return Ok(users);
         }
     }
 }

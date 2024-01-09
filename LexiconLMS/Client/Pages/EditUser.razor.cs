@@ -11,12 +11,15 @@ namespace LexiconLMS.Client.Pages
         
         [Parameter]
         public string UserId { get; set; }
+        private string updateStatusMessage;
+
         private List<string> userEmails = new List<string>();
         private Dictionary<Guid, string> users = new Dictionary<Guid, string>();
         private UserDto selectedUser = new UserDto();
 
         protected override async Task OnInitializedAsync()
         {
+            #region
             //    //var userDtos = await Http.GetFromJsonAsync<List<UserDto>>("api/users");
             //    //users = userDtos.ToDictionary(u => u.Id, u => u.Email);
 
@@ -33,7 +36,8 @@ namespace LexiconLMS.Client.Pages
             //        // Handle empty or null response (e.g., by initializing 'users' as an empty dictionary)
             //        users = new Dictionary<Guid, string>();
             //    }
-
+            #endregion
+            
             try
             {
                 var response = await Http.GetAsync("api/users");
@@ -79,11 +83,12 @@ namespace LexiconLMS.Client.Pages
             var response = await Http.PutAsJsonAsync($"api/users/{selectedUser.Id}", selectedUser);
             if (response.IsSuccessStatusCode)
             {
-                // Handle success
+                updateStatusMessage = "User updated successfully";
+                // Optionally, refresh user list or redirect
             }
             else
             {
-                // Handle errors
+                updateStatusMessage = "Error updating user";
             }
         }
     }

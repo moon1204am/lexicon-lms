@@ -74,9 +74,9 @@ namespace LexiconLMS.Client.Services
             }
         }
 
-        public async Task UpdateUser(UserDto user)
+        public async Task UpdateUser(Guid userId, UpdateUserDto updateUserDto)
         {
-            var response = await _httpClient.PutAsJsonAsync("api/users/update", user);
+            var response = await _httpClient.PutAsJsonAsync("api/users/update/{userId}", updateUserDto);
             response.EnsureSuccessStatusCode();
         }
     }

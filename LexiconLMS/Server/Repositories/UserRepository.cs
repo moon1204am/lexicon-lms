@@ -73,7 +73,13 @@ namespace LexiconLMS.Server.Repositories
 
         public async Task UpdateUserAsync(ApplicationUser user)
         {
-            var existingUser = await _userManager.FindByIdAsync(user.Id);
+
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+
+            var existingUser = await _userManager.FindByIdAsync(user.Id.ToString());
 
             if (existingUser == null)
             {
@@ -83,10 +89,9 @@ namespace LexiconLMS.Server.Repositories
             existingUser.FirstName = user.FirstName;
             existingUser.LastName = user.LastName;
             existingUser.Email = user.Email;
-            //existingUser.UserName = user.Email;
-            //existingUser.CourseId = user.CourseId;
-            // To change roles, it involves additional logic, if we're going to have Students/Teachers then it is unnecessary complexity.
-            //existingUser.Role = user.Role;
+            existingUser.UserName = user.Email;
+
+            // Handle role update logic here, if included
 
             var result = await _userManager.UpdateAsync(existingUser);
             if (!result.Succeeded)
@@ -94,6 +99,15 @@ namespace LexiconLMS.Server.Repositories
                 var errors = string.Join("\n", result.Errors.Select(e => e.Description));
                 throw new InvalidOperationException($"Could not update user: {errors} Check the method inside UserRepository.cs");
             }
+        }
+
+
+        public async Task<IEnumerable<ApplicationUser>> GetAllUsersAsync()
+        {
+            return await _context.Users.ToListAsync();
+
+            // Probably irrelevant, remove if method above works
+            //return await _userManager.Users.ToListAsync();
         }
     }
 }

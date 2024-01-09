@@ -27,6 +27,11 @@
     </EditForm>
 }
 
+@if (!string.IsNullOrEmpty(updateStatusMessage))
+{
+    <div class="alert alert-info">@updateStatusMessage</div>
+}
+
 @code {
 
 }

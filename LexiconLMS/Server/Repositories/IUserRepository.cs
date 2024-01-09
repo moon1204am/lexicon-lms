@@ -12,6 +12,7 @@ namespace LexiconLMS.Server.Repositories
         Task<ApplicationUser> CreateUserAsync(ApplicationUser user, IdentityRole identityRole);
         Task<ApplicationUser> GetUserAsync(Guid id);
         Task UpdateUserAsync(ApplicationUser user);
+        Task<IEnumerable<ApplicationUser>> GetAllUsersAsync();
 
     }
 }

@@ -8,6 +8,6 @@ public interface ILmsDataService
     Task<TResponse?> PostAsyncUser<TRequest, TResponse>(string path, TRequest content, string contentType = "application/json");
     Task<T?> PostAsync<T>(string path, object data, string contentType = "application/json");
     //Task<T?> PutAsync<T>(string path, object data, string contentType = "application/json");
-    Task UpdateUser(UserDto user);
+    Task UpdateUser(Guid userId, UpdateUserDto updateUserDto);
 
 }
