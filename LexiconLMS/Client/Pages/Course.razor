@@ -1,47 +1,53 @@
 ﻿@page "/course/{CourseId:guid}"
 @using System.Security.Claims
-<AuthorizeView>
+<div class="custom-width">
+    <AuthorizeView>
 
-    @if (CourseDto == null)
-    {
-        <h3 class="text-center">Course</h3>
-        <p><em>Loading...</em></p>
-    }
-    else
-    {
-        <h3 class="text-center">Course: @CourseDto.Name</h3>
-
-        <a href="@($"participants/{CourseDto.Id}")" class="btn btn-outline-primary btn-sm mb-1">
-            View all participants
-        </a>
-
-        @if (context.User.IsInRole("Admin"))
+        @if (CourseDto == null)
         {
-            <a class="btn btn-primary" href="@($"CourseEdit/{CourseDto.Id}")">Edit course</a>
+            <h3 class="text-center">Course</h3>
+            <p><em>Loading...</em></p>
         }
-        <h3 class="text-center">Modules</h3>
-        foreach (var module in CourseDto.Modules)
+        else
         {
-            <div class="accordion" id="accordionPanelsStayOpenExample">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                            @module.Name
-                        </button>
-                    </h2>
-                    <p class="text-center"><strong>Activities:</strong></p>
-                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-                        <div class="accordion-body">
-                            @foreach (var activity in module.Activities)
-                            {
-                                <a href="@($"{CourseDto.Id}/activity/{activity.Id}")">@activity.Name</a>
-                            }
+            <h3 class="text-center">Course: @CourseDto.Name</h3>
+            
+            <a href="@($"participants/{CourseDto.Id}")" class="btn btn-outline-primary btn-sm mb-1">
+                View all participants
+            </a>
+
+            <h3 class="text-center">Modules</h3>
+            foreach (var module in CourseDto.Modules)
+            {
+                <div class="accordion" id="accordionPanelsStayOpenExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                @module.Name
+                            </button>
+                        </h2>
+                        <p class="text-center"><strong>Activities:</strong></p>
+                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                            <div class="accordion-body">
+                                @foreach (var activity in module.Activities)
+                                {
+                                    <a href="@($"{CourseDto.Id}/activity/{activity.Id}")">@activity.Name</a>
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            }
+                <br>
+                @if (context.User.IsInRole("Admin"))
+                {
+                    <div class="text-center">
+                        <a class="btn btn-primary" href="@($"CourseEdit/{CourseDto.Id}")">Edit Course</a>
+                        <button class="btn btn-danger" @onclick="DeleteCourseAsync">Delete Course</button>
+                    </div>
+                }
+
         }
+    </AuthorizeView>
 
-    }
-</AuthorizeView>
-
+</div>
