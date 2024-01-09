@@ -29,25 +29,13 @@ namespace LexiconLMS.Server.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<CourseDto>> GetCourse(Guid id)
         {
+            if (id == Guid.Empty)
+            {
+                return BadRequest("The input for module ID is missing.");
+            }
+
             return Ok((CourseDto?)await _serviceManager.CourseService.GetCourseAsync(id));
 
-            //var courseDto = await serviceManager.CourseService.GetCourseAsync(id);
-            //if (courseDto == null) return NotFound();
-
-            //return Ok(courseDto);
-
-            //if (_context.Course == null)
-            //{
-            //    return NotFound();
-            //}
-            //var course = await _context.Course.FindAsync(id);
-
-            //if (course == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //return course;
         }
 
         // PUT: api/Courses/5
@@ -67,11 +55,11 @@ namespace LexiconLMS.Server.Controllers
         // POST: api/Courses
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<CourseAddDto>> PostCourse(CourseAddDto course)
+        public async Task<ActionResult<CourseAddDto>> PostCourse(CourseAddDto? course)
         {
             if (course != null)
             {
-                return Ok(await _serviceManager.CourseService.CreateCourseAsync(course));
+                return CreatedAtAction("GetCourse", new { id = await _serviceManager.CourseService.CreateCourseAsync(course) }, course);
             }
             else
             {
@@ -81,24 +69,20 @@ namespace LexiconLMS.Server.Controllers
 
         // DELETE: api/Courses/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCourse(Guid id)
+        public async Task<ActionResult> DeleteCourse(Guid id)
         {
-            //if (_context.Course == null)
-            //{
-            //    return NotFound();
-            //}
-            //var course = await _context.Course.FindAsync(id);
-            //if (course == null)
-            //{
-            //    return NotFound();
-            //}
+            // OK TO RECCIVE A ID?????-----Discuss at Review.<s
+            // OK TO RECCIVE A ID?????-----Discuss at Review.<s
+            // OK TO RECCIVE A ID?????-----Discuss at Review.<s
+            // OK TO RECCIVE A ID?????-----Discuss at Review.<s
+            if (id == Guid.Empty)
+            {
+                return BadRequest("The input for module ID is missing.");
+            }
 
-            //_context.Course.Remove(course);
-            //await _context.SaveChangesAsync();
+            await _serviceManager.CourseService.DeleteCourseAsync(id);
 
-            //return NoContent();
-
-            return null;
+            return NoContent();
         }
 
     }

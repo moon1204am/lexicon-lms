@@ -8,6 +8,6 @@ namespace LexiconLMS.Server.Repositories
         Task<Course?> GetAsync(Guid id);
         Task CreateAsync(Course course);
         void UpdateAsync(Course course);
-        void DeleteAsync(Guid id);
+        void DeleteAsync(Course course);
     }
 }
