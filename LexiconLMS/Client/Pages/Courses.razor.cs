@@ -11,9 +11,15 @@ namespace LexiconLMS.Client.Pages
         [Inject]
         public ILmsDataService LmsDataService { get; set; } = default!;
 
+        private Guid id;
         protected override async Task OnInitializedAsync()
         {
             CourseList = (await LmsDataService.GetAsync<List<CourseViewDto>>("api/courses"))!; //ToDo: fix nullability
+        }
+
+        public async Task DeleteCourseAsync()
+        { 
+           await LmsDataService.DeleteAsync<Guid>($"api/courses/{id}");
         }
     }
 }
