@@ -83,8 +83,8 @@ namespace LexiconLMS.Server.Repositories
             existingUser.FirstName = user.FirstName;
             existingUser.LastName = user.LastName;
             existingUser.Email = user.Email;
-            existingUser.UserName = user.Email;
-            existingUser.CourseId = user.CourseId;
+            //existingUser.UserName = user.Email;
+            //existingUser.CourseId = user.CourseId;
             // To change roles, it involves additional logic, if we're going to have Students/Teachers then it is unnecessary complexity.
             //existingUser.Role = user.Role;
 
