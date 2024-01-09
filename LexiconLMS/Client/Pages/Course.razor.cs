@@ -16,6 +16,8 @@ namespace LexiconLMS.Client.Pages
 
         [Parameter]
         public Guid CourseId { get; set; }
+
+        public Guid ModuleId { get; set; }
         public CourseDto? CourseDto { get; set; }
 
         protected override async Task OnInitializedAsync()
@@ -27,6 +29,12 @@ namespace LexiconLMS.Client.Pages
         {
             await LmsDataService.DeleteAsync<Guid>($"api/courses/{CourseId}");
             NavigationManager.NavigateTo("/courses");
+        }
+
+        public async Task DeleteModuleAsync()
+        {
+            await LmsDataService.DeleteAsync<Guid>($"api/modules/{ModuleId}");
+            NavigationManager.NavigateTo($"/course/{CourseId}",forceLoad: true);
         }
     }
 }
