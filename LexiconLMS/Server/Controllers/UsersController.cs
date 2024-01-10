@@ -37,7 +37,7 @@ namespace LexiconLMS.Server.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<UserDto>>> PutParticipants(Guid id)
+        public async Task<ActionResult<IEnumerable<UserDto>>> GetParticipants(Guid id)
         {
             return Ok(await _serviceManager.UserService.GetParticipantsAsync(id));
         }

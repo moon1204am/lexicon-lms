@@ -8,7 +8,7 @@
     }
     else
     {
-        <EditForm Model="@_moduleToAdd" OnValidSubmit="@CreateCourseAsync">
+        <EditForm Model="@_moduleToAdd" OnValidSubmit="@HandleValidSubmit">
             <DataAnnotationsValidator />
             <p class="text-danger">@_successMessage</p>
 

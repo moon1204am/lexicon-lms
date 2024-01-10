@@ -18,12 +18,12 @@ namespace LexiconLMS.Server.Services
 
         public async Task<IEnumerable<CourseDto>> GetCoursesAsync(bool includeAll = false)
         {
-            return _mapper.Map<IEnumerable<CourseDto>>(await _unitOfWork.CourseRepository.GetAsync(includeAll));
+            return _mapper.Map<IEnumerable<CourseDto>>(await _unitOfWork.CourseRepository.GetAllAsync(includeAll));
         }
 
-        public async Task<CourseDto> GetCourseAsync(Guid id)
+        public async Task<CourseDto?> GetCourseAsync(Guid id)
         {
-            return _mapper.Map<CourseDto>(await _unitOfWork.CourseRepository.GetAsync(id) ?? throw new ArgumentNullException(nameof(id)));
+            return _mapper.Map<CourseDto>(await _unitOfWork.CourseRepository.GetAsync(id));
         }
         public async Task<CourseDto> CreateCourseAsync(CourseAddDto courseAddDto)
         {
@@ -36,14 +36,14 @@ namespace LexiconLMS.Server.Services
         public async Task DeleteCourseAsync(Guid id)
         {
             var course = await _unitOfWork.CourseRepository.GetAsync(id) ?? throw new ArgumentNullException(nameof(id));
-            _unitOfWork.CourseRepository.DeleteAsync(course);
+            _unitOfWork.CourseRepository.Delete(course);
             await _unitOfWork.SaveChangesAsync();
         }
         public async Task UpdateCourseAsync(Guid id, CourseDto courseDto)
         {
             var course = await _unitOfWork.CourseRepository.GetAsync(id) ?? throw new ArgumentNullException(nameof(id));
             var courseToUpdate = _mapper.Map(courseDto, course);
-            _unitOfWork.CourseRepository.UpdateAsync(courseToUpdate);
+            _unitOfWork.CourseRepository.Update(courseToUpdate);
             await _unitOfWork.SaveChangesAsync();
         }
     }

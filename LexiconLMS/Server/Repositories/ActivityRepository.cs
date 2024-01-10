@@ -13,9 +13,34 @@ namespace LexiconLMS.Server.Repositories
             _context = context;
         }
 
-        public async Task<Activity> GetActivity(Guid id)
+        public async Task<Activity> GetAsync(Guid id)
         {
-            return await _context.Activity.FirstOrDefaultAsync(a => a.Id == id);
+            return await _context.Activity.Include(a => a.Type).FirstOrDefaultAsync(a => a.Id == id);
+        }
+
+        public async Task<IEnumerable<Activity>> GetAllAsync()
+        {
+            return await _context.Activity.Include(a => a.Type).ToListAsync();
+        }
+
+        public async Task CreateAsync(Activity activity)
+        {
+            await _context.AddAsync(activity);
+        }
+
+        public void Delete(Activity activity)
+        {
+            _context.Activity.Remove(activity);
+        }
+
+        public void Update(Activity activity)
+        {
+            _context.Update(activity);
+        }
+
+        public async Task<IEnumerable<ActivityType>> GetTypesAsync()
+        {
+            return await _context.ActivtyType.ToListAsync();
         }
     }
 }

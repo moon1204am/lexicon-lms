@@ -5,8 +5,8 @@ namespace LexiconLMS.Server.Repositories;
 public interface IModuleRepository
 {
     Task CreateAsync(Module module);
-    void DeleteAsync(Module module);
-    Task<IEnumerable<Module>> GetAsync(bool includeAll = false);
+    void Delete(Module module);
+    Task<IEnumerable<Module>> GetAllAsync(bool includeAll = false);
     Task<Module?> GetAsync(Guid id);
-    void UpdateAsync(Module module);
+    void Update(Module module);
 }

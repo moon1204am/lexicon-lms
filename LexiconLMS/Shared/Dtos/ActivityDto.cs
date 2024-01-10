@@ -7,6 +7,6 @@
         public string Description { get; set; } = string.Empty;
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
-        public string TypeName { get; set; } 
+        public string TypeName { get; set; } = string.Empty;
     }
 }

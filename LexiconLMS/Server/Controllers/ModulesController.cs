@@ -20,7 +20,7 @@ namespace LexiconLMS.Server.Controllers
 
         // GET: api/Modules
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Module>>> GetModule(bool includeAll = false)
+        public async Task<ActionResult<IEnumerable<Module>>> GetModules(bool includeAll = false)
         {
             return Ok(await _serviceManager.ModuleService.GetModulesAsync(includeAll));
 

@@ -10,7 +10,7 @@
 else
 {
     <div class="custom-width">
-        <h3 class="text-center">Course Edit</h3>
+        <h3 class="text-center">Edit Course </h3>
         <EditForm Model="@CourseDto" OnValidSubmit="@UpdateCourseAsync">
             <DataAnnotationsValidator />
             <div class="form-group">
@@ -35,13 +35,14 @@ else
             <br />
             <div class="accordion-item">
                 <button class="accordion-button btn-activities" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseZero" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                    <h3 class="text-center">Module Edit</h3>
+                    <h3 class="text-center">Edit Module</h3>
                 </button>
             
                 <div id="panelsStayOpen-collapseZero" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingZero">
                     <div class="accordion-body">
                         @foreach (var module in CourseDto.Modules)
                         {
+                            <a class="" href="@($"/activityadd/{module.Id}")"><strong>+Add Activity</strong></a>
                             <br />
                             <div class="accordion-item btn-activities">
                                 <button class="accordion-button btn" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
@@ -77,7 +78,7 @@ else
 
                             <div class="accordion-item">
                                 <button class="accordion-button btn-activities" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true" aria-controls="panelsStayOpen-collapseTwo">
-                                    <h4>Activities Edit</h4>
+                                    <h4>Edit Activities</h4>
                                 </button>
                                 <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
                                     <div class="accordion-body">
