@@ -1,9 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace LexiconLMS.Shared.Dtos
 {
-    public class ActivityAddDto
+    public class ActivityUpdateDto
     {
+        Guid ID { get; set; }
         [Required]
         [StringLength(maximumLength: 30, MinimumLength = 2, ErrorMessage = "The {0} need to be between {2} and {1} characters long.")]
         public string Name { get; set; } = string.Empty;
@@ -12,7 +18,7 @@ namespace LexiconLMS.Shared.Dtos
         public string Description { get; set; } = string.Empty;
         public DateTime StartTime { get; set; } = DateTime.Now;
         public DateTime EndTime { get; set; } = DateTime.Now.AddDays(30);
-        //public string TypeName { get; set; } = string.Empty;
+        public string TypeName { get; set; } = string.Empty;
 
         //Foreign Key
         [Required(ErrorMessage = "Selecting a module for the activity is required.")]

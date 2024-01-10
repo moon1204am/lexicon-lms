@@ -41,10 +41,10 @@ namespace LexiconLMS.Server.Services
             await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task UpdateActivityAsync(Guid id, ActivityDto activityDto)
+        public async Task UpdateActivityAsync(Guid id, ActivityAddDto activityDto)
         {
             var activity = await _unitOfWork.ActivityRepository.GetAsync(id) ?? throw new ArgumentNullException(nameof(id));
-            var activityToUpdate = _mapper.Map<Activity>(activity);
+            var activityToUpdate = _mapper.Map<Activity>(activityDto);
             _unitOfWork.ActivityRepository.Update(activity);
             await _unitOfWork.SaveChangesAsync();
         }

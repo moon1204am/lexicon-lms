@@ -47,12 +47,12 @@ namespace LexiconLMS.Server.Controllers
         // PUT: api/Activities/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<ActionResult> PutActivity(Guid id, ActivityDto activityDto)
+        public async Task<ActionResult> PutActivity(Guid id, ActivityAddDto activityDto)
         {
-            if (id != activityDto.Id)
-            {
-                return BadRequest();
-            }
+            //if (id != activityDto.Id)
+            //{
+            //    return BadRequest();
+            //}
             await _serviceManager.ActivityService.UpdateActivityAsync(id, activityDto);
 
             return NoContent();

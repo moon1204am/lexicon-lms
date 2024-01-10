@@ -7,7 +7,7 @@ namespace LexiconLMS.Server.Services
         Task<ActivityDto?> GetActivityAsync(Guid id);
         Task<IEnumerable<ActivityDto>> GetActivitiesAsync();
         Task<ActivityDto> CreateActivityAsync(ActivityAddDto activityAddDto);
-        Task UpdateActivityAsync(Guid id, ActivityDto activity);
+        Task UpdateActivityAsync(Guid id, ActivityAddDto activity);
         Task DeleteActivityAsync(Guid id);
         Task<IEnumerable<ActivityTypeDto>> GetActivityTypesAsync();
     }
