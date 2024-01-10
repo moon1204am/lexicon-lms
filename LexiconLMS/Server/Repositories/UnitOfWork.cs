@@ -18,14 +18,16 @@ namespace LexiconLMS.Server.Repositories
 
         private readonly Lazy<IModuleRepository> _moduleRepository;
         public IModuleRepository ModuleRepository => _moduleRepository.Value;
-
-        public UnitOfWork(ApplicationDbContext context, Lazy<ICourseRepository> courseRepository, Lazy<IUserRepository> userRepository, Lazy<IActivityRepository> activityRepository, Lazy<IModuleRepository> moduleRepository)
+        private readonly Lazy<IActivityTypeRepository> _activityTypeRepository;
+        public IActivityTypeRepository ActivityTypeRepository => _activityTypeRepository.Value;
+        public UnitOfWork(ApplicationDbContext context, Lazy<ICourseRepository> courseRepository, Lazy<IUserRepository> userRepository, Lazy<IActivityRepository> activityRepository, Lazy<IModuleRepository> moduleRepository, Lazy<IActivityTypeRepository> activityTypeRepository)
         {
             _context = context;
             _courseRepository = courseRepository;
             _userRepository = userRepository;
             _activityRepository = activityRepository;
             _moduleRepository = moduleRepository;
+            _activityTypeRepository = activityTypeRepository;
         }
 
 

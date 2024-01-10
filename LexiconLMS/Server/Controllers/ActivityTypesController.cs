@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LexiconLMS.Domain.Entities;
 using LexiconLMS.Server.Data;
+using LexiconLMS.Server.Services;
+using LexiconLMS.Shared.Dtos;
 
 namespace LexiconLMS.Server.Controllers
 {
@@ -14,111 +16,76 @@ namespace LexiconLMS.Server.Controllers
     [ApiController]
     public class ActivityTypesController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IServiceManager _serviceManager;
 
-        public ActivityTypesController(ApplicationDbContext context)
+        public ActivityTypesController(IServiceManager serviceManager)
         {
-            _context = context;
+            _serviceManager = serviceManager;
         }
 
-        // GET: api/ActivityTypes
+        // GET: api/Modules
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ActivityType>>> GetActivityType()
+        public async Task<ActionResult<IEnumerable<ActivityTypeDto>>> GetActivityType(bool includeAll = false)
         {
-            if (_context.ActivityType == null)
-            {
-                return NotFound();
-            }
-            return await _context.ActivityType.ToListAsync();
+            return Ok(await _serviceManager.ActivityTypeService.GetActivityTypeAsync(includeAll));
+
         }
 
-        // GET: api/ActivityTypes/5
+        // GET: api/Modules/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ActivityType>> GetActivityType(Guid id)
+        public async Task<ActionResult<ActivityTypeDto>> GetActivityType(Guid id)
         {
-            if (_context.ActivityType == null)
-            {
-                return NotFound();
-            }
-            var activityType = await _context.ActivityType.FindAsync(id);
 
-            if (activityType == null)
+            if (id == Guid.Empty)
             {
-                return NotFound();
+                return BadRequest("The input for module ID is missing.");
             }
 
-            return activityType;
+            return Ok((ActivityTypeDto?)await _serviceManager.ActivityTypeService.GetActivityTypeAsync(id));
         }
 
-        // PUT: api/ActivityTypes/5
+        // PUT: api/Modules/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutActivityType(Guid id, ActivityType activityType)
+        public async Task<ActionResult> PutActivityType(Guid id, ActivityTypeDto activityType)
         {
             if (id != activityType.Id)
             {
                 return BadRequest();
             }
-
-            _context.Entry(activityType).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ActivityTypeExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _serviceManager.ActivityTypeService.UpdateActivityTypeAsync(id, activityType);
 
             return NoContent();
         }
 
-        // POST: api/ActivityTypes
+        // POST: api/Modules
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<ActivityType>> PostActivityType(ActivityType activityType)
+        public async Task<ActionResult<ActivityTypeDto>> PostActivityType(ActivityTypeAddDto? activityType)
         {
-            if (_context.ActivityType == null)
-            {
-                return Problem("Entity set 'ApplicationDbContext.ActivityType'  is null.");
-            }
-            _context.ActivityType.Add(activityType);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetActivityType", new { id = activityType.Id }, activityType);
-        }
-
-        // DELETE: api/ActivityTypes/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteActivityType(Guid id)
-        {
-            if (_context.ActivityType == null)
-            {
-                return NotFound();
-            }
-            var activityType = await _context.ActivityType.FindAsync(id);
             if (activityType == null)
             {
-                return NotFound();
+                return BadRequest("The posted module is empty");
             }
-
-            _context.ActivityType.Remove(activityType);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            else
+            {
+                var activityTypeDto = await _serviceManager.ActivityTypeService.CreateActivityTypeAsync(activityType);
+                return CreatedAtAction(nameof(GetActivityType), new { id = activityTypeDto.Id }, activityTypeDto);
+            }
         }
 
-        private bool ActivityTypeExists(Guid id)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteActivityType(Guid id)
         {
-            return (_context.ActivityType?.Any(e => e.Id == id)).GetValueOrDefault();
+            if (id == Guid.Empty)
+            {
+                return BadRequest("The input for module ID is missing.");
+            }
+
+            await _serviceManager.ActivityTypeService.DeleteActivityTypeAsync(id);
+
+            return NoContent();
+
         }
     }
 }

@@ -5,7 +5,7 @@ using LexiconLMS.Shared.Dtos;
 
 namespace LexiconLMS.Server.Services
 {
-    public class ActivityTypeService
+    public class ActivityTypeService : IActivityTypeService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -18,32 +18,32 @@ namespace LexiconLMS.Server.Services
 
         public async Task<IEnumerable<ActivityTypeDto>> GetActivityTypeAsync(bool includeAll = false)
         {
-            return _mapper.Map<IEnumerable<ActivityTypeDto>>(await _unitOfWork.CourseRepository.GetAsync(includeAll));
+            return _mapper.Map<IEnumerable<ActivityTypeDto>>(await _unitOfWork.ActivityTypeRepository.GetAsync(includeAll));
         }
 
         public async Task<ActivityTypeDto> GetActivityTypeAsync(Guid id)
         {
-            return _mapper.Map<ActivityTypeDto>(await _unitOfWork.CourseRepository.GetAsync(id) ?? throw new ArgumentNullException(nameof(id)));
+            return _mapper.Map<ActivityTypeDto>(await _unitOfWork.ActivityTypeRepository.GetAsync(id) ?? throw new ArgumentNullException(nameof(id)));
         }
         public async Task<ActivityTypeDto> CreateActivityTypeAsync(ActivityTypeAddDto activityTypeAddDto)
         {
             var activityType = _mapper.Map<ActivityType>(activityTypeAddDto);
-            await _unitOfWork.CourseRepository.CreateAsync(activityType);
+            await _unitOfWork.ActivityTypeRepository.CreateAsync(activityType);
             await _unitOfWork.SaveChangesAsync();
             return _mapper.Map<ActivityTypeDto>(activityType);
         }
 
-        public async Task DeleteCourseAsync(Guid id)
+        public async Task DeleteActivityTypeAsync(Guid id)
         {
-            var course = await _unitOfWork.CourseRepository.GetAsync(id) ?? throw new ArgumentNullException(nameof(id));
-            _unitOfWork.CourseRepository.DeleteAsync(course);
+            var activityType = await _unitOfWork.ActivityTypeRepository.GetAsync(id) ?? throw new ArgumentNullException(nameof(id));
+            _unitOfWork.ActivityTypeRepository.DeleteAsync(activityType);
             await _unitOfWork.SaveChangesAsync();
         }
-        public async Task UpdateCourseAsync(Guid id, ActivityTypeDto activityTypeDto)
+        public async Task UpdateActivityTypeAsync(Guid id, ActivityTypeDto activityTypeDto)
         {
-            var activityType = await _unitOfWork.CourseRepository.GetAsync(id) ?? throw new ArgumentNullException(nameof(id));
+            var activityType = await _unitOfWork.ActivityTypeRepository.GetAsync(id) ?? throw new ArgumentNullException(nameof(id));
             var activityTypeToUpdate = _mapper.Map(activityTypeDto, activityType);
-            _unitOfWork.CourseRepository.UpdateAsync(activityTypeToUpdate);
+            _unitOfWork.ActivityTypeRepository.UpdateAsync(activityTypeToUpdate);
             await _unitOfWork.SaveChangesAsync();
         }
     }

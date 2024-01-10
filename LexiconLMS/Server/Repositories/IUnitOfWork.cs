@@ -6,7 +6,7 @@
         IUserRepository UserRepository { get; }
         IActivityRepository ActivityRepository { get; }
         IModuleRepository ModuleRepository { get; }
-
+        IActivityTypeRepository ActivityTypeRepository { get; }
         Task SaveChangesAsync();
     }
 }
