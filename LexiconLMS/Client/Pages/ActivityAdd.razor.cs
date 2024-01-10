@@ -27,7 +27,7 @@ namespace LexiconLMS.Client.Pages
 
         public async Task HandleValidSubmit()
         {
-            var activity = await LmsDataService.PostAsync<ActivityAddDto>("api/activities/", _activityToAddDto);
+            var activity = await LmsDataService.PostAsync<ActivityAddDto>("api/activities", _activityToAddDto);
 
             if (activity == null)
             {

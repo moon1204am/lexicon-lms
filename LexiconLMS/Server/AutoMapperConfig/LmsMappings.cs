@@ -15,6 +15,7 @@ namespace LexiconLMS.Server.AutoMapperConfig
             CreateMap<Course, CourseAddDto>().ReverseMap();
 
             CreateMap<Activity, ActivityDto>().ReverseMap();
+            CreateMap<Activity, ActivityAddDto>().ReverseMap();
             CreateMap<ActivityType, ActivityTypeDto>().ReverseMap();
             
             CreateMap<ApplicationUser, UserDto>().ReverseMap();
