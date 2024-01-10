@@ -55,11 +55,12 @@ namespace LexiconLMS.Server.Controllers
         // POST: api/Courses
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<CourseAddDto>> PostCourse(CourseAddDto? course)
+        public async Task<ActionResult<CourseDto>> PostCourse(CourseAddDto? course)
         {
             if (course != null)
             {
-                return CreatedAtAction("GetCourse", new { id = await _serviceManager.CourseService.CreateCourseAsync(course) }, course);
+                var courseDto = await _serviceManager.CourseService.CreateCourseAsync(course);
+                return CreatedAtAction(nameof(GetCourse), new { id = courseDto}, courseDto);
             }
             else
             {
@@ -71,10 +72,6 @@ namespace LexiconLMS.Server.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteCourse(Guid id)
         {
-            // OK TO RECCIVE A ID?????-----Discuss at Review.<s
-            // OK TO RECCIVE A ID?????-----Discuss at Review.<s
-            // OK TO RECCIVE A ID?????-----Discuss at Review.<s
-            // OK TO RECCIVE A ID?????-----Discuss at Review.<s
             if (id == Guid.Empty)
             {
                 return BadRequest("The input for module ID is missing.");

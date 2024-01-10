@@ -56,7 +56,7 @@ namespace LexiconLMS.Server.Controllers
         // POST: api/Modules
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<ModuleAddDto>> PostModule(ModuleAddDto? module)
+        public async Task<ActionResult<ModuleDto>> PostModule(ModuleAddDto? module)
         {
             if (module == null)
             {
@@ -64,18 +64,14 @@ namespace LexiconLMS.Server.Controllers
             }
             else
             {
-                //return Ok(await _serviceManager.ModuleService.CreateModuleAsync(module));
-                return CreatedAtAction("GetModule", new { id = await _serviceManager.ModuleService.CreateModuleAsync(module) }, module);
+                var moduleDto = await _serviceManager.ModuleService.CreateModuleAsync(module);
+                return CreatedAtAction(nameof(GetModule), new { id = moduleDto.Id}, moduleDto);
             }
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteModule(Guid id)
         {
-            // OK TO RECCIVE A ID?????-----Discuss at Review.<s
-            // OK TO RECCIVE A ID?????-----Discuss at Review.<s
-            // OK TO RECCIVE A ID?????-----Discuss at Review.<s
-            // OK TO RECCIVE A ID?????-----Discuss at Review.<s
             if (id == Guid.Empty)
             {
                 return BadRequest("The input for module ID is missing.");

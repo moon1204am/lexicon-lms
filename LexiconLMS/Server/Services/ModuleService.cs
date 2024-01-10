@@ -25,12 +25,12 @@ namespace LexiconLMS.Server.Services
         {
             return _mapper.Map<ModuleDto>(await _unitOfWork.ModuleRepository.GetAsync(id) ?? throw new ArgumentNullException(nameof(id)));
         }
-        public async Task<ModuleAddDto> CreateModuleAsync(ModuleAddDto moduleAddDto)
+        public async Task<ModuleDto> CreateModuleAsync(ModuleAddDto moduleAddDto)
         {
             var module = _mapper.Map<Module>(moduleAddDto);
             await _unitOfWork.ModuleRepository.CreateAsync(module);
             await _unitOfWork.SaveChangesAsync();
-            return _mapper.Map<ModuleAddDto>(module);
+            return _mapper.Map<ModuleDto>(module);
         }
 
         public async Task DeleteModuleAsync(Guid id)
