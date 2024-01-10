@@ -40,7 +40,7 @@ namespace LexiconLMS.Server.Repositories
 
         public async Task<IEnumerable<ActivityType>> GetTypesAsync()
         {
-            return await _context.ActivtyType.ToListAsync();
+            return await _context.ActivityType.ToListAsync();
         }
     }
 }
