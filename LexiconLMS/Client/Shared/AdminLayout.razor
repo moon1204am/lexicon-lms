@@ -1,0 +1,66 @@
+﻿@inherits LayoutComponentBase
+
+<!--Common MainLayout.razor top navbar, can refactor to smaller components-->
+<div class="page">
+
+
+        <nav class="navbar navbar-expand-lg navbar-light ">
+            <div class="container-fluid">
+                <img src="/Images/LoggaLMS.png" alt="Logo" class="logo" />
+
+                <!-- Include the HamburgerMenu component here -->
+                <HamburgerMenu />
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto nav-padding">
+                        <li class="nav-item">
+                            <a class="nav-link navbar-style" href="#">Home</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Courses">Courses</a>
+                        </li>
+                        <!-- Todo: check how to make the Admin Panel included on smaller screens -->
+                        <AuthorizeView Roles="Admin">
+                            <Authorized>
+                                <li class="nav-item">
+                                    <NavLink class="nav-link" href="/admin">
+                                        <span class="oi oi-list-rich" aria-hidden="true"></span> Admin Panel
+                                    </NavLink>
+                                </li>
+                            </Authorized>
+                        </AuthorizeView>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <LoginDisplay/>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        </div>
+        
+<!--Admin panel sidebar-->
+<div class="admin-page">
+    <div class="admin-sidebar">
+        <h3>Admin Panel</h3>
+        <ul class="nav nav-pills flex-column">
+            <li class="nav-item"><a class="nav-link" href="/admin">Create User</a></li>
+            <li class="nav-item"><a class="nav-link" href="/edituser">Edit User</a></li>
+            <li class="nav-item"><a class="nav-link" href="/CourseAdd">Add Course</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Placeholder :)</a></li>
+        </ul>
+    </div>
+ <!--Admin panel content -->
+    <div class="admin-content">
+        <h1>Admin Panel</h1>
+
+
+        <h3>Navigate on the left menu.</h3>
+        <hr>
+        @Body
+    </div>
+</div>
+
+@code {
+
+}
