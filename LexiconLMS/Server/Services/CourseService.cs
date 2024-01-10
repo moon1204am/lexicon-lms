@@ -42,7 +42,14 @@ namespace LexiconLMS.Server.Services
         public async Task UpdateCourseAsync(Guid id, CourseDto courseDto)
         {
             var course = await _unitOfWork.CourseRepository.GetAsync(id) ?? throw new ArgumentNullException(nameof(id));
+
             var courseToUpdate = _mapper.Map(courseDto, course);
+            //BANDAID FOR AVOIDING CREATING DUBLICATED ACTIVITY TYPES
+            foreach (var module in courseToUpdate.Modules)
+            {
+                module.Activities = new List<Activity>();
+            }
+            //--END OF BANDAID FOR AVOIDING CREATING DUBLICATED ACTIVITY TYPES
             _unitOfWork.CourseRepository.Update(courseToUpdate);
             await _unitOfWork.SaveChangesAsync();
         }

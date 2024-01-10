@@ -9,6 +9,8 @@ namespace LexiconLMS.Client.Pages
     {
         [Inject]
         public ILmsDataService LmsDataService { get; set; } = default!;
+        [Inject]
+        NavigationManager NavigationManager { get; set; }
 
         [Parameter]
         public string CourseId { get; set; }
@@ -22,6 +24,7 @@ namespace LexiconLMS.Client.Pages
         public async Task UpdateCourseAsync()
         { 
            await LmsDataService.PutAsync<CourseDto>($"api/courses/{CourseId}", CourseDto);
+            NavigationManager.NavigateTo($"/course/{CourseId}");
         }
     }
 }
