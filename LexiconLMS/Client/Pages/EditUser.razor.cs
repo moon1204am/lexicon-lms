@@ -97,13 +97,13 @@ namespace LexiconLMS.Client.Pages
                 
                 // Refresh user list
                 editUserDto = new UpdateUserDto();
-
                 // Set a timer to clear the message
                 var timer = new System.Threading.Timer(_ =>
                 {
                     updateStatusMessage = string.Empty; 
                     StateHasChanged(); // Notify the UI that the updateStatusMessage has changed
                 }, null, 3000, Timeout.Infinite);
+ 
             }
             else
             {
