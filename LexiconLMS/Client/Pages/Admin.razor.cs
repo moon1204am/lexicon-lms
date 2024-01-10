@@ -40,7 +40,15 @@ namespace LexiconLMS.Client.Pages
             if (response != null)
             {
                 updateStatusMessage = "User created successfully";
-                // Optionally, refresh user list or redirect
+                // Refresh user list or redirect
+                User = new CreateUserDto();
+
+                // Set a timer to clear the message
+                var timer = new System.Threading.Timer(_ =>
+                {
+                    updateStatusMessage = string.Empty;
+                    StateHasChanged(); // Notify the UI that the updateStatusMessage has changed
+                }, null, 3000, Timeout.Infinite);
             }
             else
             {
