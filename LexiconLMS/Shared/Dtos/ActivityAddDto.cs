@@ -12,7 +12,7 @@ namespace LexiconLMS.Shared.Dtos
         public string Description { get; set; } = string.Empty;
         public DateTime StartTime { get; set; } = DateTime.Now;
         public DateTime EndTime { get; set; } = DateTime.Now.AddDays(30);
-        public string TypeName { get; set; } = string.Empty;
+        //public string TypeName { get; set; } = string.Empty;
 
         //Foreign Key
         [Required(ErrorMessage = "Selecting a module for the activity is required.")]

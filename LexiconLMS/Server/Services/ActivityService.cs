@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Humanizer;
 using LexiconLMS.Domain.Entities;
 using LexiconLMS.Server.Repositories;
 using LexiconLMS.Shared.Dtos;
@@ -44,7 +45,7 @@ namespace LexiconLMS.Server.Services
         public async Task UpdateActivityAsync(Guid id, ActivityDto activityDto)
         {
             var activity = await _unitOfWork.ActivityRepository.GetAsync(id) ?? throw new ArgumentNullException(nameof(id));
-            var activityToUpdate = _mapper.Map<Activity>(activity);
+            _mapper.Map(activityDto, activity);
             _unitOfWork.ActivityRepository.Update(activity);
             await _unitOfWork.SaveChangesAsync();
         }

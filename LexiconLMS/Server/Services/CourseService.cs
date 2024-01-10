@@ -41,10 +41,15 @@ namespace LexiconLMS.Server.Services
         }
         public async Task UpdateCourseAsync(Guid id, CourseDto courseDto)
         {
-            var course = await _unitOfWork.CourseRepository.GetAsync(id) ?? throw new ArgumentNullException(nameof(id));
-            var courseToUpdate = _mapper.Map(courseDto, course);
-            _unitOfWork.CourseRepository.Update(courseToUpdate);
-            await _unitOfWork.SaveChangesAsync();
+            try
+            {
+                var course = await _unitOfWork.CourseRepository.GetAsync(id) ?? throw new ArgumentNullException(nameof(id));
+                var courseToUpdate = _mapper.Map(courseDto, course);
+                _unitOfWork.CourseRepository.Update(courseToUpdate);
+                await _unitOfWork.SaveChangesAsync();
+            }
+            catch(Exception ex) { Console.WriteLine(ex.Message); }
+            
         }
     }
 }
