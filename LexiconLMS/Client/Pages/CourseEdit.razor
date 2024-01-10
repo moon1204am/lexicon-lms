@@ -37,6 +37,7 @@ else
                 <button class="accordion-button btn-activities" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseZero" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
                     <h3 class="text-center">Module Edit</h3>
                 </button>
+            
                 <div id="panelsStayOpen-collapseZero" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingZero">
                     <div class="accordion-body">
                         @foreach (var module in CourseDto.Modules)
@@ -134,7 +135,7 @@ else
                     </div>
                 </div>
             </div>
-            <button class="btn btn-primary">Add Module</button>
+            <a class="btn btn-primary" href="@("/moduleadd")">Add Module</a>
             <button type="submit" class="btn btn-danger"> Update</button>
 
         </EditForm>

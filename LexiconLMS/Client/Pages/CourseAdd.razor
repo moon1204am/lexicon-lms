@@ -7,13 +7,13 @@
         <p class="text-danger">@_successMessage</p>
         <div class="form-group">
             <label for="Name">Name:</label>
-            <InputText maxlength="30" id="Name" @bind-Value="_courseToAdd.Name" class="form-control"/>
-            <ValidationMessage For="@(() => _courseToAdd.Name)"/>
+            <InputText maxlength="30" id="Name" @bind-Value="_courseToAdd!.Name" class="form-control"/>
+            <ValidationMessage For="@(() => _courseToAdd!.Name)"/>
         </div>
 
         <div class="form-group description-height">
             <label for="Description">Description:</label>
-            <textarea maxlength="100" id="Description" @bind="_courseToAdd.Description" class="form-control"></textarea>
+            <textarea maxlength="100" id="Description" @bind="_courseToAdd!.Description" class="form-control"></textarea>
             <ValidationMessage For="@(() => _courseToAdd.Description)"/>
         </div>
 
@@ -28,10 +28,12 @@
         </div>
 
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">Add Course</button>
+            <button type="submit" class="btn btn-success">Add Course</button>
+            <a class="btn btn-primary" href="@("/courses")">Overview Courses</a>
         </div>
 
     </EditForm>
+    
 </div>
 
 

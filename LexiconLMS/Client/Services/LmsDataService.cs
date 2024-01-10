@@ -62,5 +62,16 @@ namespace LexiconLMS.Client.Services
 
             response.EnsureSuccessStatusCode();
         }
+        public async Task DeleteAsync<T>(string path, string contentType = json)
+        {
+            //build request
+            var request = new HttpRequestMessage(HttpMethod.Delete, path);
+            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(contentType));
+
+            //send request
+            var response = await _httpClient.DeleteAsync(path);
+
+            response.EnsureSuccessStatusCode();
+        }
     }
 }
