@@ -10,17 +10,24 @@ namespace LexiconLMS.Client.Pages
         public ILmsDataService LmsDataService { get; set; } = default!;
         private ActivityTypeAddDto? _activityTypeToAdd = new ActivityTypeAddDto();
         private string _successMessage = string.Empty;
+
+        public List<ActivityDto> Activities { get; set; } = new List<ActivityDto>();
+        protected override async Task OnInitializedAsync()
+        {
+            //Activities = ((await LmsDataService.GetAsync<List<ActivityDto>>("api/activities"))!).ToList();
+        }
         public async Task CreateCourseAsync()
         {
+            var activityType = await LmsDataService.PostAsync<ActivityTypeAddDto>("api/activitytypes/", _activityTypeToAdd);
 
-            if (_activityTypeToAdd == null)
+            if (activityType == null)
             {
-                _successMessage = "Course not added";
+                _successMessage = "Activity type could not be added";
             }
             else
             {
-                await LmsDataService.PostAsync<ActivityTypeAddDto>("api/activitytypes/", _activityTypeToAdd);
-                _successMessage = "Course added";
+                
+                _successMessage = "Activity type added";
             }
         }
     }

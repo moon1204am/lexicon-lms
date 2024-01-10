@@ -1,52 +1,36 @@
 ﻿@page "/activitytypeadd"
 
 <div class="custom-width">
-    <h3 class="text-center">Add Module</h3>
-    @if (Courses == null)
+    <h3 class="text-center">Add Activity Type</h3>
+    @if (Activities == null)
     {
         <p><em>Loading..</em></p>
     }
     else
     {
-        <EditForm Model="@_moduleToAdd" OnValidSubmit="@CreateCourseAsync">
+        <EditForm Model="@_activityTypeToAdd" OnValidSubmit="@CreateCourseAsync">
             <DataAnnotationsValidator />
             <p class="text-danger">@_successMessage</p>
 
             <div class="form-group">
-                <InputSelect @bind-Value="@_moduleToAdd!.CourseId">
-                    <option selected value="">-- select a course --</option>
-                    @foreach (var course in Courses)
+                <InputSelect @bind-Value="@_activityTypeToAdd!.ActivityId">
+                    <option selected value="">-- select a activity --</option>
+                    @foreach (var activity in Activities)
                     {
-                        <option value="@course.Id" @key="course.Id">@course.Name</option>
+                        <option value="@activity.Id" @key="activity.Id">@activity.Name</option>
                     }
                 </InputSelect>
-                <ValidationMessage For="@(() => _moduleToAdd!.Name)" />
+                <ValidationMessage For="@(() => _activityTypeToAdd!.Name)" />
             </div>
-
-            <div class="form-group">
-                <label for="Name">Name:</label>
-                <InputText maxlength="30" id="Name" @bind-Value="_moduleToAdd!.Name" class="form-control" />
-                <ValidationMessage For="@(() => _moduleToAdd!.Name)" />
-            </div>
-
+  
             <div class="form-group description-height">
-                <label for="Description">Description:</label>
-                <textarea maxlength="100" id="Description" @bind="_moduleToAdd!.Description" class="form-control"></textarea>
-                <ValidationMessage For="@(() => _moduleToAdd.Description)" />
+                <label for="Name">Name:</label>
+                <textarea maxlength="50" id="Name" @bind="_activityTypeToAdd!.Name" class="form-control"></textarea>
+                <ValidationMessage For="@(() => _activityTypeToAdd.Name)" />
             </div>
 
             <div class="form-group">
-                <label for="StartDate">Start Date:</label>
-                <InputDate id="StartDate" @bind-Value="_moduleToAdd.StartDate" class="form-control" />
-            </div>
-
-            <div class="form-group">
-                <label for="EndDate">End Date:</label>
-                <InputDate id="EndDate" @bind-Value="_moduleToAdd.EndDate" class="form-control" />
-            </div>
-
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Add Module</button>
+                <button type="submit" class="btn btn-primary">Add ActivityType</button>
             </div>
 
         </EditForm>
