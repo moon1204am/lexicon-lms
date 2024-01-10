@@ -8,8 +8,9 @@
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public string TypeName { get; set; } = string.Empty;
-        //public Guid TypeId { get; set; }
+        public Guid TypeId { get; set; }
         //public ActivityTypeDto Type { get; set; }
         public Guid ActivityTypeId { get; set; }
+        //public Guid ModuleId { get; set; }
     }
 }

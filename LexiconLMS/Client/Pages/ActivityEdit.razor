@@ -7,14 +7,14 @@
         <DataAnnotationsValidator />
 
         <div class="form-group">
-            <InputSelect @bind-Value="@ActivityDto!.ActivityTypeId">
+            <InputSelect @bind-Value="@ActivityDto!.TypeId">
                 <option selected value="">-- select a type --</option>
                 @foreach (var type in ActivityTypes)
                 {
                     <option value="@type.Id" @key="type.Id">@type.Name</option>
                 }
             </InputSelect>
-            <ValidationMessage For="@(() => ActivityDto!.ActivityTypeId)" />
+            <ValidationMessage For="@(() => ActivityDto!.TypeId)" />
         </div>
 
         <div class="form-group">

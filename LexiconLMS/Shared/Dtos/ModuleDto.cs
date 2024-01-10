@@ -14,6 +14,7 @@ namespace LexiconLMS.Shared.Dtos
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public ICollection<ActivityDto> Activities { get; set; } = new List<ActivityDto>();
+        //public Guid CourseId { get; set; }
 
     }
 }
