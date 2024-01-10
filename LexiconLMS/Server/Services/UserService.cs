@@ -65,17 +65,11 @@ namespace LexiconLMS.Server.Services
             await _unitOfWork.SaveChangesAsync();
         }
 
-
-
         public async Task<IEnumerable<UserDto>> GetAllUsersAsync()
         {
             var users = await _unitOfWork.UserRepository.GetAllUsersAsync();
             return _mapper.Map<IEnumerable<UserDto>>(users);
 
         }
-
-
-
-
     }
 }

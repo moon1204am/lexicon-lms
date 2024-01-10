@@ -7,11 +7,8 @@
 @attribute [Authorize(Roles ="Admin")]
 
 <div class="container">
-
     <main role="main" class="pb-1">
-
         <div>
-
             <div class="row">
                 <div class="col-md-9">
                     <h3>Creating new user</h3>
@@ -58,9 +55,14 @@
                                 <button type="submit" class="btn btn-primary">Create User</button>
                             </EditForm>
                         </div>
+                        @if (!string.IsNullOrEmpty(updateStatusMessage))
+                        {
+                            <div class="alert alert-info custom-alert">@updateStatusMessage</div>
+                        }
                     </div>
                 </div>
             </div>
         </div>
     </main>
 </div>
+

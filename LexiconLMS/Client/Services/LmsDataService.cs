@@ -47,31 +47,7 @@ namespace LexiconLMS.Client.Services
 
                 return result;
             }
-
             return default(T);
-            
-        }
-
-        
-        
-        public async Task<TResponse?> PostAsyncUser<TRequest, TResponse>(string path, TRequest content, string contentType = json)
-        {
-            var response = await _httpClient.PostAsJsonAsync(path, content, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
-            //response.EnsureSuccessStatusCode();
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new HttpRequestException($"Response status code does not indicate success: {response.StatusCode}.");
-            }
-
-            if (response.Content == null) return default;
-            try
-            {
-                return await response.Content.ReadFromJsonAsync<TResponse>(new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
-            }
-            catch (JsonException)
-            {
-                return default;
-            }
         }
 
         public async Task UpdateUser(Guid userId, UpdateUserDto updateUserDto)

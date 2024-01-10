@@ -112,9 +112,6 @@ namespace LexiconLMS.Server.Repositories
         public async Task<IEnumerable<ApplicationUser>> GetAllUsersAsync()
         {
             return await _context.Users.ToListAsync();
-
-            // Probably irrelevant, remove if method above works
-            //return await _userManager.Users.ToListAsync();
         }
 
         public async Task<bool> CourseExistAsync(Guid courseId)

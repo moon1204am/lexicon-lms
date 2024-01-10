@@ -20,7 +20,6 @@ namespace LexiconLMS.Client.Pages
 
         protected override async Task OnInitializedAsync()
         {
-           
             try
             {
                 var response = await Http.GetAsync("api/users/getall");
