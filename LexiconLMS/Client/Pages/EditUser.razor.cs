@@ -62,6 +62,8 @@ namespace LexiconLMS.Client.Pages
                 if (user != null)
                 {
                     selectedUser = user;
+                    selectedUser.Id = userId;
+                    selectedUser.Role = user.Role;
                     editUserDto.FirstName = user.FirstName;
                     editUserDto.LastName = user.LastName;
                     editUserDto.Email = user.Email;
