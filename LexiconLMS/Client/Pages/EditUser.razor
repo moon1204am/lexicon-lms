@@ -34,10 +34,20 @@
             </div>
             <!-- Display only fields -->
             <div>
-                <label>Id: @selectedUser.Id</label>
+                <label>User ID: @selectedUser.Id</label>
             </div>
             <div>
-                <label>Course: @selectedUser.CourseId</label>
+                <label>Course ID: @selectedUser.CourseId</label>
+            </div>
+
+            <div class="form-group">
+                <label for="Course">Change user Course to a new one:</label>
+                    <select @bind="editUserDto.CourseId" class="form-control">
+                        @foreach (var course in courses)
+                        {
+                            <option value="@course.Id">@course.Name</option>
+                        }
+                    </select>
             </div>
 
         <button type="submit">Save Changes</button>

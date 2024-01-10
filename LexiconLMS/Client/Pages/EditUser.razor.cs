@@ -16,6 +16,7 @@ namespace LexiconLMS.Client.Pages
         private Dictionary<Guid, string> users = new Dictionary<Guid, string>();
         private UserDto selectedUser = new UserDto();
         private UpdateUserDto editUserDto = new UpdateUserDto();
+        private List<CourseDto> courses = new List<CourseDto>();
 
         protected override async Task OnInitializedAsync()
         {
@@ -36,6 +37,17 @@ namespace LexiconLMS.Client.Pages
                         // Handle case where user list is null
                         users = new Dictionary<Guid, string>();
                     }
+
+                    var courseResponse = await Http.GetAsync("api/courses");
+                    if (courseResponse.IsSuccessStatusCode)
+                    {
+                        courses = await courseResponse.Content.ReadFromJsonAsync<List<CourseDto>>();
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Error fetching courses: {courseResponse.StatusCode}");
+                    }
+
                 }
                 else
                 {
@@ -61,12 +73,18 @@ namespace LexiconLMS.Client.Pages
                 var user = await Http.GetFromJsonAsync<UserDto>($"api/users/{userId}");
                 if (user != null)
                 {
+                    // UserDto properties for display
                     selectedUser = user;
                     selectedUser.Id = userId;
                     selectedUser.Role = user.Role;
+
+                    // UpdateUserDto properties for editing
                     editUserDto.FirstName = user.FirstName;
                     editUserDto.LastName = user.LastName;
                     editUserDto.Email = user.Email;
+
+                    // Setting a default display on change course to user's current course
+                    editUserDto.CourseId = user.CourseId;
                 }
             }
         }

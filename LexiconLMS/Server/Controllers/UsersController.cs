@@ -54,6 +54,7 @@ namespace LexiconLMS.Server.Controllers
         [HttpPut("update/{userId}")]
         public async Task<IActionResult> UpdateUserAsync(Guid userId, [FromBody] UpdateUserDto updateUserDto)
         {
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -61,9 +62,8 @@ namespace LexiconLMS.Server.Controllers
 
             try
             {
-            await _serviceManager.UserService.UpdateUserAsync(userId, updateUserDto);
-            return Ok();
-
+                await _serviceManager.UserService.UpdateUserAsync(userId, updateUserDto);
+                return Ok();
             }
 
             catch (Exception ex)

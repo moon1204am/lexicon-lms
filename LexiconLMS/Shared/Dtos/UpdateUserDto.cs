@@ -18,6 +18,8 @@ namespace LexiconLMS.Shared.Dtos
         [Required, EmailAddress]
         public string Email { get; set; } = string.Empty;
 
+        public Guid CourseId { get; set; }
+
         // Optional: Include RoleId if you want to allow updating the Role ; requires additional logic in the controller
         // [Required]
         // public Guid RoleId { get; set; }

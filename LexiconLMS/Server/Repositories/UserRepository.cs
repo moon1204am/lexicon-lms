@@ -86,10 +86,17 @@ namespace LexiconLMS.Server.Repositories
                 throw new KeyNotFoundException($"User with id {user.Id} not found.");
             }
 
+            // Verify if the new CourseId is valid, if it is no the default Guid
+            if (user.CourseId != Guid.Empty && !await CourseExistAsync(user.CourseId))
+            {
+                throw new KeyNotFoundException($"Course with id {user.CourseId} not found.");
+            }
+
             existingUser.FirstName = user.FirstName;
             existingUser.LastName = user.LastName;
             existingUser.Email = user.Email;
             existingUser.UserName = user.Email;
+            existingUser.CourseId = user.CourseId;
 
             // Handle role update logic here, if included
 
@@ -108,6 +115,11 @@ namespace LexiconLMS.Server.Repositories
 
             // Probably irrelevant, remove if method above works
             //return await _userManager.Users.ToListAsync();
+        }
+
+        public async Task<bool> CourseExistAsync(Guid courseId)
+        {
+            return await _context.Course.AnyAsync(c => c.Id == courseId);
         }
     }
 }
