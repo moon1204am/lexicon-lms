@@ -12,10 +12,23 @@ main {
 .admin-sidebar {
     width: 250px;
     height: 100vh;
-    padding-left:1rem;
-    padding-top:1rem;
+    padding-left: 1rem;
+    padding-top: 1rem;
+    /*    (9, 24, 52) background-color: #616161;
+        rgb(103, 147, 228)
+    */
+    background-color: rgba(43, 24, 155, 0.2);
     /* Blazor style gradient
         background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);*/
+}
+
+h3 {
+    color: #e9f0fb;
+}
+
+.nav-link {
+    /*color: #E7F7D4;*/
+    color: #448D76;
 }
 
 .admin-content {

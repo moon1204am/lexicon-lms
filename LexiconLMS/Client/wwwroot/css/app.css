@@ -1,12 +1,33 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
+/* Color Scheme */
+/*
+* Background Main: #E7F7D4 light-washed green
+* Background Secondary: #448D76 darker-washed green
+* Background Tertiary: Light gray #F5F5F5
+* Background Tertiary2: Dark gray #616161
+* Text Main: #091834 dark blue
+* Text Secondary: #7FBD32 green
+* Text Secondary: #e9f0fb off-white for dark background
+* Accent: #1258DC blue
+* 
+    ***************/
+
+
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #F5F5F5;
+}
+
+nav.navbar.navbar-expand-lg {
+    background-color: #F5F5F5;
 }
 
 h1:focus {
     outline: none;
 }
+
+
 
 a, .btn-link {
     color: #0071c1;
