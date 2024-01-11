@@ -36,14 +36,14 @@ namespace LexiconLMS.Server.Services
         public async Task DeleteActivityTypeAsync(Guid id)
         {
             var activityType = await _unitOfWork.ActivityTypeRepository.GetAsync(id) ?? throw new ArgumentNullException(nameof(id));
-            _unitOfWork.ActivityTypeRepository.DeleteAsync(activityType);
+            _unitOfWork.ActivityTypeRepository.Delete(activityType);
             await _unitOfWork.SaveChangesAsync();
         }
         public async Task UpdateActivityTypeAsync(Guid id, ActivityTypeDto activityTypeDto)
         {
             var activityType = await _unitOfWork.ActivityTypeRepository.GetAsync(id) ?? throw new ArgumentNullException(nameof(id));
             var activityTypeToUpdate = _mapper.Map(activityTypeDto, activityType);
-            _unitOfWork.ActivityTypeRepository.UpdateAsync(activityTypeToUpdate);
+            _unitOfWork.ActivityTypeRepository.Update(activityTypeToUpdate);
             await _unitOfWork.SaveChangesAsync();
         }
     }
