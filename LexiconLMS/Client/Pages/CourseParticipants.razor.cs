@@ -14,7 +14,7 @@ namespace LexiconLMS.Client.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            CourseParticipantsList = await LmsDataService.GetAsync<List<UserDto>>($"api/users/{CourseId}");
+            CourseParticipantsList = await LmsDataService.GetAsync<List<UserDto>>($"api/users/participants/{CourseId}");
         }
     }
 }

@@ -44,12 +44,19 @@ namespace LexiconLMS.Client.Services
             //send the request
             var response = await _httpClient.PostAsync(path, request.Content);
 
+            // Note: EnsureSuccessStatusCode() was commented out in Krystian's branch.
             response.EnsureSuccessStatusCode();
+
+            if (response.IsSuccessStatusCode)
+            {
 
             var stream = await response.Content.ReadAsStreamAsync();
             var result = JsonSerializer.Deserialize<T>(stream, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
-                return result;
+                
+            return result;
             }
+            
+
             return default(T);
         }
 
