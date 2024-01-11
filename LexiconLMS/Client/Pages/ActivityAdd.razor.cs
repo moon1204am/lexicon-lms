@@ -8,9 +8,10 @@ namespace LexiconLMS.Client.Pages
     {
         [Inject]
         public ILmsDataService LmsDataService { get; set; } = default!;
+        [Inject]
+        private NavigationManager NavigationManager { get; set; } = default!;
         private ActivityAddDto? _activityToAddDto = new ActivityAddDto();
         private List<ActivityTypeDto> ActivityTypes = new List<ActivityTypeDto>();
-        private string _successMessage = string.Empty;
         [Parameter]
         public Guid ModuleId { get; set; }
         public List<CourseViewDto> Modules { get; set; } = new List<CourseViewDto>();
@@ -24,15 +25,7 @@ namespace LexiconLMS.Client.Pages
         public async Task HandleValidSubmit()
         {
             var activity = await LmsDataService.PostAsync<ActivityAddDto>("api/activities", _activityToAddDto);
-
-            if (activity == null)
-            {
-                _successMessage = "Activity could not be added";
-            }
-            else
-            {
-                _successMessage = "Activity added";
-            }
+            NavigationManager.NavigateTo("/courses");
         }
     }
 }

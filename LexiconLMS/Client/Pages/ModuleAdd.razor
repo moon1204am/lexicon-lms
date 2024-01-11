@@ -10,7 +10,6 @@
     {
         <EditForm Model="@_moduleToAdd" OnValidSubmit="@HandleValidSubmit">
             <DataAnnotationsValidator />
-            <p class="text-danger">@_successMessage</p>
 
             <div class="form-group">
                 <InputSelect @bind-Value="@_moduleToAdd!.CourseId">

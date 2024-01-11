@@ -5,16 +5,7 @@
     <EditForm Model="@_activityToAddDto" OnValidSubmit="@HandleValidSubmit">
 
         <DataAnnotationsValidator/>
- @*        <div class="form-group">
-            <InputSelect @bind-Value="@_activityToAddDto!.ModuleId">
-                <option selected value="">-- select a activity --</option>
-                @foreach (var module in Modules)
-                {
-                    <option value="@module.Id" @key="module.Id">@module.Name</option>
-                }
-            </InputSelect>
-            <ValidationMessage For="@(() => _activityToAddDto!.ModuleId)" />
-        </div>  *@
+
         
         <div class="form-group">
             <InputSelect @bind-Value="@_activityToAddDto!.ActivityTypeId">
@@ -27,7 +18,6 @@
             <ValidationMessage For="@(() => _activityToAddDto!.ActivityTypeId)" />
         </div>
 
-        <p class="text-danger">@_successMessage</p>
         <div class="form-group">
             <label for="Name">Name:</label>
             <InputText maxlength="30" id="Name" @bind-Value="_activityToAddDto!.Name" class="form-control"/>
