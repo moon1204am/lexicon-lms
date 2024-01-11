@@ -4,25 +4,26 @@
     <main>
         <nav class="navbar navbar-expand-lg navbar-light ">
             <div class="container-fluid">
-                <img src="/Images/LoggaLMS.png" alt="Logo" class="logo" />
+                
 
                 <!-- Include the HamburgerMenu component here -->
                 <HamburgerMenu />
 
                 <div class="collapse navbar-collapse" id="navbarNav">
+                    <img src="/Images/LoggaLMS.png" alt="Logo" class="logo" />
                     <ul class="navbar-nav mx-auto nav-padding">
                         <li class="nav-item">
                             <a class="nav-link navbar-style" href="#">Home</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/Courses">Courses</a>
+                            <a class="nav-link navbar-style" href="/Courses">Courses</a>
                         </li>
                         <!-- Todo: check how to make the Admin Panel included on smaller screens -->
                         <AuthorizeView Roles="Admin">
                             <Authorized>
                                 <li class="nav-item">
-                                    <NavLink class="nav-link" href="/admin">
+                                    <NavLink class="nav-link navbar-style" href="/admin">
                                         <span class="oi oi-list-rich" aria-hidden="true"></span> Admin Panel
                                     </NavLink>
                                 </li>
