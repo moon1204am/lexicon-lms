@@ -225,6 +225,11 @@ nav.navbar.navbar-expand-lg {
     margin-top: 2rem !important;
     
 }
+.custom-widthtwo {
+    width: 700px !important;
+    margin: 0 auto !important;
+    margin-top: 2rem !important;
+}
 textarea#Description.form-control{
     height: 7rem;
 }
@@ -238,7 +243,9 @@ textarea#Description.form-control{
 .btn-activities {
     background-color: rgba(0, 0, 255, 0.1) !important;
 }
-
+.padding-layoutleft {
+    padding-left: 20rem !important;
+}
 @media (max-width: 767px) {
     .custom-width {
         width: 100% !important;
@@ -252,4 +259,14 @@ textarea#Description.form-control{
 
 .btn-primary {
     margin-top: 0.5rem;
+}
+.padding-mainlayout {
+    margin-top: 3rem !important;
+}
+
+@media (max-width: 767px) {
+    .custom-width {
+        width: 100% !important;
+        margin: 0 auto !important;
+    }
 }
