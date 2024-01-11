@@ -45,15 +45,15 @@ namespace LexiconLMS.Server.Services
             {
                 var course = await _unitOfWork.CourseRepository.GetAsync(id) ?? throw new ArgumentNullException(nameof(id));
 
-                var courseToUpdate = _mapper.Map(courseDto, course);
+                _mapper.Map(courseDto, course);
 
                 //BANDAID FOR AVOIDING CREATING DUBLICATED ACTIVITY TYPES
-                //foreach (var module in courseToUpdate.Modules)
-                //{
-                //    module.Activities = new List<Activity>();
-                //}
+                foreach (var module in course.Modules)
+                {
+                    module.Activities = new List<Activity>();
+                }
 
-                _unitOfWork.CourseRepository.Update(courseToUpdate);
+                _unitOfWork.CourseRepository.Update(course);
                 await _unitOfWork.SaveChangesAsync();
             }
             catch(Exception ex) { Console.WriteLine(ex.Message); }
