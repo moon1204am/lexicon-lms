@@ -2,30 +2,13 @@
 @using Microsoft.AspNetCore.Authorization
 @using LexiconLMS.Client.Services
 @inject ILmsDataService LmsDataService
+@layout AdminLayout
 @attribute [Authorize(Roles ="Admin")]
 
-<h3>Admin</h3>
-
 <div class="container">
-
     <main role="main" class="pb-1">
-
-        <h1>Admin Panel</h1>
-
         <div>
-            <h3>Navigate on the left menu.</h3>
-            <hr>
             <div class="row">
-                <div class="col-md-3">
-                    <!-- Navigation menu -->
-                    <ul class="nav nav-pills flex-column">
-                        <li class="nav-item"><a class="nav-link active" id="#" aria-current="page" href="/admin">Create User</a></li>
-                        <li class="nav-item"><a class="nav-link" id="#" href="#">Edit User</a></li>
-                        <li class="nav-item"><a class="nav-link" id="#" href="/CourseAdd">Add Course</a></li>
-                        <li class="nav-item"><a class="nav-link" id="#" href="/ModuleAdd">Add Module</a></li>
-                        <li class="nav-item"><a class="nav-link" id="#" href="#">Placeholder :)</a></li>
-                    </ul>
-                </div>
                 <div class="col-md-9">
                     <h3>Creating new user</h3>
                     <!-- User Creation form -->
@@ -71,9 +54,14 @@
                                 <button type="submit" class="btn btn-primary">Create User</button>
                             </EditForm>
                         </div>
+                        @if (!string.IsNullOrEmpty(updateStatusMessage))
+                        {
+                            <div class="alert alert-info custom-alert">@updateStatusMessage</div>
+                        }
                     </div>
                 </div>
             </div>
         </div>
     </main>
 </div>
+

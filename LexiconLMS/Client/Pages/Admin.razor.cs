@@ -14,6 +14,7 @@ namespace LexiconLMS.Client.Pages
         public CreateUserDto User { get; set; } = new CreateUserDto();
         public List<CourseDto> Courses { get; set; } = new List<CourseDto>();
         public List<RoleDto> RolesList { get; set; } = new List<RoleDto>();
+        private string updateStatusMessage;
 
 
 
@@ -35,12 +36,24 @@ namespace LexiconLMS.Client.Pages
         
         protected async Task HandleValidSubmit()
         {
-            await LmsDataService.PostAsync<CreateUserDto>("api/users", User);
-            // Old approach
-            //newUser.RoleId = _roleGuid;
-            //await LmsDataService.PostAsyncUser<CreateUserDto, object>("api/users", newUser);
+            var response = await LmsDataService.PostAsync<CreateUserDto>("api/users", User);
+            if (response != null)
+            {
+                updateStatusMessage = "User created successfully";
+                // Refresh user list or redirect
+                User = new CreateUserDto();
+
+                // Set a timer to clear the message
+                var timer = new System.Threading.Timer(_ =>
+                {
+                    updateStatusMessage = string.Empty;
+                    StateHasChanged(); // Notify the UI that the updateStatusMessage has changed
+                }, null, 3000, Timeout.Infinite);
+            }
+            else
+            {
+                updateStatusMessage = "Error creating user";
+            }
         }
-
-
     }
 }
