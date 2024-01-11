@@ -16,17 +16,18 @@
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    background-color: #F5F5F5;
+    background-color: white;
 }
 
 nav.navbar.navbar-expand-lg {
-    background-color: #F5F5F5;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    
 }
 
 h1:focus {
     outline: none;
 }
-
 
 
 a, .btn-link {
@@ -37,6 +38,7 @@ a, .btn-link {
     margin: 0;
     padding: 0;
     display: inline-block;
+    color: #0050c4 !important;
 }
 
 .btn-primary {
