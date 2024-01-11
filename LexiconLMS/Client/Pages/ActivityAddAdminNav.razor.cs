@@ -4,22 +4,31 @@ using Microsoft.AspNetCore.Components;
 
 namespace LexiconLMS.Client.Pages
 {
-    public partial class ActivityAdd
+    public partial class ActivityAddAdminNav
     {
         [Inject]
         public ILmsDataService LmsDataService { get; set; } = default!;
         private ActivityAddDto? _activityToAddDto = new ActivityAddDto();
         private List<ActivityTypeDto> ActivityTypes = new List<ActivityTypeDto>();
+        private List<CourseDto> Courses = new List<CourseDto>();
         private string _successMessage = string.Empty;
         [Parameter]
         public Guid ModuleId { get; set; }
-        public List<CourseViewDto> Modules { get; set; } = new List<CourseViewDto>();
+        private Guid _courseId { get; set; }
+        public List<ModuleDto> Modules { get; set; } = new List<ModuleDto>();
 
         protected override async Task OnInitializedAsync()
         {
             ActivityTypes = await LmsDataService.GetAsync<List<ActivityTypeDto>>("api/activities/types");
+            Courses = (await LmsDataService.GetAsync<List<CourseDto>>("api/courses")).ToList();
+           
+            //foreach (var course in Courses)
+            //{
+            //    Modules = course.Modules.ToList();
+            //}
+
             _activityToAddDto.ModuleId = ModuleId;
-        }        
+        }
 
         public async Task HandleValidSubmit()
         {

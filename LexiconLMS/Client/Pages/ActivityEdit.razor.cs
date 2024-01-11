@@ -9,6 +9,8 @@ namespace LexiconLMS.Client.Pages
         [Inject]
         public ILmsDataService LmsDataService { get; set; } = default!;
         public List<ActivityTypeDto> ActivityTypes = new List<ActivityTypeDto>();
+        [Inject]
+        NavigationManager NavigationManager { get; set; } = default!;
 
         [Parameter]
         public string ActivityId { get; set; }
@@ -23,6 +25,7 @@ namespace LexiconLMS.Client.Pages
         public async Task HandleValidSubmit()
         {
             await LmsDataService.PutAsync<CourseDto>($"api/activities/{ActivityId}", ActivityDto);
+            NavigationManager.NavigateTo($"/courses");
         }
     }
 }

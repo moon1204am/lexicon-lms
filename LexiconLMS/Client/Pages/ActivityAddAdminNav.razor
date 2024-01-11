@@ -1,21 +1,32 @@
-﻿@page "/activityadd/{ModuleId:guid}"
+﻿@page "/activityaddadminnav"
 
 <div class="custom-width">
     <h3 class="text-center">Add Activity</h3>
     <EditForm Model="@_activityToAddDto" OnValidSubmit="@HandleValidSubmit">
 
-        <DataAnnotationsValidator/>
- @*        <div class="form-group">
+        <DataAnnotationsValidator />
+   
+        <div class="form-group">
+            <InputSelect @bind-Value="@_courseId">
+                <option selected value="">-- select a course --</option>
+                @foreach (var course in Courses)
+                {
+                    <option value="@course.Id" @key="course.Id">@course.Name</option>
+                }
+            </InputSelect>
+        </div>
+        
+        <div class="form-group">
             <InputSelect @bind-Value="@_activityToAddDto!.ModuleId">
-                <option selected value="">-- select a activity --</option>
+                <option selected value="">-- select a module --</option>
                 @foreach (var module in Modules)
                 {
                     <option value="@module.Id" @key="module.Id">@module.Name</option>
                 }
             </InputSelect>
-            <ValidationMessage For="@(() => _activityToAddDto!.ModuleId)" />
-        </div>  *@
-        
+            <ValidationMessage For="@(() => _activityToAddDto!.ActivityTypeId)" />
+        </div>
+
         <div class="form-group">
             <InputSelect @bind-Value="@_activityToAddDto!.ActivityTypeId">
                 <option selected value="">-- select a type --</option>
@@ -30,24 +41,24 @@
         <p class="text-danger">@_successMessage</p>
         <div class="form-group">
             <label for="Name">Name:</label>
-            <InputText maxlength="30" id="Name" @bind-Value="_activityToAddDto!.Name" class="form-control"/>
-            <ValidationMessage For="@(() => _activityToAddDto!.Name)"/>
+            <InputText maxlength="30" id="Name" @bind-Value="_activityToAddDto!.Name" class="form-control" />
+            <ValidationMessage For="@(() => _activityToAddDto!.Name)" />
         </div>
 
         <div class="form-group description-height">
             <label for="Description">Description:</label>
             <textarea maxlength="100" id="Description" @bind="_activityToAddDto!.Description" class="form-control"></textarea>
-            <ValidationMessage For="@(() => _activityToAddDto.Description)"/>
+            <ValidationMessage For="@(() => _activityToAddDto.Description)" />
         </div>
 
         <div class="form-group">
             <label for="StartDate">Start Date:</label>
-            <InputDate id="StartDate" @bind-Value="_activityToAddDto.StartTime" class="form-control"/>
+            <InputDate id="StartDate" @bind-Value="_activityToAddDto.StartTime" class="form-control" />
         </div>
 
         <div class="form-group">
             <label for="EndDate">End Date:</label>
-            <InputDate id="EndDate" @bind-Value="_activityToAddDto.EndTime" class="form-control"/>
+            <InputDate id="EndDate" @bind-Value="_activityToAddDto.EndTime" class="form-control" />
         </div>
 
         <div class="form-group">
@@ -56,5 +67,5 @@
         </div>
 
     </EditForm>
-    
+
 </div>
