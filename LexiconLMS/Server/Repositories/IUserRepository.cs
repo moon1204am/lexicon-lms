@@ -11,6 +11,7 @@ namespace LexiconLMS.Server.Repositories
         Task<IdentityRole> GetRoleAsync(Guid id);
         Task<ApplicationUser> CreateUserAsync(ApplicationUser user, IdentityRole identityRole);
         Task<ApplicationUser> GetUserAsync(Guid id);
+        Task<ApplicationUser> GetUserAsync(string UserName);
         Task UpdateUserAsync(ApplicationUser user);
         Task<IEnumerable<ApplicationUser>> GetAllUsersAsync();
         Task<bool> CourseExistAsync(Guid courseId);

@@ -9,7 +9,8 @@ namespace LexiconLMS.Server.Services
         Task<UserDto> CreateUserAsync(CreateUserDto userDto);
         Task<IEnumerable<RoleDto>> GetRolesAsync();
         Task<IEnumerable<UserDto>> GetParticipantsAsync(Guid courseId);
-        Task<CreateUserDto> GetUserAsync(Guid id);
+        Task<UserDto> GetUserAsync(Guid id);
+        Task<UserDto> GetUserAsync(string UserName);
         Task UpdateUserAsync(Guid userId, UpdateUserDto updateUserDto);
         Task<IEnumerable<UserDto>> GetAllUsersAsync();
 
