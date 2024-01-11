@@ -120,21 +120,48 @@ a.btn.btn-outline-primary {
     font-size: 1.2rem;
 }
 
-    a.navbar-style
-    {
-        color: rgba(0, 0, 0, 0.5); /* Set the default color for the link */
-        text-decoration: none !important; /*Remove underline */
+a.navbar-style,
+button.nav-link.btn-link {
+    position: relative;
+    color: rgba(0, 0, 0, 0.5);
+    text-decoration: none !important;
+}
+
+    a.navbar-style::before,
+    button.nav-link.btn-link::before,
+    a.navbar-style::after,
+    button.nav-link.btn-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 33%;
+        width: 0;
+        height: 1px;
+        background-color: black;
+        transition: width 0.5s ease;
+        backface-visibility: hidden; /* Add this line to improve rendering */
     }
 
-        a.navbar-style:hover,
-        button.nav-link.btn-link:hover {
-            color: rgba(0, 0, 0, 0.6) !important;
-            transition: 0.5s;
-            transform: scale(1.1);
-            text-decoration: none !important;
-            font-weight: bold;
-            border-bottom: 1px solid black;
-        }
+a.navbar-style::before,
+button.nav-link.btn-link::before {
+    transform: translateX(-33%);
+}
+
+a.navbar-style:hover::before,
+button.nav-link.btn-link:hover::before,
+a.navbar-style:hover::after,
+button.nav-link.btn-link:hover::after {
+    width: 55%;
+}
+
+a.navbar-style:hover,
+button.nav-link.btn-link:hover {
+    color: rgba(0, 0, 0, 0.6) !important;
+    transition: 0.5s;
+    transform: scale(1.1);
+    text-decoration: none !important;
+    font-weight: bold;
+}
 
 .top-row {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add box shadow */
@@ -146,7 +173,7 @@ nav.navbar.navbar-expand-lg {
 }
 
 .nav-padding {
-    padding-left: 55px;
+    padding-right: 5.5rem;
 }
 
 .button-nav {
