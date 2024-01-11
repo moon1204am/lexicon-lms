@@ -14,22 +14,32 @@ main {
     height: 100vh;
     padding-left: 1rem;
     padding-top: 1rem;
-    /*    (9, 24, 52) background-color: #616161;
-        rgb(103, 147, 228)
-    */
-    background-color: rgba(43, 24, 155, 0.2);
+    background-color: white;
+    border-right: 1px solid #d6d5d5;
+    border-radius: 1px;
+    
+ 
+    color: #0050c4;
     /* Blazor style gradient
         background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);*/
 }
 
 h3 {
-    color: #e9f0fb;
+    color: #330900;
 }
 
-.nav-link {
-    /*color: #E7F7D4;*/
-    color: #448D76;
+.nav-link-admin {
+    color: #0050c4 !important;
+    display: block;
+    padding: .5rem 1rem;
+    text-decoration: none;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
 }
+
+.nav-pills {
+    color: #0050c4 !important;
+}
+
 
 .admin-content {
     flex-grow: 1;
