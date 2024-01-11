@@ -9,13 +9,13 @@ namespace LexiconLMS.Client.Pages
         [Inject]
         public ILmsDataService LmsDataService { get; set; } = default!;
         [Parameter]
-        public string ActivityId { get; set; }
+        public Guid ActivityId { get; set; }
         [Parameter]
-        public string CourseId { get; set; }
+        public Guid CourseId { get; set; }
         public ActivityDto? ActivityDto { get; set; }
         protected override async Task OnInitializedAsync()
         {
-            ActivityDto = await LmsDataService.GetAsync<ActivityDto>($"api/courses/activity/{ActivityId}");
+            ActivityDto = await LmsDataService.GetAsync<ActivityDto>($"api/activities/{ActivityId}");
         }
     }
 }

@@ -19,12 +19,12 @@ namespace LexiconLMS.Server.Repositories
             await _context.AddAsync(course);
         }
 
-        public void DeleteAsync(Course course)
+        public void Delete(Course course)
         {
             _context.Remove(course);
         }
 
-        public async Task<IEnumerable<Course>> GetAsync(bool includeAll = false)
+        public async Task<IEnumerable<Course>> GetAllAsync(bool includeAll = false)
         {
             return includeAll ? await _context.Course.Include(c => c.Modules).ThenInclude(m => m.Activities).ThenInclude(a => a.Type).ToListAsync() : 
                 await _context.Course.ToListAsync();
@@ -35,7 +35,7 @@ namespace LexiconLMS.Server.Repositories
             return await _context.Course.Include(c => c.Modules).ThenInclude(m => m.Activities).ThenInclude(a => a.Type).FirstOrDefaultAsync(c => c.Id == id);
         }
 
-        public void UpdateAsync(Course course)
+        public void Update(Course course)
         {
             _context.Update(course);
         }

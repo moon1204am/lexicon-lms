@@ -18,16 +18,16 @@ namespace LexiconLMS.Client.Pages
             Courses = ((await LmsDataService.GetAsync<List<CourseViewDto>>("api/courses"))!).ToList();
         }
 
-        public async Task CreateCourseAsync()
+        public async Task HandleValidSubmit()
         {
+            var module= await LmsDataService.PostAsync<ModuleAddDto>("api/modules/", _moduleToAdd);
 
-            if (_moduleToAdd == null)
+            if (module == null)
             {
-                _successMessage = "Module not added";
+                _successMessage = "Module could not be added";
             }
             else
             {
-                await LmsDataService.PostAsync<ModuleAddDto>("api/modules/", _moduleToAdd);
                 _successMessage = "Module added";
             }
         }

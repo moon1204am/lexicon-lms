@@ -17,7 +17,7 @@ namespace LexiconLMS.Server.Data
         public DbSet<Course> Course { get; set; } = default!;
         public DbSet<ApplicationUser> ApplicationUser { get; set; } = default!;
         public DbSet<Activity> Activity { get; set; } = default!;
-        public DbSet<LexiconLMS.Domain.Entities.Module> Module { get; set; } = default!;
-        public DbSet<LexiconLMS.Domain.Entities.ActivityType> ActivityType { get; set; } = default!;
+        public DbSet<Module> Module { get; set; } = default!;
+        public DbSet<ActivityType> ActivityType { get; set; } = default!;
     }
 }

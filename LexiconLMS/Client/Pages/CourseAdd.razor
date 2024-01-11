@@ -2,7 +2,7 @@
 
 <div class="custom-width">
     <h3 class="text-center">Add Course</h3>
-    <EditForm Model="@_courseToAdd" OnValidSubmit="@CreateCourseAsync">
+    <EditForm Model="@_courseToAdd" OnValidSubmit="@HandleValidSubmit">
         <DataAnnotationsValidator/>
         <p class="text-danger">@_successMessage</p>
         <div class="form-group">

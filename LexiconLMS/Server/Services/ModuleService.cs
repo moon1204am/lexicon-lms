@@ -18,12 +18,12 @@ namespace LexiconLMS.Server.Services
 
         public async Task<IEnumerable<ModuleDto>> GetModulesAsync(bool includeAll = false)
         {
-            return _mapper.Map<IEnumerable<ModuleDto>>(await _unitOfWork.ModuleRepository.GetAsync(includeAll));
+            return _mapper.Map<IEnumerable<ModuleDto>>(await _unitOfWork.ModuleRepository.GetAllAsync(includeAll));
         }
 
         public async Task<ModuleDto> GetModuleAsync(Guid id)
         {
-            return _mapper.Map<ModuleDto>(await _unitOfWork.ModuleRepository.GetAsync(id) ?? throw new ArgumentNullException(nameof(id)));
+            return _mapper.Map<ModuleDto>(await _unitOfWork.ModuleRepository.GetAsync(id));
         }
         public async Task<ModuleDto> CreateModuleAsync(ModuleAddDto moduleAddDto)
         {
@@ -36,14 +36,14 @@ namespace LexiconLMS.Server.Services
         public async Task DeleteModuleAsync(Guid id)
         {
             var module = await _unitOfWork.ModuleRepository.GetAsync(id) ?? throw new ArgumentNullException(nameof(id));
-            _unitOfWork.ModuleRepository.DeleteAsync(module);
+            _unitOfWork.ModuleRepository.Delete(module);
             await _unitOfWork.SaveChangesAsync();
         }
         public async Task UpdateModuleAsync(Guid id, ModuleDto moduleDto)
         {
             var module = await _unitOfWork.ModuleRepository.GetAsync(id) ?? throw new ArgumentNullException(nameof(id));
             var moduleToUpdate = _mapper.Map(moduleDto, module);
-            _unitOfWork.ModuleRepository.UpdateAsync(moduleToUpdate);
+            _unitOfWork.ModuleRepository.Update(moduleToUpdate);
             await _unitOfWork.SaveChangesAsync();
         }
 

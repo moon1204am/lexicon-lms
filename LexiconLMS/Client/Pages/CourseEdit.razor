@@ -10,7 +10,7 @@
 else
 {
     <div class="custom-width">
-        <h3 class="text-center">Course Edit</h3>
+        <h3 class="text-center">Edit Course </h3>
         <EditForm Model="@CourseDto" OnValidSubmit="@UpdateCourseAsync">
             <DataAnnotationsValidator />
             <div class="form-group">
@@ -35,13 +35,14 @@ else
             <br />
             <div class="accordion-item">
                 <button class="accordion-button btn-activities" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseZero" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                    <h3 class="text-center">Module Edit</h3>
+                    <h3 class="text-center">Edit Module</h3>
                 </button>
             
                 <div id="panelsStayOpen-collapseZero" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingZero">
                     <div class="accordion-body">
                         @foreach (var module in CourseDto.Modules)
                         {
+                            <a class="" href="@($"/activityadd/{module.Id}")"><strong>+Add Activity</strong></a>
                             <br />
                             <div class="accordion-item btn-activities">
                                 <button class="accordion-button btn" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
@@ -75,9 +76,9 @@ else
 
                         
 
-                            <div class="accordion-item">
+                            @* <div class="accordion-item">
                                 <button class="accordion-button btn-activities" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true" aria-controls="panelsStayOpen-collapseTwo">
-                                    <h4>Activities Edit</h4>
+                                    <h4>Edit Activities</h4>
                                 </button>
                                 <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
                                     <div class="accordion-body">
@@ -115,7 +116,7 @@ else
                                                             <p><strong>Type of activity:</strong> </p>
                                                         </div>
                                                         <div class="col-2 ">
-                                                            <p>@activity.TypeName</p>
+                                                            <p>@activity.Name</p>
                                                             <a href="" class="nomargin-nopadding">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                                                     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
@@ -129,7 +130,7 @@ else
                                         }
                                     </div>
                                 </div>
-                            </div>
+                            </div> *@
                             <br />
                         }
                     </div>

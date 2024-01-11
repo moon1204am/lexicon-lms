@@ -19,7 +19,7 @@ namespace LexiconLMS.Server.Controllers
         [Authorize(Roles="Admin")]
         // GET: api/Courses
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CourseDto>>> GetCourse(bool includeAll = false)
+        public async Task<ActionResult<IEnumerable<CourseDto>>> GetCourses(bool includeAll = false)
         {
             return Ok(await _serviceManager.CourseService.GetCoursesAsync(includeAll));
 
