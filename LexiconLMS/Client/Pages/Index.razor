@@ -20,7 +20,11 @@
                 <li><a class="list-group-flush" href="/Courses">See overview of all courses</a></li>
                 <li><a class="list-group-flush" href="/admin">Check out the Admin Panel!</a></li>
                     </ul>
-            </AuthorizeView>    
+            </AuthorizeView>
+
+        <AuthorizeView Roles="Student">
+            <HomePage></HomePage>
+        </AuthorizeView>
     </div>
    @*  <SurveyPrompt Title="How is Blazor working for you?" /> *@
 

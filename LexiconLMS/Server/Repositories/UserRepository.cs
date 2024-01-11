@@ -71,6 +71,11 @@ namespace LexiconLMS.Server.Repositories
             return await _userManager.Users.FirstOrDefaultAsync(u => u.Id == id.ToString());
         }
 
+        public async Task<ApplicationUser> GetUserAsync(string UserName)
+        {
+            return await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == UserName);
+        }
+
         public async Task UpdateUserAsync(ApplicationUser user)
         {
 

@@ -15,9 +15,14 @@
                             <a class="nav-link navbar-style" href="#">Home</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="/Courses">Courses</a>
-                        </li>
+                        <AuthorizeView Roles="Admin">
+                            <Authorized>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/Courses">Courses</a>
+                                </li>
+                            </Authorized>
+                        </AuthorizeView>
+
                         <!-- Todo: check how to make the Admin Panel included on smaller screens -->
                         <AuthorizeView Roles="Admin">
                             <Authorized>
