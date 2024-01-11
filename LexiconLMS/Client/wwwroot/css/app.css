@@ -265,7 +265,12 @@ textarea#Description.form-control{
 .padding-mainlayout {
     margin-top: 3rem !important;
 }
-
+button.btn.btn-success {
+    margin-top: 0.5rem;
+}
+button.btn.btn-danger {
+    margin-top: 0.5rem;
+}
 @media (max-width: 767px) {
     .custom-width {
         width: 100% !important;
