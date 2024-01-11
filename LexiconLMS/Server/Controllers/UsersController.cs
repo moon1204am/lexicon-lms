@@ -32,20 +32,25 @@ namespace LexiconLMS.Server.Controllers
 
         // Note: Added ("{id}") to the route in order to resolve the error with 'GetAllUsers()' method signature.
         [HttpGet("{id}")]
-        public async Task<ActionResult<CreateUserDto>> GetUser(Guid id)
+        public async Task<ActionResult<UserDto>> GetUser(Guid id)
         {
             return Ok(await _serviceManager.UserService.GetUserAsync(id));
         }
+        [HttpGet("loginuser/{UserName}")]
+        public async Task<ActionResult<UserDto>> GetUser(string UserName)
+        {
+            return Ok(await _serviceManager.UserService.GetUserAsync(UserName));
+        }
 
-        //// Note: Added ("participants/") to the route in order to resolve the error with 'GetAllUsers()' method signature.
-        //[HttpGet("participants/{id}")]
-        //public async Task<ActionResult<IEnumerable<UserDto>>> PutParticipants(Guid id)
-        //{
-        //    return Ok(await _serviceManager.UserService.GetParticipantsAsync(id));
-        //}
+            //// Note: Added ("participants/") to the route in order to resolve the error with 'GetAllUsers()' method signature.
+            //[HttpGet("participants/{id}")]
+            //public async Task<ActionResult<IEnumerable<UserDto>>> PutParticipants(Guid id)
+            //{
+            //    return Ok(await _serviceManager.UserService.GetParticipantsAsync(id));
+            //}
 
-        //Came from development, double check routing and the 'GetParticipants' method signature is probably correct(newer).
-        [HttpGet("participants/{id}")]
+            //Came from development, double check routing and the 'GetParticipants' method signature is probably correct(newer).
+            [HttpGet("participants/{id}")]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetParticipants(Guid id)
         {
             return Ok(await _serviceManager.UserService.GetParticipantsAsync(id));

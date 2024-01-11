@@ -1,0 +1,11 @@
+﻿<AuthorizeView>
+@if(UserDto == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <h1>Welcome @UserDto.FullName</h1>
+        <a class="btn btn-outline-primary" href="@($"course/{UserDto.CourseId}")">@CourseDto.Name</a>
+}
+</AuthorizeView>

@@ -47,9 +47,14 @@ namespace LexiconLMS.Server.Services
             return _mapper.Map<IEnumerable<UserDto>>(await _unitOfWork.UserRepository.GetParticipantsAsync(courseId));
         }
 
-        public async Task<CreateUserDto> GetUserAsync(Guid id)
+        public async Task<UserDto> GetUserAsync(Guid id)
         {
-            return _mapper.Map<CreateUserDto>(await _unitOfWork.UserRepository.GetUserAsync(id));
+            return _mapper.Map<UserDto>(await _unitOfWork.UserRepository.GetUserAsync(id));
+        }
+
+        public async Task<UserDto> GetUserAsync(string UserName)
+        {
+            return _mapper.Map<UserDto>(await _unitOfWork.UserRepository.GetUserAsync(UserName));
         }
 
         public async Task UpdateUserAsync(Guid userId, UpdateUserDto updateUserDto)

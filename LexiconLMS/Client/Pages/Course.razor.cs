@@ -20,6 +20,8 @@ namespace LexiconLMS.Client.Pages
         public Guid ModuleId { get; set; }
         public CourseDto? CourseDto { get; set; }
 
+
+
         protected override async Task OnInitializedAsync()
         {
             CourseDto = await LmsDataService.GetAsync<CourseDto>($"api/courses/{CourseId}");
