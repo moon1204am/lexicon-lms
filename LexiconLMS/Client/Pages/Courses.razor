@@ -19,27 +19,22 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var coursesViewDto in CourseList)
+            @foreach (var courseViewDto in CourseList)
             {
                 <tr>
 
-                    <td scope="row" >
-                        <a class="no-padding-lms" href="https://www.w3schools.com">@coursesViewDto.Name</a> @* ToDo: Ref to (Modules) *@
+                    <td scope="row">
+                        <a class="no-padding-lms" href="@($"course/{courseViewDto.Id}")">@courseViewDto.Name</a> @* ToDo: Ref to (Modules) *@
                     </td>
                     <td scope="row">
-                        @coursesViewDto.StartDate.ToString("yyyy-MM-dd")
+                        @courseViewDto.StartDate.ToString("yyyy-MM-dd")
                     </td>
                     <td scope="row">
-                        @coursesViewDto.EndDate.ToString("yyyy-MM-dd")
+                        @courseViewDto.EndDate.ToString("yyyy-MM-dd")
                     </td>
-
                 </tr>
             }
-            </tbody>
-
-        </table>
-
-
-
-
+        </tbody>
+    </table>
+    <a class="btn btn-success" href="@($"courseAdd/")">Add Course</a> @* ToDo: Ref to (Modules) *@
 }

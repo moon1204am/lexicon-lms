@@ -28,11 +28,10 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddIdentityServer()
-
     .AddApiAuthorization<ApplicationUser, ApplicationDbContext>(
-        options => {
+        options =>
+        {
             options.IdentityResources["openid"].UserClaims.Add("role");
-
             if (options.ApiResources.Any())
             {
                 options.ApiResources.Single().UserClaims.Add("role");
@@ -51,8 +50,6 @@ builder.Services.AddRepositories();
 builder.Services.AddCorsPolicy();
 
 
-
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -61,7 +58,7 @@ if (app.Environment.IsDevelopment())
     app.UseMigrationsEndPoint();
     app.UseWebAssemblyDebugging();
     //Note: uncomment if you need a fresh set of SeedData and delete the database
-    //await app.SeedDataAsync();
+    await app.SeedDataAsync();
 }
 else
 {

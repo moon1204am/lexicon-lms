@@ -6,5 +6,7 @@ public interface ILmsDataService
 {
     Task<T?> GetAsync<T>(string path, string contentType = "application/json");
     Task<T?> PostAsync<T>(string path, object data, string contentType = "application/json");
+    Task PutAsync<T>(string path, object data, string contentType = "application/json");
+    Task DeleteAsync<T>(string path, string contentType = "application/json");
     Task UpdateUser(Guid userId, UpdateUserDto updateUserDto);
 }

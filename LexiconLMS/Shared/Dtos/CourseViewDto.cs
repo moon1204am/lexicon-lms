@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LexiconLMS.Shared.Dtos
 {
-    public class CoursesViewDto
+    public class CourseViewDto
     {
         public Guid Id { get; init; }
         public string Name { get; init; } = string.Empty;

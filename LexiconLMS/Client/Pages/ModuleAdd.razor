@@ -1,0 +1,54 @@
+﻿@page "/moduleadd"
+
+<div class="custom-width">
+    <h3 class="text-center">Add Module</h3>
+    @if (Courses == null)
+    {
+        <p><em>Loading..</em></p>
+    }
+    else
+    {
+        <EditForm Model="@_moduleToAdd" OnValidSubmit="@HandleValidSubmit">
+            <DataAnnotationsValidator />
+            <p class="text-danger">@_successMessage</p>
+
+            <div class="form-group">
+                <InputSelect @bind-Value="@_moduleToAdd!.CourseId">
+                    <option selected value="">-- select a course --</option>
+                    @foreach (var course in Courses)
+                    {
+                        <option value="@course.Id" @key="course.Id">@course.Name</option>
+                    }
+                </InputSelect>
+                <ValidationMessage For="@(() => _moduleToAdd!.Name)" />
+            </div>
+
+            <div class="form-group">
+                <label for="Name">Name:</label>
+                <InputText maxlength="30" id="Name" @bind-Value="_moduleToAdd!.Name" class="form-control" />
+                <ValidationMessage For="@(() => _moduleToAdd!.Name)" />
+            </div>
+
+            <div class="form-group description-height">
+                <label for="Description">Description:</label>
+                <textarea maxlength="100" id="Description" @bind="_moduleToAdd!.Description" class="form-control"></textarea>
+                <ValidationMessage For="@(() => _moduleToAdd.Description)" />
+            </div>
+
+            <div class="form-group">
+                <label for="StartDate">Start Date:</label>
+                <InputDate id="StartDate" @bind-Value="_moduleToAdd.StartDate" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="EndDate">End Date:</label>
+                <InputDate id="EndDate" @bind-Value="_moduleToAdd.EndDate" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Add Module</button>
+            </div>
+
+        </EditForm>
+    }
+</div>

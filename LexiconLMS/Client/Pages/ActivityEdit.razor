@@ -1,0 +1,46 @@
+﻿@page "/activityedit/{ActivityId}"
+
+<div class="custom-width">
+    <h3 class="text-center">Edit Activity</h3>
+    <EditForm Model="@ActivityDto" OnValidSubmit="@HandleValidSubmit">
+
+        <DataAnnotationsValidator />
+
+        <div class="form-group">
+            <InputSelect @bind-Value="@ActivityDto!.ActivityTypeId">
+                <option selected value="">-- select a type --</option>
+                @foreach (var type in ActivityTypes)
+                {
+                    <option value="@type.Id" @key="type.Id">@type.Name</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => ActivityDto!.ActivityTypeId)" />
+        </div>
+
+        <div class="form-group">
+            <label for="Name">Name:</label>
+            <InputText maxlength="30" id="Name" @bind-Value="ActivityDto!.Name" class="form-control" />
+            <ValidationMessage For="@(() => ActivityDto!.Name)" />
+        </div>
+
+        <div class="form-group description-height">
+            <label for="Description">Description:</label>
+            <textarea maxlength="100" id="Description" @bind="ActivityDto!.Description" class="form-control"></textarea>
+            <ValidationMessage For="@(() => ActivityDto.Description)" />
+        </div>
+
+        <div class="form-group">
+            <label for="StartDate">Start Date:</label>
+            <InputDate id="StartDate" @bind-Value="ActivityDto.StartTime" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for="EndDate">End Date:</label>
+            <InputDate id="EndDate" @bind-Value="ActivityDto.EndTime" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Save</button>
+        </div>
+    </EditForm>
+</div>

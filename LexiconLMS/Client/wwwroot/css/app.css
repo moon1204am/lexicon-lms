@@ -176,10 +176,21 @@ nav.navbar.navbar-expand-lg {
 .custom-width {
     width: 300px !important;
     margin: 0 auto !important;
-    margin-top: 5rem !important;
+    margin-top: 2rem !important;
+    
 }
 textarea#Description.form-control{
     height: 7rem;
+}
+.box-shadow {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjust the values as needed */
+}
+.nomargin-nopadding {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.btn-activities {
+    background-color: rgba(0, 0, 255, 0.1) !important;
 }
 
 @media (max-width: 767px) {

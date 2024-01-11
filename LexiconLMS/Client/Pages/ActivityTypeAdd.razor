@@ -1,0 +1,38 @@
+﻿@page "/activitytypeadd"
+
+<div class="custom-width">
+    <h3 class="text-center">Add Activity Type</h3>
+    @if (Activities == null)
+    {
+        <p><em>Loading..</em></p>
+    }
+    else
+    {
+        <EditForm Model="@_activityTypeToAdd" OnValidSubmit="@CreateCourseAsync">
+            <DataAnnotationsValidator />
+            <p class="text-danger">@_successMessage</p>
+
+            <div class="form-group">
+                <InputSelect @bind-Value="@_activityTypeToAdd!.ActivityId">
+                    <option selected value="">-- select a activity --</option>
+                    @foreach (var activity in Activities)
+                    {
+                        <option value="@activity.Id" @key="activity.Id">@activity.Name</option>
+                    }
+                </InputSelect>
+                <ValidationMessage For="@(() => _activityTypeToAdd!.Name)" />
+            </div>
+  
+            <div class="form-group description-height">
+                <label for="Name">Name:</label>
+                <textarea maxlength="50" id="Name" @bind="_activityTypeToAdd!.Name" class="form-control"></textarea>
+                <ValidationMessage For="@(() => _activityTypeToAdd.Name)" />
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Add ActivityType</button>
+            </div>
+
+        </EditForm>
+    }
+</div>

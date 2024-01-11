@@ -6,8 +6,8 @@ namespace LexiconLMS.Server.Services
 
     {
         Task<IEnumerable<CourseDto>> GetCoursesAsync(bool includeAll = false);
-        Task<CourseDto> GetCourseAsync(Guid id);
-        Task<CourseAddDto> CreateCourseAsync(CourseAddDto courseDto);
+        Task<CourseDto?> GetCourseAsync(Guid id);
+        Task<CourseDto> CreateCourseAsync(CourseAddDto courseDto);
         Task UpdateCourseAsync(Guid id, CourseDto courseDto);
         Task DeleteCourseAsync(Guid id);
 
