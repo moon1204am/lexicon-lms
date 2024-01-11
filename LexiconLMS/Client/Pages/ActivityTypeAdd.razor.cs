@@ -14,7 +14,7 @@ namespace LexiconLMS.Client.Pages
         public List<ActivityDto> Activities { get; set; } = new List<ActivityDto>();
         protected override async Task OnInitializedAsync()
         {
-            //Activities = ((await LmsDataService.GetAsync<List<ActivityDto>>("api/activities"))!).ToList();
+            Activities = ((await LmsDataService.GetAsync<List<ActivityDto>>("api/activities"))!).ToList();
         }
         public async Task CreateCourseAsync()
         {
