@@ -70,5 +70,53 @@ namespace LexiconLMS.Server.Repositories
         {
             return await _userManager.Users.FirstOrDefaultAsync(u => u.Id == id.ToString());
         }
+
+        public async Task UpdateUserAsync(ApplicationUser user)
+        {
+
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+
+            var existingUser = await _userManager.FindByIdAsync(user.Id.ToString());
+
+            if (existingUser == null)
+            {
+                throw new KeyNotFoundException($"User with id {user.Id} not found.");
+            }
+
+            // Verify if the new CourseId is valid, if it is no the default Guid
+            if (user.CourseId != Guid.Empty && !await CourseExistAsync(user.CourseId))
+            {
+                throw new KeyNotFoundException($"Course with id {user.CourseId} not found.");
+            }
+
+            existingUser.FirstName = user.FirstName;
+            existingUser.LastName = user.LastName;
+            existingUser.Email = user.Email;
+            existingUser.UserName = user.Email;
+            existingUser.CourseId = user.CourseId;
+
+            // Handle role update logic here, if included
+
+            var result = await _userManager.UpdateAsync(existingUser);
+            if (!result.Succeeded)
+            {
+                var errors = string.Join("\n", result.Errors.Select(e => e.Description));
+                throw new InvalidOperationException($"Could not update user: {errors} Check the method inside UserRepository.cs");
+            }
+        }
+
+
+        public async Task<IEnumerable<ApplicationUser>> GetAllUsersAsync()
+        {
+            return await _context.Users.ToListAsync();
+        }
+
+        public async Task<bool> CourseExistAsync(Guid courseId)
+        {
+            return await _context.Course.AnyAsync(c => c.Id == courseId);
+        }
     }
 }

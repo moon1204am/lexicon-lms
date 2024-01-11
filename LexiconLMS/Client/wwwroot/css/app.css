@@ -199,3 +199,11 @@ textarea#Description.form-control{
         margin: 0 auto !important;
     }
 }
+
+.alert {
+    margin-top: 1rem;
+}
+
+.btn-primary {
+    margin-top: 0.5rem;
+}
