@@ -50,7 +50,10 @@ namespace LexiconLMS.Server.Services
                 //BANDAID FOR AVOIDING CREATING DUBLICATED ACTIVITY TYPES
                 foreach (var module in course.Modules)
                 {
-                    module.Activities = new List<Activity>();
+                    foreach (var activity in module.Activities)
+                    {
+                        activity.Type = null;
+                    }                   
                 }
 
                 _unitOfWork.CourseRepository.Update(course);
