@@ -35,7 +35,7 @@ namespace LexiconLMS.Client.Pages
 
             UserDto = await LmsDataService.GetAsync<UserDto>($"api/users/loginuser/{username}");
             var course = await LmsDataService.GetAsync<CourseDto>($"api/courses/{UserDto.CourseId}");
-            if (UserDto.CourseId == course.Id)
+            if (UserDto.CourseId == null)
             {
                 NavigationManager.NavigateTo($"/", forceLoad: true);
             }
