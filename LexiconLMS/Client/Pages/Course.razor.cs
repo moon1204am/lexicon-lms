@@ -15,37 +15,20 @@ namespace LexiconLMS.Client.Pages
         public ILmsDataService LmsDataService { get; set; } = default!;
         [Inject]
         private NavigationManager NavigationManager { get; set; } = default!;
-        [Inject]
-        private AuthenticationStateProvider AuthenticationStateProvider { get; set; }
 
         [Parameter]
         public Guid CourseId { get; set; }
 
-        public CourseDto? CourseDto { get; set; }
-
         public Guid ModuleId { get; set; }
-        public UserDto? UserDto { get; set; }
+        public CourseDto? CourseDto { get; set; }
 
 
 
         protected override async Task OnInitializedAsync()
         {
-            var authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-            var username = authenticationState.User.Identity?.Name;
-
-            UserDto = await LmsDataService.GetAsync<UserDto>($"api/users/loginuser/{username}");
-            var course = await LmsDataService.GetAsync<CourseDto>($"api/courses/{UserDto.CourseId}");
-            if (UserDto.CourseId == null)
-            {
-                NavigationManager.NavigateTo($"/", forceLoad: true);
-            }
-            if (UserDto.Role == "Admin" || (UserDto.CourseId == course.Id))
-            {
-                CourseDto = course;
-            }
-
+            CourseDto = await LmsDataService.GetAsync<CourseDto>($"api/courses/{CourseId}");
         }
-        
+
         public async Task DeleteCourseAsync()
         {
             await LmsDataService.DeleteAsync<Guid>($"api/courses/{CourseId}");
@@ -55,7 +38,7 @@ namespace LexiconLMS.Client.Pages
         public async Task DeleteModuleAsync()
         {
             await LmsDataService.DeleteAsync<Guid>($"api/modules/{ModuleId}");
-            NavigationManager.NavigateTo($"/course/{CourseId}",forceLoad: true);
+            NavigationManager.NavigateTo($"/course/{CourseId}", forceLoad: true);
         }
     }
 }

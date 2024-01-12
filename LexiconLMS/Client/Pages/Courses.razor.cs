@@ -14,7 +14,7 @@ namespace LexiconLMS.Client.Pages
         public ILmsDataService LmsDataService { get; set; } = default!;
         protected override async Task OnInitializedAsync()
         {
-            CourseList = (await LmsDataService.GetAsync<List<CourseViewDto>>("api/courses"))!; //ToDo: fix nullability
+            CourseList = (await LmsDataService.GetAsync<List<CourseViewDto>>("api/courses"))!;
         }
     }
 }

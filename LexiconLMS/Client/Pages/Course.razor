@@ -3,7 +3,6 @@
 <div class="custom-width">
     <AuthorizeView>
         
-       
         @if (CourseDto == null)
         {
             <h3 class="text-center">Course</h3>
@@ -54,7 +53,7 @@
             {
                 <div class="text-center">
                     <a class="btn btn-primary" href="@($"CourseEdit/{CourseDto.Id}")">Edit Course</a>
-                   @*  <button class="btn btn-danger" @onclick="DeleteCourseAsync">Delete Course</button> *@
+                 
                 </div>
             }
 
