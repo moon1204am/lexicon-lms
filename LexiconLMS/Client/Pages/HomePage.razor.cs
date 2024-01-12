@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Components;
 using LexiconLMS.Client.Services;
 using LexiconLMS.Shared.Dtos;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LexiconLMS.Client.Pages
 {
+    [Authorize]
     public partial class HomePage
     {
         [Inject]

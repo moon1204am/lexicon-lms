@@ -4,9 +4,11 @@ using LexiconLMS.Client.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LexiconLMS.Client.Pages
 {
+    [Authorize(Roles = "Admin")]
     public partial class Admin : ComponentBase
     {
         // ILmsDataService is injected in the Admin.razor page.

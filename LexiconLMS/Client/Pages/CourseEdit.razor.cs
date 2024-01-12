@@ -1,10 +1,12 @@
 ﻿using LexiconLMS.Client.Services;
 using LexiconLMS.Shared.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Identity;
 
 namespace LexiconLMS.Client.Pages
 {
+    [Authorize(Roles = "Admin")]
     public partial class CourseEdit
     {
         [Inject]
