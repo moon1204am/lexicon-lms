@@ -272,7 +272,8 @@ button.btn.btn-danger {
     margin-top: 0.5rem;
 }
 @media (max-width: 767px) {
-    .custom-width {
+    .custom-width,
+    .custom-widthtwo{
         width: 100% !important;
         margin: 0 auto !important;
     }
