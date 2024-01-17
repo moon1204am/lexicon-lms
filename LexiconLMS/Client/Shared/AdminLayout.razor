@@ -12,13 +12,13 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-                <img src="/Images/LoggaLMS.png" alt="Logo" class="logo" />
+            <img src="/Images/LoggaLMS.png" alt="Logo" class="logo" />
 
-                <!-- Include the HamburgerMenu component here -->
-                <HamburgerMenu />
+            <!-- Include the HamburgerMenu component here -->
+            <HamburgerMenu />
 
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav mx-auto nav-padding">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto nav-padding">
                     <li class="nav-item">
                         <div class="d-flex align-items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
@@ -39,43 +39,43 @@
                         </div>
 
                     </li>
-                        
-                        <AuthorizeView Roles="Admin">
-                            <Authorized>
-                                <li class="nav-item">
-                                <NavLink class="nav-link navbar-style" href="/admin">
-                                        <span class="oi oi-list-rich" aria-hidden="true"></span> Admin Panel
-                                    </NavLink>
-                                </li>
-                            </Authorized>
-                        </AuthorizeView>
-                    </ul>
 
-                    <ul class="navbar-nav">
-                        <LoginDisplay/>
-                    </ul>
-                </div>
+                    <AuthorizeView Roles="Admin">
+                        <Authorized>
+                            <li class="nav-item">
+                                <NavLink class="nav-link navbar-style" href="/admin">
+                                    <span class="oi oi-list-rich" aria-hidden="true"></span> Admin Panel
+                                </NavLink>
+                            </li>
+                        </Authorized>
+                    </AuthorizeView>
+                </ul>
+
+                <ul class="navbar-nav">
+                    <LoginDisplay />
+                </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
 </div>
-        
+
 <!--Admin panel sidebar-->
 <div class="admin-page padding-mainlayout d-flex">
     <!-- Admin Panel Sidebar -->
     <div class="admin-sidebar collapse d-lg-block" id="adminSidebar">
         <ul class="nav nav-pills flex-column">
             <!-- Sidebar Links -->
-            <li class="nav-item"><a class="nav-link-admin" href="/admin">Create User</a></li>
-            <li class="nav-item"><a class="nav-link-admin" href="/edituser">Edit User</a></li>
-            <li class="nav-item"><a class="nav-link-admin" href="/CourseAdd">Add Course</a></li>
-            <li class="nav-item"><a class="nav-link-admin" href="/Courses">Go to Teacher Panel</a></li>
+            <li class="nav-item"><a class="nav-link-admin btn btn-outline-primary btn-admin" href="/admin">Create User</a></li>
+            <li class="nav-item"><a class="nav-link-admin btn btn-outline-primary btn-admin" href="/edituser">Edit User</a></li>
+            <li class="nav-item"><a class="nav-link-admin btn btn-outline-primary btn-admin" href="/CourseAdd">Add Course</a></li>
+            <li class="nav-item"><a class="nav-link-admin btn btn-outline-primary btn-admin" href="/Courses">Courses Overview</a></li>
         </ul>
     </div>
-            <!--Admin panel content -->
-             <div class="admin-content flex-grow-1">
-                @*   <h1>Navigate on the left menu.</h1> *@
-                  @Body
-            </div>
+    <!--Admin panel content -->
+    <div class="admin-content flex-grow-1">
+        @*   <h1>Navigate on the left menu.</h1> *@
+        @Body
     </div>
+</div>
 
 

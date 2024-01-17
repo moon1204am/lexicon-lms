@@ -15,7 +15,7 @@ else
             <DataAnnotationsValidator />
             <div class="form-group">
                 <label for="Name">Name:</label>
-                <InputText maxlength="30" id="Name" @bind-Value="CourseDto.Name" class="form-control" />
+                <InputText maxlength="30" id="Name" @bind-Value="CourseDto.Name" class="form-control box-shadow" />
                 <ValidationMessage For="@(() => CourseDto.Name)" />
             </div>
             <div class="form-group description-height">
@@ -33,7 +33,7 @@ else
             </div>
 
             <br />
-            <div class="accordion-item">
+            <div class="accordion-item box-shadow">
                 <button class="accordion-button btn-activities" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseZero" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
                     <h3 class="text-center">Edit Module</h3>
                 </button>

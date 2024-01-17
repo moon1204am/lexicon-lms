@@ -143,11 +143,11 @@ a.btn.btn-outline-primary {
     font-size: 1.2rem;
 }
 
-a.navbar-style,
-button.nav-link.btn-link {
-    position: relative;
-    color: rgba(0, 0, 0, 0.5);
-    text-decoration: none !important;
+    a.navbar-style,
+    button.nav-link.btn-link {
+        position: relative;
+        color: rgba(0, 0, 0, 0.5);
+        text-decoration: none !important;
 }
 
     a.navbar-style::before,
@@ -225,7 +225,6 @@ nav.navbar.navbar-expand-lg {
     width: 300px !important;
     margin: 0 auto !important;
     margin-top: 2rem !important;
-    
 }
 .custom-widthtwo {
     width: 700px !important;
@@ -248,12 +247,6 @@ textarea#Description.form-control{
 .padding-layoutleft {
     padding-left: 20rem !important;
 }
-@media (max-width: 767px) {
-    .custom-width {
-        width: 100% !important;
-        margin: 0 auto !important;
-    }
-}
 
 .alert {
     margin-top: 1rem;
@@ -262,8 +255,37 @@ textarea#Description.form-control{
 .btn-primary {
     margin-top: 0.5rem;
 }
-.padding-mainlayout {
+.admin-sidebar {
+    padding-top: 4.2rem !important;
+}
+.admin-content
+{
     margin-top: 3rem !important;
+}
+a.nav-link-admin.btn.btn-outline-primary,
+a.btn.btn-outline-primary.btn-sm.mb-1,
+a.btn.btn-outline-primary.button-nav,
+button.nav-link.btn.btn-outline-primary.button-nav {
+    margin-bottom: 1rem !important;
+    margin-right: 1rem !important;
+    border-radius: 50px !important;
+    border-color: rgba(43, 24, 155, 0.8) !important;
+    color: rgba(43, 24, 155, 0.8) !important;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add box shadow */
+}
+    a.nav-link-admin.btn.btn-outline-primary:hover,
+    a.btn.btn-outline-primary.btn-sm.mb-1:hover {
+        background-color: rgba(0, 0, 255, 0.1) !important;
+    }
+    a.nav-link-admin.btn.btn-outline-primary:focus,
+    button.nav-link.btn.btn-outline-primary.button-nav:focus,
+    a.btn.btn-outline-primary.button-nav:focus,
+    a.btn.btn-outline-primary.btn-sm.mb-1:focus{
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.2);
+        outline: none;
+    }
+.modules {
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1) !important; /* Add box shadow */
 }
 button.btn.btn-success {
     margin-top: 0.5rem;
@@ -271,10 +293,65 @@ button.btn.btn-success {
 button.btn.btn-danger {
     margin-top: 0.5rem;
 }
-@media (max-width: 767px) {
-    .custom-width,
-    .custom-widthtwo{
+.admin-page {
+    display: flex;
+    flex-wrap: wrap; /*wrap: This value allows the items to wrap onto new lines if necessary. If there is not enough space for all items on one line, the items will move to the next line.*/
+}
+
+.admin-sidebar {
+    order: 1; /* Change the order to 1 for small screens */
+    width: 100%; /* Full width on small screens */
+    margin-bottom: 10px; /* Add some spacing between sidebar and content */
+}
+
+.admin-content {
+    order: 2; /* Change the order to 2 for small screens */
+    flex-grow: 1; /* Take up remaining space */
+}
+a.btn.btn-success,
+button.btn.btn-success{
+    border-radius: 50px !important;
+    background-color: rgba(40, 167, 69, 0.9) !important;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1) !important; /* Add box shadow */
+    padding: 10px 20px !important;
+}
+a.btn.btn-success:hover,
+button.btn.btn-success:hover{
+    background-color: rgba(40, 167, 69, 0.8) !important;
+}
+a.btn.btn-primary,
+button.btn.btn-primary{
+    background-color: rgba(0, 123, 255, 0.8) !important;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1) !important; /* Add box shadow */
+    padding: 10px 20px !important;
+    border-radius: 50px !important;
+}
+    a.btn.btn-primary:hover,
+    button.btn.btn-primary:hover {
+        background-color: rgba(0, 123, 255, 0.7) !important;
+    }
+button.btn.btn-danger {
+    background-color: rgba(220, 53, 69, 0.8) !important;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1) !important; /* Add box shadow */
+    padding: 10px 20px !important;
+    border-radius: 50px !important;
+}
+    button.btn.btn-danger:hover {
+        background-color: rgba(220, 53, 69, 0.7) !important;
+    }
+    @media (max-width: 767px) {
+        .custom-width, .custom-widthtwo{
         width: 100% !important;
         margin: 0 auto !important;
+    }
+    /*.admin-sidebar, .admin-content {
+        width: auto;*/ /* Reset width to default */
+        /*order: 0;*/ /* Reset order to default */
+    /*}*/
+    .admin-sidebar {
+
+        height: 10% !important;
+        border: none !important;
+        margin:auto !important;
     }
 }
