@@ -256,17 +256,18 @@ textarea#Description.form-control{
     margin-top: 0.5rem;
 }
 .admin-sidebar {
-    padding-top: 4.2rem !important;
+    padding-top: 3.5rem !important;
 }
 .admin-content
 {
     margin-top: 3rem !important;
 }
+
 a.nav-link-admin.btn.btn-outline-primary,
 a.btn.btn-outline-primary.btn-sm.mb-1,
 a.btn.btn-outline-primary.button-nav,
 button.nav-link.btn.btn-outline-primary.button-nav {
-    margin-bottom: 1rem !important;
+    margin-bottom: 0.5rem !important;
     margin-right: 1rem !important;
     border-radius: 50px !important;
     border-color: rgba(43, 24, 155, 0.8) !important;
@@ -319,8 +320,21 @@ a.btn.btn-success:hover,
 button.btn.btn-success:hover{
     background-color: rgba(40, 167, 69, 0.8) !important;
 }
-a.btn.btn-primary,
-button.btn.btn-primary {
+button.nav-link.btn.btn-outline-primary,
+a.btn.btn-outline-primary{
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1) !important; /* Add box shadow */
+    border-radius: 50px !important;
+    border-color: rgba(43, 24, 155, 0.8) !important;
+    color: rgba(43, 24, 155, 0.8) !important;
+    padding: 10px 20px !important;
+    margin: 0.5rem 0.5rem !important;
+    font-size: 1.2rem;
+}
+    button.nav-link.btn.btn-outline-primary:hover,
+    a.btn.btn-outline-primary:hover {
+        background-color: rgba(0, 0, 255, 0.1) !important;
+    }
+{
     background-color: rgba(0, 123, 255, 0.8) !important;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1) !important; /* Add box shadow */
     padding: 10px 20px !important;
@@ -356,7 +370,7 @@ button.btn.btn-danger {
         border: none !important;
         margin:auto !important;
     }
-        button.nav-link.btn.btn-outline-primary.button-nav {
+        button.nav-link.btn.btn-outline-primary {
             box-shadow: none !important;
             color: rgba(0, 0, 0, 0.5) !important;
         }
