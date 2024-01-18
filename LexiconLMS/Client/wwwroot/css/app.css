@@ -320,16 +320,30 @@ a.btn.btn-success:hover,
 button.btn.btn-success:hover{
     background-color: rgba(40, 167, 69, 0.8) !important;
 }
-button.nav-link.btn.btn-outline-primary,
-a.btn.btn-outline-primary{
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1) !important; /* Add box shadow */
+a.btn.btn-primary,
+button.btn.btn-primary{
     border-radius: 50px !important;
-    border-color: rgba(43, 24, 155, 0.8) !important;
-    color: rgba(43, 24, 155, 0.8) !important;
     padding: 10px 20px !important;
-    margin: 0.5rem 0.5rem !important;
-    font-size: 1.2rem;
+    margin: 0 !important;
+    background-color: rgba(0, 123, 255, 0.9) !important;
 }
+button.btn.btn-primary
+{
+    margin-top: 0.5rem !important;
+}
+#btn-overviewcourse {
+    margin-top: 0.5rem !important;
+}
+    button.nav-link.btn.btn-outline-primary,
+    a.btn.btn-outline-primary {
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1) !important; /* Add box shadow */
+        border-radius: 50px !important;
+        border-color: rgba(43, 24, 155, 0.8) !important;
+        color: rgba(43, 24, 155, 0.8) !important;
+        padding: 10px 20px !important;
+        margin: 0.5rem 0.5rem !important;
+        font-size: 1.2rem;
+    }
     button.nav-link.btn.btn-outline-primary:hover,
     a.btn.btn-outline-primary:hover {
         background-color: rgba(0, 0, 255, 0.1) !important;
@@ -351,6 +365,7 @@ button.btn.btn-danger {
     padding: 10px 20px !important;
     border-radius: 50px !important;
     margin-bottom: 1rem !important;
+    margin-top: 1rem !important;
 }
     button.btn.btn-danger:hover {
         background-color: rgba(220, 53, 69, 0.7) !important;
