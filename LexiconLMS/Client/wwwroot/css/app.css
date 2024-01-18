@@ -388,5 +388,6 @@ button.btn.btn-danger {
         button.nav-link.btn.btn-outline-primary {
             box-shadow: none !important;
             color: rgba(0, 0, 0, 0.5) !important;
+            border: none !important;
         }
 }
