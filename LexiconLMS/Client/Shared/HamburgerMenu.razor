@@ -1,32 +1,11 @@
 ﻿<!-- HamburgerMenu.razor -->
-<button @onclick="ToggleMenu" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    ☰
+<button @onclick="ToggleMenu" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
 </button>
 
 @if (isMenuOpen)
 {
-    <div class="menu">
-        <ul class="navbar-nav mx-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="#" @onclick="CloseMenu">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/courses" @onclick="CloseMenu">Courses</a>
-            </li>
-            <AuthorizeView Roles="Admin">
-                <Authorized>
-                    <li class="nav-item">
-                        <NavLink class="nav-link" href="/admin">
-                            <span class="oi oi-list-rich" aria-hidden="true"></span> Admin Panel
-                        </NavLink>
-                    </li>
-                </Authorized>
-            </AuthorizeView>
-        </ul>
-        <ul class="navbar-nav ml-auto">
-            <LoginDisplay/>
-        </ul>
-    </div>
+
 }
 
 @code {
