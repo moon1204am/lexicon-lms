@@ -50,50 +50,50 @@ namespace LexiconLMS.Client.Services
             if (response.IsSuccessStatusCode)
             {
 
-            var stream = await response.Content.ReadAsStreamAsync();
-            var result = JsonSerializer.Deserialize<T>(stream, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
-                
-            return result;
+                var stream = await response.Content.ReadAsStreamAsync();
+                var result = JsonSerializer.Deserialize<T>(stream, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+
+                return result;
             }
-            
+
 
             return default(T);
         }
 
-    public async Task PutAsync<T>(string path, object data, string contentType = json)
-    {
-        //build request
-        var request = new HttpRequestMessage(HttpMethod.Put, path);
-        _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(contentType));
+        public async Task PutAsync<T>(string path, object data, string contentType = json)
+        {
+            //build request
+            var request = new HttpRequestMessage(HttpMethod.Put, path);
+            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(contentType));
 
-        var jsonContent = JsonSerializer.Serialize(data);
-        request.Content = new StringContent(jsonContent, Encoding.UTF8, contentType);
+            var jsonContent = JsonSerializer.Serialize(data);
+            request.Content = new StringContent(jsonContent, Encoding.UTF8, contentType);
 
-        //send request
-        var response = await _httpClient.PutAsync(path, request.Content);
+            //send request
+            var response = await _httpClient.PutAsync(path, request.Content);
 
-        response.EnsureSuccessStatusCode();
+            response.EnsureSuccessStatusCode();
+        }
+
+        public async Task DeleteAsync<T>(string path, string contentType = json)
+        {
+            //build request
+            var request = new HttpRequestMessage(HttpMethod.Delete, path);
+            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(contentType));
+
+            //send request
+            var response = await _httpClient.DeleteAsync(path);
+
+            response.EnsureSuccessStatusCode();
+        }
+
+
+
+        public async Task UpdateUser(Guid userId, UpdateUserDto updateUserDto)
+        {
+            var response = await _httpClient.PutAsJsonAsync("api/users/update/{userId}", updateUserDto);
+            response.EnsureSuccessStatusCode();
+        }
+
     }
-
-    public async Task DeleteAsync<T>(string path, string contentType = json)
-    {
-        //build request
-        var request = new HttpRequestMessage(HttpMethod.Delete, path);
-        _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(contentType));
-
-        //send request
-        var response = await _httpClient.DeleteAsync(path);
-
-        response.EnsureSuccessStatusCode();
-    }
-
-
-
-    public async Task UpdateUser(Guid userId, UpdateUserDto updateUserDto)
-    {
-        var response = await _httpClient.PutAsJsonAsync("api/users/update/{userId}", updateUserDto);
-        response.EnsureSuccessStatusCode();
-    }
-
-}
 }
